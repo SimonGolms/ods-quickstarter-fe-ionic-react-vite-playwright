@@ -1,0 +1,7 @@
+{
+  "name": "COMPONENTID",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

@@ -1,0 +1,9 @@
+.history/
+build/
+internals/generators/
+internals/scripts/
+node_modules/
+openshift/ods-deployments.json
+package-lock.json
+package.json
+yarn.lock

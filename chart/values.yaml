@@ -1,0 +1,11 @@
+appUrl: PROJECTID
+imageTag: 1.0.0
+
+odsApplicationDomain: apps.OPENSHIFT_DOMAIN_DEV
+
+## @param nameOverride String to partially override nginx.fullname template (will maintain the release name)
+##
+nameOverride: ''
+## @param fullnameOverride String to fully override nginx.fullname template
+##
+fullnameOverride: ''

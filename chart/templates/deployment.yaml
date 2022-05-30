@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+  name: {{ include "chart.name" . }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 8 }}
+  template:
+    metadata:
+      labels:
+        {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: REACT_APP_API_URL
+          value: {{ .Values.reactAppApiUrl }}
+        - name: REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID
+          value: {{ .Values.azureActiveDirectoryClientId }}
+        - name: REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID
+          value: {{ .Values.azureActiveDirectoryTenantId }}
+        image: "default-route-openshift-image-registry.apps.OPENSHIFT_DOMAIN_DEV/PROJECTID-cd/{{ include "chart.name" . }}:{{ .Values.imageTag }}"
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: {{ include "chart.name" . }}
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

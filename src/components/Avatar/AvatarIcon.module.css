@@ -1,0 +1,13 @@
+.expand {
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  background-color: rgba(var(--ion-color-medium-rgb), 25%);
+}
+
+.icon ion-icon {
+  height: 100%;
+  width: 100%;
+}

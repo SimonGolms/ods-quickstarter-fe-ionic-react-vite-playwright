@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    haproxy.router.openshift.io/timeout: 300s
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+  name: {{ include "chart.name" . }}
+spec:
+  host: "{{ .Values.appUrl }}.{{ .Values.odsApplicationDomain }}"
+  port:
+    targetPort: 8080
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "chart.name" . }}
+    weight: 100
+  wildcardPolicy: None

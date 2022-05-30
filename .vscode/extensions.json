@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "chakrounanas.turbo-console-log",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "eg2.vscode-npm-script",
+    "esbenp.prettier-vscode",
+    "mikestead.dotenv",
+    "ms-azuretools.vscode-docker",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "streetsidesoftware.code-spell-checker",
+    "visualstudioexptteam.vscodeintellicode",
+    "yzhang.markdown-all-in-one",
+    "stylelint.vscode-stylelint"
+  ]
+}

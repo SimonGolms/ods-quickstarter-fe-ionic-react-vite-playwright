@@ -1,0 +1,13 @@
+blockquote {
+  background: var(--ion-color-light);
+  border-radius: var(--app-border-radius);
+  margin: 0;
+}
+
+blockquote p {
+  padding: 1rem;
+}
+
+figure {
+  margin: 0 0 1rem;
+}

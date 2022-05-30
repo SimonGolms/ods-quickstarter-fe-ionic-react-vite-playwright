@@ -1,0 +1,9 @@
+/* Custom Material Design CSS Variables */
+.md {
+  --app-border-radius: 0;
+}
+
+/* Custom iOS CSS Variables */
+.ios {
+  --app-border-radius: 6px;
+}

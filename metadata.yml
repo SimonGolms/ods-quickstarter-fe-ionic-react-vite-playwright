@@ -1,0 +1,33 @@
+# Documentation: https://www.opendevstack.org/ods-documentation/opendevstack/4.x/quickstarters/metadata.html
+description: An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
+name: PROJECTID-COMPONENTID
+supplier: https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react
+# ! IMPORTANT - WORKAROUND
+# To make a rollout with Helm in an OpenShift 4 cluster and with the Release Manager possible, the type 'ods' must be replaced with 'ods-infra'.
+# The current tool 'tailor', which was responsible for rolling out the release, does not officially support OpenShift 4.
+# Helm is recommended as the official successor and the actual Kubernetes/OpenShift standard tool.
+# See: https://github.com/opendevstack/tailor#installation
+# However, Helm is not supported during rollout if it is triggered by the Release Manager.
+# See: https://github.com/opendevstack/ods-jenkins-shared-library/blob/de3b3ebd7477ec1092fcd1bb23a861c960a206fc/src/org/ods/component/RolloutOpenShiftDeploymentStage.groovy#L127-L130
+# In Addition, the Release Manager still relies on tailor during execution and expects a corresponding resource with the label 'app=${project.key}-${repo.id}' in the 'FinalizeOdsComponent' phase which causes it to fail!
+# See: https://github.com/opendevstack/ods-jenkins-shared-library/blob/5dd761eb3eedbaf648854195bfddcd879d712a30/src/org/ods/orchestration/phases/FinalizeOdsComponent.groovy#L35
+# But with the type 'ods-infra' the phase 'FinalizeNonOdsComponent' is used, where tailor is not used.
+# See: https://github.com/opendevstack/ods-jenkins-shared-library/blob/f2470541f2e9cd8d247f5924ce0f5246b2069644/src/org/ods/orchestration/util/MROPipelineUtil.groovy#L358
+#      https://github.com/opendevstack/ods-jenkins-shared-library/blob/f2470541f2e9cd8d247f5924ce0f5246b2069644/src/org/ods/orchestration/phases/FinalizeNonOdsComponent.groovy
+# Unfortunately, this eliminates the automatic merge of the release branch into master, since this has been prevented for the type 'ods-infra'.
+# See: https://github.com/opendevstack/ods-jenkins-shared-library/blob/f2470541f2e9cd8d247f5924ce0f5246b2069644/src/org/ods/orchestration/FinalizeStage.groovy#L68
+#      https://github.com/opendevstack/ods-jenkins-shared-library/blob/f2470541f2e9cd8d247f5924ce0f5246b2069644/src/org/ods/orchestration/FinalizeStage.groovy#L184
+# This results in an error during the rollout in QA and PROD, as the Release Manager checks whether the commit hash
+# from the release branch and listed in 'ods-state/dev.json' in the Release Manager repository is present in the master branch.
+# If the commit is not present, a warning build occurs when rolling out to QA and fails in PROD.
+# See: https://github.com/opendevstack/ods-jenkins-shared-library/blob/c4bf8f92752c94b5d90a18f3d44b4438006bbe7c/src/org/ods/orchestration/InitStage.groovy#L356-L372
+#      https://github.com/opendevstack/ods-jenkins-shared-library/blob/de05d8dcdd125b6f5ebe506e0e73d2e7c57dc0e7/src/org/ods/services/GitService.groovy#L279
+# As a currently known workaround, the release branch must be MANUALLY merged into the master branch after a successful rollout in DEV and before continue the rollout to QA!
+# You can do this via Bitbucket or cli.
+# ```sh
+# git checkout master
+# git merge origin/release/VERSION --no-edit
+# git push
+# ```
+type: ods-infra
+version: 1.0.0

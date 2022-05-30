@@ -1,0 +1,19 @@
+.container {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.container.danger {
+  background: rgba(var(--ion-color-danger-rgb), 15%);
+  border-radius: var(--app-border-radius);
+  color: var(--ion-color-danger);
+}
+
+.container.success {
+  background: rgba(var(--ion-color-success-rgb), 15%);
+  border-radius: var(--app-border-radius);
+  color: var(--ion-color-success);
+}
