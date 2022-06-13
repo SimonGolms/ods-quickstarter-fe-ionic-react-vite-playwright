@@ -20,94 +20,202 @@
 
 ## Provision Quickstarter
 
+For an official ODS Quickstarter, the provisioning app takes care of the provisioning in combination with the Jenkinsfile in the associated Quickstarter template.
+However, since this is an extended Quickstarter, which is developed independently and decoupled from ODS, the necessary steps of the provisioning app and Jenkins itself must be performed, which are covered in this section.
+
 ### Prerequisites
 
-- A `ODS@4.x` project with the example project id: `foo`.
-- In an OpenShift 4 cluster used as `DEV` instance, the following projects:
-  - `foo-cd`
-  - `foo-dev`
-  - `foo-test`
-- In an OpenShift 4 cluster used as `PROD` instance, the following projects:
-
-  - `foo-prod`
-
-- Having `helm` and `oc` cli installed and configured.
-
-  ```sh
-  # Check helm version
-  helm version
-
-  # Check oc version
-  oc version
-  ```
-
-- A Jenkins agent with Node.js and minimum version `16.x`. In case it does not exist yet, it can be easily created with the following commands:
-
-  ```sh
-  # Login
-  oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
-
-  # Switch project
-  oc project foo-cd
-
-  # Provision jenkins-agent-nodejs-16
-  oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
-  ```
-
-  For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
+To provision this Quickstarter, you need a deployed ODS project with the corresponding `*-cd`, `*-dev` and `*-test` projects in the OpenShift 4 dev cluster, the `*-prod` project in the OpenShift 4 prod cluster and the associated Bitbucket project.
 
 ### Setup Quickstarter
 
-1. Get Source Code
+#### 1. Get Source Code
 
-   ```sh
-   # Clone Repository
-   git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react.git
-   cd ods-quickstarter-fe-ionic-react
+- Option 1 (recommended): Clone the repository
 
-   # OR download from GitHub
-   curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/archive/refs/heads/main.tar.gz && \
-   tar -xvzf main.tar.gz && \
-   rm main.tar.gz
-   cd ods-quickstarter-fe-ionic-react-main
-   ```
+  ```sh
+  git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react.git
+  cd ods-quickstarter-fe-ionic-react
+  ```
 
-2. Set your Project Id (e.g. `foo`) for the Quickstarter
+- Option 2: Download the repository
 
-   ```sh
-   # Search all the files in the current folder’s subdirectories and replace with the given string. This will also include any hidden files.
-   # IMPORTANT: Keep your project id in lowercase.
-   find . -type f -exec sed --expression 's/PROJECTID/foo/g' --in-place {} +
-   ```
+  ```sh
+  curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/archive/refs/heads/main.tar.gz && \
+  tar -xvzf main.tar.gz && \
+  rm main.tar.gz
+  cd ods-quickstarter-fe-ionic-react-main
+  ```
 
-3. Set your Component Id (e.g. `app`) for the Quickstarter
+#### 2. Set Project Id
 
-   ```sh
-   # Search all the files in the current folder’s subdirectories and replace with the given string. This will also include any hidden files.
-   # IMPORTANT: Keep your component id in lowercase.
-   find . -type f -exec sed --expression 's/COMPONENTID/app/g' --in-place {} +
-   ```
+To make the Quickstarter available in your project, the corresponding project id is required. With the following command all files are checked. The placeholder `PROJECTID` is searched and replaced by the actual project id.
 
-4. Set your OpenShift domain url
+Replace `YOUR_PROJECT_ID` with your project id, e.g. `foo`
 
-   ```sh
-   find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_DEV/dev.ocp.company.com/g' --in-place {} +
-   find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_PROD/prod.ocp.company.com/g' --in-place {} +
-   ```
+```sh
+# IMPORTANT: Keep your project id in lowercase.
+find . -type f -exec sed --expression 's/PROJECTID/YOUR_PROJECT_ID/g' --in-place {} +
+```
 
-5. Set your Bitbucket domain url
+🛑 **IMPORTANT:** This and the other commands also replace the placeholders in the other sections of the documentation. It is therefore recommended to continue with the README in the downloaded source code. Otherwise, please be aware that you have to replace the placeholder `PROJECTID` with your project id for each further command.
 
-   ```sh
-   find . -type f -exec sed --expression 's/BITBUCKET_DOMAIN/bitbucket.company.com/g' --in-place {} +
-   ```
+#### 3. Set Component Id
 
-6. Remove template resources
+Replace `YOUR_COMPONENT_ID` with your component id, e.g. `app`, `frontend`, etc.
 
-   ```sh
-   rm -rf .git .github CHANGELOG.md
-   ```
+```sh
+# IMPORTANT: Keep your component id in lowercase.
+find . -type f -exec sed --expression 's/COMPONENTID/YOUR_COMPONENT_ID/g' --in-place {} +
+```
 
-### Setup Bitbucket Code Repository
+#### 4. Set OpenShift dev domain URLs
+
+Replace `YOUR_OPENSHIFT_DOMAIN_DEV` with your OpenShift 4 Dev Cluster Domain, e.g. `dev.ocp.company.com`
+
+<details><summary>How do I find out the <code>YOUR_OPENSHIFT_DOMAIN_DEV</code> value?</summary>
+
+Go to your `*-cd` project of your OpenShift 4 Dev Cluster in the browser and look at the URL properly. Extract the `YOUR_OPENSHIFT_DOMAIN_DEV` as follows:
+
+```txt
+https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/PROJECTID-cd ◄── Your url
+
+https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/PROJECTID-cd
+                  ▲                                 ▲                     ▲
+                  │                                 │                     └─── Pathname
+                  │                                 └── YOUR_OPENSHIFT_DOMAIN_DEV
+                  └─ Application Sub Domain
+```
+
+</details>
+
+```sh
+find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_DEV/YOUR_OPENSHIFT_DOMAIN_DEV/g' --in-place {} +
+```
+
+#### 5. Set OpenShift prod domain URLs
+
+Replace `OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `prod.ocp.company.com`
+
+<details><summary>How do I find out the <code>YOUR_OPENSHIFT_DOMAIN_PROD</code> value?</summary>
+
+Go to your `*-prod` project of your OpenShift 4 Dev Cluster in the browser and look at the URL properly. Extract the `YOUR_OPENSHIFT_DOMAIN_PROD` as follows:
+
+```txt
+https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/PROJECTID-cd ◄── Your url
+
+https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/PROJECTID-cd
+                  ▲                                 ▲                     ▲
+                  │                                 │                     └─── Pathname
+                  │                                 └── YOUR_OPENSHIFT_DOMAIN_PROD
+                  └─ Application Sub Domain
+```
+
+</details>
+
+```sh
+find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_PROD/YOUR_OPENSHIFT_DOMAIN_PROD/g' --in-place {} +
+```
+
+#### 6. Set BitBucket domain URL
+
+Replace `YOUR_BITBUCKET_DOMAIN` with your BitBucket Domain, e.g. `bitbucket.company.com`
+
+<details><summary>How do I find out the <code>YOUR_BITBUCKET_DOMAIN</code> value?</summary>
+
+Go to your BitBucket project in the browser and look at the URL properly. Extract the `YOUR_BITBUCKET_DOMAIN` as follows:
+
+```txt
+https://bitbucket.company.com/projects/PROJECTID ◄── Your url
+
+https://   bitbucket.company.com   /projects/PROJECTID
+  ▲                ▲                     ▲
+  │                │                     └─── Pathname
+  │                └── YOUR_BITBUCKET_DOMAIN
+  └─ Protocol
+```
+
+</details>
+
+```sh
+find . -type f -exec sed --expression 's/BITBUCKET_DOMAIN/YOUR_BITBUCKET_DOMAIN/g' --in-place {} +
+```
+
+#### 7. Remove template resources
+
+```sh
+rm -rf .git .github CHANGELOG.md
+```
+
+#### 8. Install `helm` cli
+
+[Helm](https://helm.sh/) is a package manager for Kubernetes that configures and deploys applications and services on a Kubernetes/OpenShift cluster. Think of it like `apt`/`yum`/`homebrew` for Kubernetes. It uses Helm charts to simplify the development and deployment process.
+
+`helm` will be used later in the [`pre-commit`](./.husky/pre-commit) git hook for linting the application [Helm charts](./chart/).
+
+```sh
+# Install helm cli
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Verify successfully installed helm version
+helm version
+```
+
+More Information: <https://helm.sh/docs/intro/install/>
+
+#### 9. Install `oc` cli
+
+With the OpenShift command-line interface (CLI), the `oc` command, you can create applications and manage OpenShift Container Platform projects from a terminal.
+
+`oc` will be used by helm and for further configuration and housekeeping tasks.
+
+To be compatible with the latest OpenShift Container Platform (OCP) version, the binary is downloaded and installed from the associated OpenShift Container Platform.
+
+```sh
+# Install oc cli
+curl -O https://downloads-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/amd64/linux/oc.tar && \
+tar -xvf oc.tar && rm oc.tar && \
+sudo mv oc /usr/local/bin/
+
+# Verify successfully installed oc version
+oc version
+```
+
+More Information: <https://docs.openshift.com/container-platform/4.9/cli_reference/openshift_cli/getting-started-cli.html>
+
+#### 10. Provision Jenkins Agent with Node.js `16.x`
+
+It might happen that your `ODS@4.x` setup only provides a Jenkins agent with Node.js `12.x`. However, in order to be able to work with the latest version and to have potential security holes closed, a Jenkins agent with the latest Node.js version is required for the build process in the CI/CD process.
+
+<details><summary>How do I find out which a Jenkins Agent with Node.js are available in my <code>ODS@4.x</code> setup?</summary>
+
+Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.openshift.io~v1~BuildConfig?name=jenkins-agent-nodejs>
+
+</details>
+
+In case it does not exist yet, it can be easily created with the following commands:
+
+<details><summary>How to find the <code>oc</code> login token</summary>
+
+1. Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/oauth/token/display>
+2. Click on `Display token` or `Request another token`
+
+</details>
+
+```sh
+# Login to OpenShift dev instance
+oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
+
+# Switch project
+oc project PROJECTID-cd
+
+# Provision jenkins-agent-nodejs-16
+oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
+```
+
+For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
+
+#### 11. Setup Bitbucket Code Repository
 
 1. Create BitBucket Repository
 
@@ -120,7 +228,7 @@
      --header "Content-Type: application/json" \
      --request POST \
      --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/ \
-     --user 'USER@COMPANY.COM'
+     --user USER@COMPANY.COM
    ```
 
 2. Get trigger secret from the webhook proxy
@@ -135,7 +243,7 @@
 
 3. Create Webhook
 
-   - Replace `TRIGGER_SECRET` with the obtained trigger secret from step 1.
+   - Replace `TRIGGER_SECRET` with the obtained trigger secret from previous step.
    - Replace `USER@COMPANY.COM` with an authorized (administrative) user with access to the Bitbucket project
 
    ```sh
@@ -145,20 +253,82 @@
      --header "Content-Type: application/json" \
      --request POST \
      --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/PROJECTID-COMPONENTID/webhooks \
-     --user 'USER@COMPANY.COM'
+     --user USER@COMPANY.COM
    ```
 
 4. Publish to Bitbucket Code Repository
 
    ```sh
+   # Requires git v2.31.1
    git init --initial-branch=master
    git add --all
    git commit -m "chore: initial version"
    git remote add origin https://BITBUCKET_DOMAIN/scm/PROJECTID/PROJECTID-COMPONENTID.git
    # Before you push your first commit, make sure that no credentials are in the README as a result of the previous steps.
-   # You might also delete unnecessary content in this context.
+   # You might also delete unnecessary content in this context, like the 'Provision Quickstarter' section of this README.
    git push -u origin HEAD:master
    ```
+
+### Verify successfully provision
+
+If the provisioning was successful, the previous push of the first commit should have triggered the first build process in Jenkins in the meantime, which can be viewed under the following link: <https://jenkins-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV/job/PROJECTID-cd/job/PROJECTID-cd-COMPONENTID-master/>
+
+#### Feature Environment
+
+A new feature environment is created by the associated git branch name, e.g. `feature/next`.
+
+```sh
+# Creates and switch to new branch from the current branch
+git checkout -b feature/next
+
+# Add empty commit in case the previous commit includes '[skip ci]'
+git commit -m "chore: create feature-next environment" --allow-empty
+
+# Push the new branch to the remote repository
+git push -u origin feature/next
+```
+
+A new Jenkins build should have been created and can be followed under the following link: <https://jenkins-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV/job/PROJECTID-cd/job/PROJECTID-cd-COMPONENTID-feature-next/>
+
+Assuming the Jenkins build has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-dev/release/PROJECTID-COMPONENTID-feature-next) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV>
+
+#### Release to `dev`, `test` and `prod`
+
+1. Update your `metadata.yml` in your release manager repository
+
+   ```yaml
+   # Example metadata.yml
+   id: PROJECTID
+   name: Project PROJECTID
+   description: Description of PROJECTID
+
+   environments:
+     prod:
+       apiUrl: api.OPENSHIFT_DOMAIN_PROD:6443
+       credentialsId: PROJECTID-cd-PROJECTID-prod
+
+   repositories:
+     - id: COMPONENTID
+       branch: master
+       url: https://bitbucket.biscrum.com/scm/PROJECTID/PROJECTID-COMPONENTID.git
+
+   services:
+     bitbucket:
+       credentials:
+         id: PROJECTID-cd-cd-user-with-password
+     # jira:
+     #   credentials:
+     #     id: PROJECTID-cd-cd-user-with-password
+     nexus:
+       repository:
+         name: leva-documentation
+   ```
+
+2. Go to the Jenkins build of the release manager and start a new build process in the `dev` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-dev/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV>
+
+3. Go to the Jenkins build of the release manager and start a new build process in the `qa` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-test`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-test) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-test/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV>
+
+4. Go to the Jenkins build of the release manager and start a new build process in the `prod` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-prod`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/topology/ns/PROJECTID-prod) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/helm-releases/ns/PROJECTID-prod/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID.apps.OPENSHIFT_DOMAIN_DEV>
 
 ---
 
@@ -208,7 +378,7 @@ N/A
 
 [![OpenDevStack](https://img.shields.io/badge/OpenDevStack-222.svg?style=for-the-badge&logoColor=white)](https://www.opendevstack.org/)
 [![Jenkins](https://img.shields.io/badge/Jenkins-D24939.svg?style=for-the-badge&logo=jenkins&logoColor=white)](https://nginx.org/)
-[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://www.opendevstack.org/)
+[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://helm.sh/)
 [![Semantic Release](https://img.shields.io/badge/Semantic%20Release-494949.svg?style=for-the-badge&logo=semantic-release&logoColor=white)](https://semantic-release.gitbook.io/semantic-release/)
 [![Husky](https://img.shields.io/badge/%F0%9F%90%B6%20Husky-42b983.svg?style=for-the-badge)](https://typicode.github.io/husky/#/)
 
@@ -300,8 +470,10 @@ N/A
 
 ### Requirements
 
+- Helm v3+
 - Node.js v16+
 - NPM v8+
+- oc v4.9+
 
 #### Using [`NVM`](https://github.com/nvm-sh/nvm)
 
@@ -449,7 +621,7 @@ class openshift-dev classOpenShift
 With each new `feature/*` branch created, a new environment is created in the OpenShift Project `PROJECTID-cd`.
 Different stages are processed in the Jenkinsfile and finally rolled out and managed via Helm.
 
-Please be aware that a new route (e.g. <https://PROJECTID-COMPONENTID-feature-foo.apps.OPENSHIFT_DOMAIN_DEV>) is created for each new feature environment. If this is required for the SSO login, it must be specified as a new valid redirect URL in the app registration.
+Please be aware that a new route (e.g. <https://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV>) is created for each new feature environment. If this is required for the SSO login, it must be specified as a new valid redirect URL in the app registration.
 
 ```mermaid
 %% If the Mermaid Diagram is not rendered (as is the case on BitBucket), it can be viewed at https://mermaid.live/
@@ -471,30 +643,30 @@ flowchart TB
                     stageInitialize-->stageInstallDependency-->stageVersioning-->stageWorkaroundFindOpenShiftImageOrElse -->|orElse| stageAnalyzeCode-->odsComponentStageScanWithSonar-->stageBuild-->stageDeploy-->odsComponentStageBuildOpenShiftImage-->stageWorkaroundUnitTest-->stageWorkaroundRolloutDeployment-->stageRelease
                 end
             end
-            subgraph cd-IS-PROJECTID-COMPONENTID-feature-foo["PROJECTID-COMPONENTID-feature-foo (Image Stream)"]
-                cd-IST-PROJECTID-COMPONENTID-feature-foo["PROJECTID-COMPONENTID-feature-foo:hash"]:::classImageStreamTag
+            subgraph cd-IS-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next (Image Stream)"]
+                cd-IST-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next:hash"]:::classImageStreamTag
             end
         end
         subgraph PROJECTID-dev
-            subgraph dev-HR-PROJECTID-COMPONENTID-feature-foo["PROJECTID-COMPONENTID-feature-foo (Helm Release)"]
-                dev-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> dev-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID-COMPONENTID-feature-foo.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+            subgraph dev-HR-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next (Helm Release)"]
+                dev-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> dev-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
         end
     end
     subgraph bitbucket["BitBucket"]
         subgraph bitbucket-PROJECTID["PROJECTID (Project)"]
             subgraph bitbucket-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-feature-foo["feature-foo (Branch)"]
+                bitbucket-PROJECTID-COMPONENTID-branch-feature-next["feature-next (Branch)"]
             end
         end
     end
 
 bitbucket-PROJECTID-COMPONENTID -- trigger --> webhook-proxy -- trigger --> Jenkins
-bitbucket-PROJECTID-COMPONENTID-branch-feature-foo -- pull --> Jenkinsfile
-cd-IST-PROJECTID-COMPONENTID-feature-foo --> dev-D-COMPONENTID
-odsComponentStageBuildOpenShiftImage -- push --> cd-IST-PROJECTID-COMPONENTID-feature-foo
+bitbucket-PROJECTID-COMPONENTID-branch-feature-next -- pull --> Jenkinsfile
+cd-IST-PROJECTID-COMPONENTID-feature-next --> dev-D-COMPONENTID
+odsComponentStageBuildOpenShiftImage -- push --> cd-IST-PROJECTID-COMPONENTID-feature-next
 odsComponentStageScanWithSonar <-.-> sonarqube
-stageWorkaroundRolloutDeployment -- stageRolloutWithHelm --> dev-HR-PROJECTID-COMPONENTID-feature-foo
+stageWorkaroundRolloutDeployment -- stageRolloutWithHelm --> dev-HR-PROJECTID-COMPONENTID-feature-next
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -513,8 +685,8 @@ classDef classService fill:#6ca10022,stroke:#6ca100
 
 class BitBucket classBitBucket
 class bitbucket-PROJECTID,bitbucket-PROJECTID-COMPONENTID classBitBucketProject
-class dev-HR-PROJECTID-COMPONENTID-feature-foo classHelmRelease
-class cd-IS-PROJECTID-COMPONENTID-feature-foo classImageStream
+class dev-HR-PROJECTID-COMPONENTID-feature-next classHelmRelease
+class cd-IS-PROJECTID-COMPONENTID-feature-next classImageStream
 class ods,PROJECTID-cd,PROJECTID-dev classOcpProject
 class Jenkins,Jenkinsfile,sonarqube,webhook-proxy classOcpResource
 class openshift-dev classOpenShift
@@ -833,10 +1005,10 @@ oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | whil
 
 ## Roadmap
 
+- [x] Improve Documentation
 - [ ] Implement Android
 - [ ] Implement iOS
 - [ ] Implement Ionic Appflow
-- [ ] Improve Documentation
 - [ ] Improve Testing
 
 ## Author
