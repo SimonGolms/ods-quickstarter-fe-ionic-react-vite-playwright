@@ -1,6 +1,10 @@
 /* eslint-disable import/no-unused-modules, no-multi-str, no-template-curly-in-string */
 module.exports = {
-  branches: ['master', 'next', { channel: '${name}', name: 'feature*', prerelease: 'next' }],
+  branches: [
+    'master',
+    'next',
+    { channel: '${name.replace(/[^a-zA-Z0-9]/g, "-")}', name: 'feature/*', prerelease: '${name.replace(/[^a-zA-Z0-9]/g, "-")}' },
+  ],
   plugins: [
     [
       '@semantic-release/commit-analyzer',
