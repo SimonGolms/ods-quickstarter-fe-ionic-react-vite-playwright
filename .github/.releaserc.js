@@ -47,6 +47,13 @@ module.exports = {
       },
     ],
     [
+      '@semantic-release/exec',
+      {
+        // HINT: Make sure that the changed files are part of the 'assets' property in @semantic-release/git
+        verifyReleaseCmd: "sed -i 's/version-.*-blue/version-${nextRelease.version}-blue/g' README.md",
+      },
+    ],
+    [
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
@@ -56,7 +63,7 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md'],
+        assets: ['CHANGELOG.md', 'README.md'],
         message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
