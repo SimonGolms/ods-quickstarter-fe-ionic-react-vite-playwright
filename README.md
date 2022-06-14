@@ -3,6 +3,9 @@
 > An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge&cacheSeconds=2592000)
+[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-jenkins-agent-nodejs?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/graphs/commit-activity)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
 ![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
 ![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
 
@@ -326,9 +329,22 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
 2. Go to the Jenkins build of the release manager and start a new build process in the `dev` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-dev/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV>
 
-3. Go to the Jenkins build of the release manager and start a new build process in the `qa` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-test`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-test) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-test/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV>
+3. Before you can deploy a release into `qa`/`test` environment, you need to merge the release branch into your master branch to pass the checks in the Jenkins shared library stage [`odsOrchestrationPipeline`](https://github.com/opendevstack/ods-jenkins-shared-library/blob/4.x/vars/odsOrchestrationPipeline.groovy), see comment in [`metadata.yml`](./metadata.yml) for more details:
 
-4. Go to the Jenkins build of the release manager and start a new build process in the `prod` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-prod`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/topology/ns/PROJECTID-prod) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/helm-releases/ns/PROJECTID-prod/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID.apps.OPENSHIFT_DOMAIN_DEV>
+   ```sh
+   # Switch to master branch
+   git checkout master
+
+   # Merge the remote release branch into master without opening a text editor and accept the auto-generated message
+   git merge origin/release/<VERSION> --no-edit
+
+   # Push the changes to the remote repository
+   git push
+   ```
+
+4. Go to the Jenkins build of the release manager and start a new build process in the `qa`/`test` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-test`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-test) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-test/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV>
+
+5. Go to the Jenkins build of the release manager and start a new build process in the `prod` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-prod`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/topology/ns/PROJECTID-prod) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/helm-releases/ns/PROJECTID-prod/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID.apps.OPENSHIFT_DOMAIN_DEV>
 
 ---
 
@@ -1034,8 +1050,8 @@ This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-i
 
 ## Further Resources
 
+- <https://docs.atlassian.com/bitbucket-server/rest/7.6.12/bitbucket-rest.html>
+- <https://helm.sh/>
 - <https://ionicframework.com>
 - <https://reactjs.org>
 - <https://www.opendevstack.org/>
-- <https://helm.sh/>
-- <https://docs.atlassian.com/bitbucket-server/rest/7.6.12/bitbucket-rest.html>
