@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.2...v1.0.3) (2022-06-14)
+
+
+### Continuous Integration
+
+* **github:** update semantic-release configuration to update README version ([f72bf49](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/f72bf4919e3f33e805abf2ec07dfd4e32bf51e20))
+
+
+### Documentation
+
+* update "verify successfully provision" section ([4db37f3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/4db37f341ba0a1b3cd5e97fd4d93d917dcc711f9))
+
+
+### Build System
+
+* **deps:** update dependencies ([273a8cb](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/273a8cb70b2eee5eb50632455e615b318caa52bb))
+
 ## [1.0.2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.1...v1.0.2) (2022-06-13)
 
 

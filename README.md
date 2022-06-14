@@ -2,7 +2,7 @@
 
 > An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge&cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.0.3-blue.svg?style=for-the-badge&cacheSeconds=2592000)
 [![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-jenkins-agent-nodejs?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
@@ -52,16 +52,16 @@ To provision this Quickstarter, you need a deployed ODS project with the corresp
 
 #### 2. Set Project Id
 
-To make the Quickstarter available in your project, the corresponding project id is required. With the following command all files are checked. The placeholder `PROJECTID` is searched and replaced by the actual project id.
+To make the Quickstarter available in your project, the corresponding project id is required. With the following command all files are checked. The placeholder `foo` is searched and replaced by the actual project id.
 
 Replace `YOUR_PROJECT_ID` with your project id, e.g. `foo`
 
 ```sh
 # IMPORTANT: Keep your project id in lowercase.
-find . -type f -exec sed --expression 's/PROJECTID/YOUR_PROJECT_ID/g' --in-place {} +
+find . -type f -exec sed --expression 's/foo/YOUR_PROJECT_ID/g' --in-place {} +
 ```
 
-🛑 **IMPORTANT:** This and the other commands also replace the placeholders in the other sections of the documentation. It is therefore recommended to continue with the README in the downloaded source code. Otherwise, please be aware that you have to replace the placeholder `PROJECTID` with your project id for each further command.
+🛑 **IMPORTANT:** This and the other commands also replace the placeholders in the other sections of the documentation. It is therefore recommended to continue with the README in the downloaded source code. Otherwise, please be aware that you have to replace the placeholder `foo` with your project id for each further command.
 
 #### 3. Set Component Id
 
@@ -69,7 +69,7 @@ Replace `YOUR_COMPONENT_ID` with your component id, e.g. `app`, `frontend`, etc.
 
 ```sh
 # IMPORTANT: Keep your component id in lowercase.
-find . -type f -exec sed --expression 's/COMPONENTID/YOUR_COMPONENT_ID/g' --in-place {} +
+find . -type f -exec sed --expression 's/app/YOUR_COMPONENT_ID/g' --in-place {} +
 ```
 
 #### 4. Set OpenShift dev domain URLs
@@ -81,9 +81,9 @@ Replace `YOUR_OPENSHIFT_DOMAIN_DEV` with your OpenShift 4 Dev Cluster Domain, e.
 Go to your `*-cd` project of your OpenShift 4 Dev Cluster in the browser and look at the URL properly. Extract the `YOUR_OPENSHIFT_DOMAIN_DEV` as follows:
 
 ```txt
-https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/PROJECTID-cd ◄── Your url
+https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/foo-cd ◄── Your url
 
-https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/PROJECTID-cd
+https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/foo-cd
                   ▲                                 ▲                     ▲
                   │                                 │                     └─── Pathname
                   │                                 └── YOUR_OPENSHIFT_DOMAIN_DEV
@@ -105,9 +105,9 @@ Replace `OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `
 Go to your `*-prod` project of your OpenShift 4 Dev Cluster in the browser and look at the URL properly. Extract the `YOUR_OPENSHIFT_DOMAIN_PROD` as follows:
 
 ```txt
-https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/PROJECTID-cd ◄── Your url
+https://console-openshift-console.apps.dev.ocp.company.com/topology/ns/foo-cd ◄── Your url
 
-https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/PROJECTID-cd
+https://console-openshift-console.apps.   dev.ocp.company.com   /topology/ns/foo-cd
                   ▲                                 ▲                     ▲
                   │                                 │                     └─── Pathname
                   │                                 └── YOUR_OPENSHIFT_DOMAIN_PROD
@@ -129,9 +129,9 @@ Replace `YOUR_BITBUCKET_DOMAIN` with your BitBucket Domain, e.g. `bitbucket.comp
 Go to your BitBucket project in the browser and look at the URL properly. Extract the `YOUR_BITBUCKET_DOMAIN` as follows:
 
 ```txt
-https://bitbucket.company.com/projects/PROJECTID ◄── Your url
+https://bitbucket.company.com/projects/foo ◄── Your url
 
-https://   bitbucket.company.com   /projects/PROJECTID
+https://   bitbucket.company.com   /projects/foo
   ▲                ▲                     ▲
   │                │                     └─── Pathname
   │                └── YOUR_BITBUCKET_DOMAIN
@@ -210,7 +210,7 @@ In case it does not exist yet, it can be easily created with the following comma
 oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
 
 # Switch project
-oc project PROJECTID-cd
+oc project foo-cd
 
 # Provision jenkins-agent-nodejs-16
 oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
@@ -227,10 +227,10 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    ```sh
    # For security reasons (e.g. terminal history) --user 'USERNAME:PASSWORD' should be avoided.
    # Instead, a prompt will show up for the password if --user 'USERNAME' is used!
-   curl --data '{"defaultBranch":"master","description":"📱 Repo of the app from PROJECTID build with ionic and react","name":"PROJECTID-COMPONENTID"}' \
+   curl --data '{"defaultBranch":"master","description":"📱 Repo of the app from foo build with ionic and react","name":"foo-app"}' \
      --header "Content-Type: application/json" \
      --request POST \
-     --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/ \
+     --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/foo/repos/ \
      --user USER@COMPANY.COM
    ```
 
@@ -241,7 +241,7 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
 
    # Get trigger secret 'webhook-proxy' in plaintext
-   oc get secret webhook-proxy --namespace PROJECTID-cd --output jsonpath='{.data.trigger-secret}' | base64 -d | xargs
+   oc get secret webhook-proxy --namespace foo-cd --output jsonpath='{.data.trigger-secret}' | base64 -d | xargs
    ```
 
 3. Create Webhook
@@ -252,10 +252,10 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    ```sh
    # For security reasons (e.g. terminal history) --user 'USERNAME:PASSWORD' should be avoided.
    # Instead, a prompt will show up for the password if --user 'USERNAME' is used!
-   curl --data '{"active":true,"configuration":{},"events":["pr:merged","repo:refs_changed","pr:declined","pr:deleted"],"name":"Jenkins","url":"https://webhook-proxy-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV?trigger_secret=TRIGGER_SECRET"}' \
+   curl --data '{"active":true,"configuration":{},"events":["pr:merged","repo:refs_changed","pr:declined","pr:deleted"],"name":"Jenkins","url":"https://webhook-proxy-foo-cd.apps.OPENSHIFT_DOMAIN_DEV?trigger_secret=TRIGGER_SECRET"}' \
      --header "Content-Type: application/json" \
      --request POST \
-     --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/PROJECTID-COMPONENTID/webhooks \
+     --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/foo/repos/foo-app/webhooks \
      --user USER@COMPANY.COM
    ```
 
@@ -266,7 +266,7 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    git init --initial-branch=master
    git add --all
    git commit -m "chore: initial version"
-   git remote add origin https://BITBUCKET_DOMAIN/scm/PROJECTID/PROJECTID-COMPONENTID.git
+   git remote add origin https://BITBUCKET_DOMAIN/scm/foo/foo-app.git
    # Before you push your first commit, make sure that no credentials are in the README as a result of the previous steps.
    # You might also delete unnecessary content in this context, like the 'Provision Quickstarter' section of this README.
    git push -u origin HEAD:master
@@ -274,7 +274,7 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
 
 ### Verify successfully provision
 
-If the provisioning was successful, the previous push of the first commit should have triggered the first build process in Jenkins in the meantime, which can be viewed under the following link: <https://jenkins-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV/job/PROJECTID-cd/job/PROJECTID-cd-COMPONENTID-master/>
+If the provisioning was successful, the previous push of the first commit should have triggered the first build process in Jenkins in the meantime, which can be viewed under the following link: <https://jenkins-foo-cd.apps.OPENSHIFT_DOMAIN_DEV/job/foo-cd/job/foo-cd-app-master/>
 
 #### Feature Environment
 
@@ -291,9 +291,9 @@ git commit -m "chore: create feature-next environment" --allow-empty
 git push -u origin feature/next
 ```
 
-A new Jenkins build should have been created and can be followed under the following link: <https://jenkins-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV/job/PROJECTID-cd/job/PROJECTID-cd-COMPONENTID-feature-next/>
+A new Jenkins build should have been created and can be followed under the following link: <https://jenkins-foo-cd.apps.OPENSHIFT_DOMAIN_DEV/job/foo-cd/job/foo-cd-app-feature-next/>
 
-Assuming the Jenkins build has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-dev/release/PROJECTID-COMPONENTID-feature-next) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV>
+Assuming the Jenkins build has been successfully completed, the application should have been created in the OpenShift 4 project [`foo-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/foo-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/foo-dev/release/foo-app-feature-next) resource and should be accessible under the following link: <https://foo-app-feature-next.apps.OPENSHIFT_DOMAIN_DEV>
 
 #### Release to `dev`, `test` and `prod`
 
@@ -301,33 +301,33 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
    ```yaml
    # Example metadata.yml
-   id: PROJECTID
-   name: Project PROJECTID
-   description: Description of PROJECTID
+   id: foo
+   name: Project foo
+   description: Description of foo
 
    environments:
      prod:
        apiUrl: api.OPENSHIFT_DOMAIN_PROD:6443
-       credentialsId: PROJECTID-cd-PROJECTID-prod
+       credentialsId: foo-cd-foo-prod
 
    repositories:
-     - id: COMPONENTID
+     - id: app
        branch: master
-       url: https://bitbucket.biscrum.com/scm/PROJECTID/PROJECTID-COMPONENTID.git
+       url: https://bitbucket.biscrum.com/scm/foo/foo-app.git
 
    services:
      bitbucket:
        credentials:
-         id: PROJECTID-cd-cd-user-with-password
+         id: foo-cd-cd-user-with-password
      # jira:
      #   credentials:
-     #     id: PROJECTID-cd-cd-user-with-password
+     #     id: foo-cd-cd-user-with-password
      nexus:
        repository:
          name: leva-documentation
    ```
 
-2. Go to the Jenkins build of the release manager and start a new build process in the `dev` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-dev/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV>
+2. Go to the Jenkins build of the release manager and start a new build process in the `dev` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`foo-dev`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/foo-dev) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/foo-dev/release/app) resource and should be accessible under the following link: <https://foo-app-dev.apps.OPENSHIFT_DOMAIN_DEV>
 
 3. Before you can deploy a release into `qa`/`test` environment, you need to merge the release branch into your master branch to pass the checks in the Jenkins shared library stage [`odsOrchestrationPipeline`](https://github.com/opendevstack/ods-jenkins-shared-library/blob/4.x/vars/odsOrchestrationPipeline.groovy), see comment in [`metadata.yml`](./metadata.yml) for more details:
 
@@ -342,9 +342,9 @@ Assuming the Jenkins build has been successfully completed, the application shou
    git push
    ```
 
-4. Go to the Jenkins build of the release manager and start a new build process in the `qa`/`test` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-test`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/PROJECTID-test) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/PROJECTID-test/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV>
+4. Go to the Jenkins build of the release manager and start a new build process in the `qa`/`test` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`foo-test`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/topology/ns/foo-test) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_DEV/helm-releases/ns/foo-test/release/app) resource and should be accessible under the following link: <https://foo-app-test.apps.OPENSHIFT_DOMAIN_DEV>
 
-5. Go to the Jenkins build of the release manager and start a new build process in the `prod` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`PROJECTID-prod`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/topology/ns/PROJECTID-prod) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/helm-releases/ns/PROJECTID-prod/release/COMPONENTID) resource and should be accessible under the following link: <https://PROJECTID-COMPONENTID.apps.OPENSHIFT_DOMAIN_DEV>
+5. Go to the Jenkins build of the release manager and start a new build process in the `prod` environment. Assuming the release has been successfully completed, the application should have been created in the OpenShift 4 project [`foo-prod`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/topology/ns/foo-prod) as a new [`HelmRelease`](https://console-openshift-console.apps.OPENSHIFT_DOMAIN_PROD/helm-releases/ns/foo-prod/release/app) resource and should be accessible under the following link: <https://foo-app.apps.OPENSHIFT_DOMAIN_DEV>
 
 ---
 
@@ -431,9 +431,9 @@ N/A
 
    Ideally you have one Azure App registry per environment (`dev`/`test`/`prod`) with at least the following SPA redirects:
 
-   - Dev: `http://localhost/`, `https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV`
-   - Test: `http://localhost/`, `https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV`
-   - Prod: `http://localhost/`, `https://PROJECTID-COMPONENTID.apps.OPENSHIFT_DOMAIN_PROD`
+   - Dev: `http://localhost/`, `https://foo-app-dev.apps.OPENSHIFT_DOMAIN_DEV`
+   - Test: `http://localhost/`, `https://foo-app-test.apps.OPENSHIFT_DOMAIN_DEV`
+   - Prod: `http://localhost/`, `https://foo-app.apps.OPENSHIFT_DOMAIN_PROD`
 
    Update the following entries with the `Application (client) ID` and `Directory (tenant) ID` from the corresponding app registry environment
 
@@ -537,7 +537,7 @@ npm run test
 ```sh
 npm run build
 mv build docker
-docker build -t PROJECTID-COMPONENTID -f docker/Dockerfile docker
+docker build -t foo-app -f docker/Dockerfile docker
 ```
 
 In case the command `RUN apk update && apk upgrade` cannot be executed (e.g. working behind a proxy), uncomment it for the moment.
@@ -545,7 +545,7 @@ In case the command `RUN apk update && apk upgrade` cannot be executed (e.g. wor
 #### Start Docker Image
 
 ```sh
-docker run -p 8080:8080 --env-file .env PROJECTID-COMPONENTID
+docker run -p 8080:8080 --env-file .env foo-app
 ```
 
 Starts the [nginx](https://nginx.org) server and makes your application accessible at `localhost:8080`.
@@ -577,37 +577,37 @@ flowchart TB
         subgraph aqua
             aqua-aqua["Aqua Container Security"]
         end
-        subgraph PROJECTID-cd
+        subgraph foo-cd
             subgraph webhook-proxy
                 direction TB
-                cd-DC-webhook-proxy["webhook-proxy (DeploymentConfig)"]:::classDeploymentConfig <-. Port 8080 .-> cd-S-webhook-proxy["webhook-proxy (Service)"]:::classService <-. Port 8080 .-> cd-RT-webhook-proxy["webhook-proxy (Route)\nhttps://webhook-proxy-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+                cd-DC-webhook-proxy["webhook-proxy (DeploymentConfig)"]:::classDeploymentConfig <-. Port 8080 .-> cd-S-webhook-proxy["webhook-proxy (Service)"]:::classService <-. Port 8080 .-> cd-RT-webhook-proxy["webhook-proxy (Route)\nhttps://webhook-proxy-foo-cd.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
             subgraph Jenkins
                 subgraph Jenkinsfile
                     stageInitialize-->stageInstallDependency-->stageVersioning-->stageWorkaroundFindOpenShiftImageOrElse --> stageAnalyzeCode-->odsComponentStageScanWithSonar-->stageBuild-->stageDeploy-->odsComponentStageBuildOpenShiftImage-->stageWorkaroundUnitTest-->stageWorkaroundRolloutDeployment-->stageRelease
                 end
             end
-            subgraph cd-IS-PROJECTID-COMPONENTID-master["PROJECTID-COMPONENTID-master (Image Stream)"]
-                cd-IST-PROJECTID-COMPONENTID-master["PROJECTID-COMPONENTID-master:v1.4.2"]:::classImageStreamTag
+            subgraph cd-IS-foo-app-master["foo-app-master (Image Stream)"]
+                cd-IST-foo-app-master["foo-app-master:v1.4.2"]:::classImageStreamTag
             end
         end
     end
     subgraph BitBucket
-        subgraph bb-project-PROJECTID["PROJECTID (Project)"]
-            subgraph bb-project-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bb-project-PROJECTID-COMPONENTID-branch-master["master (Branch)"]
+        subgraph bb-project-foo["foo (Project)"]
+            subgraph bb-project-foo-app["foo-app (Repo)"]
+                bb-project-foo-app-branch-master["master (Branch)"]
             end
         end
     end
 
 
-aqua-aqua -- scan --> cd-IST-PROJECTID-COMPONENTID-master
-bb-project-PROJECTID-COMPONENTID -- trigger --> webhook-proxy -- trigger --> Jenkins
-bb-project-PROJECTID-COMPONENTID-branch-master -- pull --> Jenkinsfile
-odsComponentStageBuildOpenShiftImage -- push --> cd-IST-PROJECTID-COMPONENTID-master
+aqua-aqua -- scan --> cd-IST-foo-app-master
+bb-project-foo-app -- trigger --> webhook-proxy -- trigger --> Jenkins
+bb-project-foo-app-branch-master -- pull --> Jenkinsfile
+odsComponentStageBuildOpenShiftImage -- push --> cd-IST-foo-app-master
 odsComponentStageBuildOpenShiftImage -. trigger .-> aqua-aqua -. result .-> odsComponentStageBuildOpenShiftImage
 odsComponentStageScanWithSonar -. trigger .-> sonarqube -. result .-> odsComponentStageScanWithSonar
-stageRelease -- "push (v1.4.2)" --> bb-project-PROJECTID-COMPONENTID-branch-master
+stageRelease -- "push (v1.4.2)" --> bb-project-foo-app-branch-master
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -625,19 +625,19 @@ classDef classRoute fill:#2b9af322,stroke:#2b9af3
 classDef classService fill:#6ca10022,stroke:#6ca100
 
 class BitBucket classBitBucket
-class bb-project-PROJECTID,bb-project-PROJECTID-COMPONENTID classBitBucketProject
-class cd-IS-PROJECTID-COMPONENTID-master classImageStream
-class aqua,ods,PROJECTID-cd,PROJECTID-dev classOcpProject
+class bb-project-foo,bb-project-foo-app classBitBucketProject
+class cd-IS-foo-app-master classImageStream
+class aqua,ods,foo-cd,foo-dev classOcpProject
 class aqua-aqua,Jenkins,Jenkinsfile,sonarqube,webhook-proxy classOcpResource
 class openshift-dev classOpenShift
 ```
 
 ### Feature Environments
 
-With each new `feature/*` branch created, a new environment is created in the OpenShift Project `PROJECTID-cd`.
+With each new `feature/*` branch created, a new environment is created in the OpenShift Project `foo-cd`.
 Different stages are processed in the Jenkinsfile and finally rolled out and managed via Helm.
 
-Please be aware that a new route (e.g. <https://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV>) is created for each new feature environment. If this is required for the SSO login, it must be specified as a new valid redirect URL in the app registration.
+Please be aware that a new route (e.g. <https://foo-app-feature-next.apps.OPENSHIFT_DOMAIN_DEV>) is created for each new feature environment. If this is required for the SSO login, it must be specified as a new valid redirect URL in the app registration.
 
 ```mermaid
 %% If the Mermaid Diagram is not rendered (as is the case on BitBucket), it can be viewed at https://mermaid.live/
@@ -649,40 +649,40 @@ flowchart TB
                 ods-DC-sonarqube["sonarqube (DeploymentConfig)"]:::classDeploymentConfig <-. Port 9000 .-> ods-S-sonarqube["sonarqube (Service)"]:::classService <-. Port 9000 .-> ods-RT-sonarqube["sonarqube (Route)\nhttps://sonarqube-ods.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
         end
-        subgraph PROJECTID-cd
+        subgraph foo-cd
             subgraph webhook-proxy
                 direction TB
-                cd-DC-webhook-proxy["webhook-proxy (DeploymentConfig)"]:::classDeploymentConfig <-. Port 8080 .-> cd-S-webhook-proxy["webhook-proxy (Service)"]:::classService <-. Port 8080 .-> cd-RT-webhook-proxy["webhook-proxy (Route)\nhttps://webhook-proxy-PROJECTID-cd.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+                cd-DC-webhook-proxy["webhook-proxy (DeploymentConfig)"]:::classDeploymentConfig <-. Port 8080 .-> cd-S-webhook-proxy["webhook-proxy (Service)"]:::classService <-. Port 8080 .-> cd-RT-webhook-proxy["webhook-proxy (Route)\nhttps://webhook-proxy-foo-cd.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
             subgraph Jenkins
                 subgraph Jenkinsfile
                     stageInitialize-->stageInstallDependency-->stageVersioning-->stageWorkaroundFindOpenShiftImageOrElse -->|orElse| stageAnalyzeCode-->odsComponentStageScanWithSonar-->stageBuild-->stageDeploy-->odsComponentStageBuildOpenShiftImage-->stageWorkaroundUnitTest-->stageWorkaroundRolloutDeployment-->stageRelease
                 end
             end
-            subgraph cd-IS-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next (Image Stream)"]
-                cd-IST-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next:hash"]:::classImageStreamTag
+            subgraph cd-IS-foo-app-feature-next["foo-app-feature-next (Image Stream)"]
+                cd-IST-foo-app-feature-next["foo-app-feature-next:hash"]:::classImageStreamTag
             end
         end
-        subgraph PROJECTID-dev
-            subgraph dev-HR-PROJECTID-COMPONENTID-feature-next["PROJECTID-COMPONENTID-feature-next (Helm Release)"]
-                dev-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> dev-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID-COMPONENTID-feature-next.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+        subgraph foo-dev
+            subgraph dev-HR-foo-app-feature-next["foo-app-feature-next (Helm Release)"]
+                dev-D-app["app (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-app["app (Service)"]:::classService <-. Port 8080 .-> dev-RT-app["app (Route)\nhttps://foo-app-feature-next.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
         end
     end
     subgraph bitbucket["BitBucket"]
-        subgraph bitbucket-PROJECTID["PROJECTID (Project)"]
-            subgraph bitbucket-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-feature-next["feature-next (Branch)"]
+        subgraph bitbucket-foo["foo (Project)"]
+            subgraph bitbucket-foo-app["foo-app (Repo)"]
+                bitbucket-foo-app-branch-feature-next["feature-next (Branch)"]
             end
         end
     end
 
-bitbucket-PROJECTID-COMPONENTID -- trigger --> webhook-proxy -- trigger --> Jenkins
-bitbucket-PROJECTID-COMPONENTID-branch-feature-next -- pull --> Jenkinsfile
-cd-IST-PROJECTID-COMPONENTID-feature-next --> dev-D-COMPONENTID
-odsComponentStageBuildOpenShiftImage -- push --> cd-IST-PROJECTID-COMPONENTID-feature-next
+bitbucket-foo-app -- trigger --> webhook-proxy -- trigger --> Jenkins
+bitbucket-foo-app-branch-feature-next -- pull --> Jenkinsfile
+cd-IST-foo-app-feature-next --> dev-D-app
+odsComponentStageBuildOpenShiftImage -- push --> cd-IST-foo-app-feature-next
 odsComponentStageScanWithSonar <-.-> sonarqube
-stageWorkaroundRolloutDeployment -- stageRolloutWithHelm --> dev-HR-PROJECTID-COMPONENTID-feature-next
+stageWorkaroundRolloutDeployment -- stageRolloutWithHelm --> dev-HR-foo-app-feature-next
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -700,10 +700,10 @@ classDef classRoute fill:#2b9af322,stroke:#2b9af3
 classDef classService fill:#6ca10022,stroke:#6ca100
 
 class BitBucket classBitBucket
-class bitbucket-PROJECTID,bitbucket-PROJECTID-COMPONENTID classBitBucketProject
-class dev-HR-PROJECTID-COMPONENTID-feature-next classHelmRelease
-class cd-IS-PROJECTID-COMPONENTID-feature-next classImageStream
-class ods,PROJECTID-cd,PROJECTID-dev classOcpProject
+class bitbucket-foo,bitbucket-foo-app classBitBucketProject
+class dev-HR-foo-app-feature-next classHelmRelease
+class cd-IS-foo-app-feature-next classImageStream
+class ods,foo-cd,foo-dev classOcpProject
 class Jenkins,Jenkinsfile,sonarqube,webhook-proxy classOcpResource
 class openshift-dev classOpenShift
 ```
@@ -717,9 +717,9 @@ class openshift-dev classOpenShift
 flowchart TB
     subgraph openshift-dev["OpenShift (DEV)"]
 
-        subgraph PROJECTID-cd
+        subgraph foo-cd
             subgraph jenkins["Jenkins"]
-                subgraph jenkinsfile-PROJECTID-COMPONENTID["Jenkinsfile (PROJECTID-COMPONENTID)"]
+                subgraph jenkinsfile-foo-app["Jenkinsfile (foo-app)"]
                     stageInitialize-->stageInstallDependency-->stageVersioning-->stageWorkaroundFindOpenShiftImageOrElse --> stageAnalyzeCode-->odsComponentStageScanWithSonar-->stageBuild-->stageDeploy-->odsComponentStageBuildOpenShiftImage-->stageWorkaroundUnitTest-->stageWorkaroundRolloutDeployment-->stageRelease
                 end
                 build-with-parameters("<strong>Build with Parameters</strong>\nenvironment: dev\nversion: 20220518.001"):::classManualTask
@@ -727,8 +727,8 @@ flowchart TB
                     InitStage --> BuildStage --> DeployStage --> TestStage --> ReleaseStage --> FinalizeStage
                 end
             end
-            subgraph cd-IS-COMPONENTID["COMPONENTID (Image Stream)"]
-                cd-IST-COMPONENTID["COMPONENTID:20220518.001"]:::classImageStreamTag
+            subgraph cd-IS-app["app (Image Stream)"]
+                cd-IST-app["app:20220518.001"]:::classImageStreamTag
             end
         end
         subgraph ods
@@ -740,37 +740,37 @@ flowchart TB
         subgraph aqua
             aqua-aqua["Aqua Container Security"]
         end
-        subgraph PROJECTID-dev
-            subgraph dev-HR-COMPONENTID["COMPONENTID (Helm Release)"]
+        subgraph foo-dev
+            subgraph dev-HR-app["app (Helm Release)"]
                 direction TB
-                dev-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> dev-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID-dev.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+                dev-D-app["app (Deployment)"]:::classDeployment <-. Port 8080 .-> dev-S-app["app (Service)"]:::classService <-. Port 8080 .-> dev-RT-app["app (Route)\nhttps://foo-dev.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
         end
     end
     subgraph BitBucket
-        subgraph bitbucket-PROJECTID["PROJECTID (Project)"]
-            subgraph bitbucket-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-master["master (Branch)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-release["release/20220518.001 (Branch)"]
+        subgraph bitbucket-foo["foo (Project)"]
+            subgraph bitbucket-foo-app["foo-app (Repo)"]
+                bitbucket-foo-app-branch-master["master (Branch)"]
+                bitbucket-foo-app-branch-release["release/20220518.001 (Branch)"]
             end
-            subgraph bitbucket-PROJECTID-releasemanager["PROJECTID-releasemanager (Repo)"]
-                bitbucket-PROJECTID-releasemanager-branch-master["master (Branch)"]
+            subgraph bitbucket-foo-releasemanager["foo-releasemanager (Repo)"]
+                bitbucket-foo-releasemanager-branch-master["master (Branch)"]
             end
         end
     end
 
-aqua-aqua -- scan --> cd-IST-COMPONENTID
-cd-IST-COMPONENTID --> dev-D-COMPONENTID
-bitbucket-PROJECTID-COMPONENTID-branch-master -- pull --> jenkinsfile-PROJECTID-COMPONENTID
-bitbucket-PROJECTID-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
-BuildStage -- trigger --> jenkinsfile-PROJECTID-COMPONENTID
+aqua-aqua -- scan --> cd-IST-app
+cd-IST-app --> dev-D-app
+bitbucket-foo-app-branch-master -- pull --> jenkinsfile-foo-app
+bitbucket-foo-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
+BuildStage -- trigger --> jenkinsfile-foo-app
 build-with-parameters -. trigger .-> InitStage
-FinalizeStage -- push --> bitbucket-PROJECTID-COMPONENTID-branch-release
-FinalizeStage -- push --> bitbucket-PROJECTID-releasemanager-branch-master
-odsComponentStageBuildOpenShiftImage -- push --> cd-IST-COMPONENTID
+FinalizeStage -- push --> bitbucket-foo-app-branch-release
+FinalizeStage -- push --> bitbucket-foo-releasemanager-branch-master
+odsComponentStageBuildOpenShiftImage -- push --> cd-IST-app
 odsComponentStageBuildOpenShiftImage -. trigger .-> aqua-aqua -. result .-> odsComponentStageBuildOpenShiftImage
 odsComponentStageScanWithSonar -. trigger .-> sonarqube -. result .-> odsComponentStageScanWithSonar
-stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> dev-HR-COMPONENTID
+stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> dev-HR-app
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -789,11 +789,11 @@ classDef classService fill:#6ca10022,stroke:#6ca100
 classDef classManualTask fill:#65bd1022,stroke:#65bd10,stroke-width:4px
 
 class BitBucket classBitBucket
-class bitbucket-PROJECTID,bitbucket-PROJECTID-COMPONENTID,bitbucket-PROJECTID-releasemanager classBitBucketProject
-class dev-HR-COMPONENTID classHelmRelease
-class cd-IS-COMPONENTID classImageStream
-class aqua,ods,PROJECTID-cd,PROJECTID-dev classOcpProject
-class aqua-aqua,jenkins,jenkinsfile-PROJECTID-COMPONENTID,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
+class bitbucket-foo,bitbucket-foo-app,bitbucket-foo-releasemanager classBitBucketProject
+class dev-HR-app classHelmRelease
+class cd-IS-app classImageStream
+class aqua,ods,foo-cd,foo-dev classOcpProject
+class aqua-aqua,jenkins,jenkinsfile-foo-app,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
 class openshift-dev classOpenShift
 ```
 
@@ -803,47 +803,47 @@ class openshift-dev classOpenShift
 %% If the Mermaid Diagram is not rendered (as is the case on BitBucket), it can be viewed at https://mermaid.live/
 flowchart TB
     subgraph openshift-dev["OpenShift (DEV)"]
-        subgraph PROJECTID-cd
+        subgraph foo-cd
             subgraph jenkins["Jenkins"]
                 build-with-parameters{{"<strong>Build with Parameters</strong>\nenvironment: qa\nversion: 20220518.001"}}:::classManualTask
                 subgraph jenkinsfile-releasemanager["Jenkinsfile (Release Manager)"]
                     InitStage --> BuildStage --> DeployStage --> TestStage --> ReleaseStage --> FinalizeStage
                 end
-                subgraph jenkinsfile-PROJECTID-COMPONENTID["Jenkinsfile (PROJECTID-COMPONENTID)"]
+                subgraph jenkinsfile-foo-app["Jenkinsfile (foo-app)"]
                     stageInitialize --> stageInstallDependency --> stageVersioning --> stageWorkaroundFindOpenShiftImageOrElse --> stageWorkaroundUnitTest --> stageWorkaroundRolloutDeployment --> stageRelease
                 end
             end
-            subgraph cd-IS-COMPONENTID["COMPONENTID (Image Stream)"]
-                cd-IST-COMPONENTID["COMPONENTID:20220518.001"]:::classImageStreamTag
+            subgraph cd-IS-app["app (Image Stream)"]
+                cd-IST-app["app:20220518.001"]:::classImageStreamTag
             end
         end
-        subgraph PROJECTID-test
-            subgraph test-HR-COMPONENTID["COMPONENTID (Helm Release)"]
-                test-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> test-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> test-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID-test.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
+        subgraph foo-test
+            subgraph test-HR-app["app (Helm Release)"]
+                test-D-app["app (Deployment)"]:::classDeployment <-. Port 8080 .-> test-S-app["app (Service)"]:::classService <-. Port 8080 .-> test-RT-app["app (Route)\nhttps://foo-test.apps.OPENSHIFT_DOMAIN_DEV"]:::classRoute
             end
         end
     end
     subgraph BitBucket
-        subgraph bitbucket-PROJECTID["PROJECTID (Project)"]
-            subgraph bitbucket-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-master["master (Branch)"]
+        subgraph bitbucket-foo["foo (Project)"]
+            subgraph bitbucket-foo-app["foo-app (Repo)"]
+                bitbucket-foo-app-branch-master["master (Branch)"]
                 merge{{"<strong>Merge into master</strong>\nrelease/20220518.001 (Branch)"}}:::classManualTask
             end
-            subgraph bitbucket-PROJECTID-releasemanager["PROJECTID-releasemanager (Repo)"]
-                bitbucket-PROJECTID-releasemanager-branch-master["master (Branch)"]
+            subgraph bitbucket-foo-releasemanager["foo-releasemanager (Repo)"]
+                bitbucket-foo-releasemanager-branch-master["master (Branch)"]
             end
         end
     end
 
-cd-IST-COMPONENTID <-.-> stageWorkaroundFindOpenShiftImageOrElse
-cd-IST-COMPONENTID --> test-D-COMPONENTID
-bitbucket-PROJECTID-COMPONENTID-branch-master -- pull --> jenkinsfile-PROJECTID-COMPONENTID
-bitbucket-PROJECTID-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
-merge --> bitbucket-PROJECTID-COMPONENTID-branch-master["master (Branch)"]
-BuildStage -- trigger --> jenkinsfile-PROJECTID-COMPONENTID
+cd-IST-app <-.-> stageWorkaroundFindOpenShiftImageOrElse
+cd-IST-app --> test-D-app
+bitbucket-foo-app-branch-master -- pull --> jenkinsfile-foo-app
+bitbucket-foo-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
+merge --> bitbucket-foo-app-branch-master["master (Branch)"]
+BuildStage -- trigger --> jenkinsfile-foo-app
 build-with-parameters -. trigger .-> InitStage
-FinalizeStage -- push --> bitbucket-PROJECTID-releasemanager-branch-master
-stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> test-HR-COMPONENTID
+FinalizeStage -- push --> bitbucket-foo-releasemanager-branch-master
+stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> test-HR-app
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -862,11 +862,11 @@ classDef classService fill:#6ca10022,stroke:#6ca100
 classDef classManualTask fill:#65bd1022,stroke:#65bd10,stroke-width:4px
 
 class BitBucket classBitBucket
-class bitbucket-PROJECTID,bitbucket-PROJECTID-COMPONENTID,bitbucket-PROJECTID-releasemanager classBitBucketProject
-class test-HR-COMPONENTID classHelmRelease
-class cd-IS-COMPONENTID classImageStream
-class aqua,ods,PROJECTID-cd,PROJECTID-test classOcpProject
-class aqua-aqua,jenkins,jenkinsfile-PROJECTID-COMPONENTID,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
+class bitbucket-foo,bitbucket-foo-app,bitbucket-foo-releasemanager classBitBucketProject
+class test-HR-app classHelmRelease
+class cd-IS-app classImageStream
+class aqua,ods,foo-cd,foo-test classOcpProject
+class aqua-aqua,jenkins,jenkinsfile-foo-app,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
 class openshift-dev classOpenShift
 ```
 
@@ -876,47 +876,47 @@ class openshift-dev classOpenShift
 %% If the Mermaid Diagram is not rendered (as is the case on BitBucket), it can be viewed at https://mermaid.live/
 flowchart TB
     subgraph openshift-dev["OpenShift (DEV)"]
-        subgraph PROJECTID-cd
+        subgraph foo-cd
             subgraph jenkins["Jenkins"]
                 build-with-parameters{{"<strong>Build with Parameters</strong>\nenvironment: prod\nversion: 20220518.001"}}:::classManualTask
                 subgraph jenkinsfile-releasemanager["Jenkinsfile (Release Manager)"]
                     InitStage --> BuildStage --> DeployStage --> TestStage --> ReleaseStage --> FinalizeStage
                 end
-                subgraph jenkinsfile-PROJECTID-COMPONENTID["Jenkinsfile (PROJECTID-COMPONENTID)"]
+                subgraph jenkinsfile-foo-app["Jenkinsfile (foo-app)"]
                     stageInitialize --> stageInstallDependency --> stageVersioning --> stageWorkaroundFindOpenShiftImageOrElse --> stageWorkaroundUnitTest --> stageWorkaroundRolloutDeployment --> stageRelease
                 end
             end
-            subgraph cd-IS-COMPONENTID["COMPONENTID (Image Stream)"]
-                cd-IST-COMPONENTID["COMPONENTID:20220518.001"]:::classImageStreamTag
+            subgraph cd-IS-app["app (Image Stream)"]
+                cd-IST-app["app:20220518.001"]:::classImageStreamTag
             end
         end
     end
     subgraph openshift-prod["OpenShift (PROD)"]
-        subgraph PROJECTID-prod
-            subgraph prod-HR-COMPONENTID["COMPONENTID (Helm Release)"]
-                prod-D-COMPONENTID["COMPONENTID (Deployment)"]:::classDeployment <-. Port 8080 .-> prod-S-COMPONENTID["COMPONENTID (Service)"]:::classService <-. Port 8080 .-> prod-RT-COMPONENTID["COMPONENTID (Route)\nhttps://PROJECTID.apps.OPENSHIFT_DOMAIN_PROD"]:::classRoute
+        subgraph foo-prod
+            subgraph prod-HR-app["app (Helm Release)"]
+                prod-D-app["app (Deployment)"]:::classDeployment <-. Port 8080 .-> prod-S-app["app (Service)"]:::classService <-. Port 8080 .-> prod-RT-app["app (Route)\nhttps://foo.apps.OPENSHIFT_DOMAIN_PROD"]:::classRoute
             end
         end
     end
     subgraph BitBucket
-        subgraph bitbucket-PROJECTID["PROJECTID (Project)"]
-            subgraph bitbucket-PROJECTID-COMPONENTID["PROJECTID-COMPONENTID (Repo)"]
-                bitbucket-PROJECTID-COMPONENTID-branch-master["master (Branch)"]
+        subgraph bitbucket-foo["foo (Project)"]
+            subgraph bitbucket-foo-app["foo-app (Repo)"]
+                bitbucket-foo-app-branch-master["master (Branch)"]
             end
-            subgraph bitbucket-PROJECTID-releasemanager["PROJECTID-releasemanager (Repo)"]
-                bitbucket-PROJECTID-releasemanager-branch-master["master (Branch)"]
+            subgraph bitbucket-foo-releasemanager["foo-releasemanager (Repo)"]
+                bitbucket-foo-releasemanager-branch-master["master (Branch)"]
             end
         end
     end
 
-cd-IST-COMPONENTID --> prod-D-COMPONENTID
-cd-IST-COMPONENTID <-.-> stageWorkaroundFindOpenShiftImageOrElse
-bitbucket-PROJECTID-COMPONENTID-branch-master -- pull --> jenkinsfile-PROJECTID-COMPONENTID
-bitbucket-PROJECTID-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
-BuildStage -- trigger --> jenkinsfile-PROJECTID-COMPONENTID
+cd-IST-app --> prod-D-app
+cd-IST-app <-.-> stageWorkaroundFindOpenShiftImageOrElse
+bitbucket-foo-app-branch-master -- pull --> jenkinsfile-foo-app
+bitbucket-foo-releasemanager-branch-master -- pull --> jenkinsfile-releasemanager
+BuildStage -- trigger --> jenkinsfile-foo-app
 build-with-parameters -. trigger .-> InitStage
-FinalizeStage -- push --> bitbucket-PROJECTID-releasemanager-branch-master
-stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> prod-HR-COMPONENTID
+FinalizeStage -- push --> bitbucket-foo-releasemanager-branch-master
+stageWorkaroundRolloutDeployment -- "Rollout with Helm" --> prod-HR-app
 
 %% stlyes
 classDef classBitBucket fill:#2684FF22,stroke:#2684FF,stroke-width:4px
@@ -935,11 +935,11 @@ classDef classService fill:#6ca10022,stroke:#6ca100
 classDef classManualTask fill:#65bd1022,stroke:#65bd10,stroke-width:4px
 
 class BitBucket classBitBucket
-class bitbucket-PROJECTID,bitbucket-PROJECTID-COMPONENTID,bitbucket-PROJECTID-releasemanager classBitBucketProject
-class prod-HR-COMPONENTID classHelmRelease
-class cd-IS-COMPONENTID classImageStream
-class aqua,ods,PROJECTID-cd,PROJECTID-prod classOcpProject
-class aqua-aqua,jenkins,jenkinsfile-PROJECTID-COMPONENTID,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
+class bitbucket-foo,bitbucket-foo-app,bitbucket-foo-releasemanager classBitBucketProject
+class prod-HR-app classHelmRelease
+class cd-IS-app classImageStream
+class aqua,ods,foo-cd,foo-prod classOcpProject
+class aqua-aqua,jenkins,jenkinsfile-foo-app,jenkinsfile-releasemanager,sonarqube,webhook-proxy classOcpResource
 class openshift-dev,openshift-prod classOpenShift
 ```
 
@@ -985,13 +985,13 @@ With the approach of making each feature available as a new deployed environment
 oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
 
 # Switch to Project
-oc project PROJECTID-dev
+oc project foo-dev
 
 # Delete/Uninstall all feature charts
-helm list | grep -e 'COMPONENTID' | cut -f1 | xargs helm uninstall
+helm list | grep -e 'app' | cut -f1 | xargs helm uninstall
 
 # Delete all other feature resources
-oc get all --output jsonpath='{range .items[*]}{"oc delete "}{.kind}{" "}{.metadata.name}{" "}{"\n"}{end}' | grep -- "COMPONENTID-feature-" | while read -r line; do eval $line; done
+oc get all --output jsonpath='{range .items[*]}{"oc delete "}{.kind}{" "}{.metadata.name}{" "}{"\n"}{end}' | grep -- "app-feature-" | while read -r line; do eval $line; done
 ```
 
 #### Jenkins Pipelines
@@ -1007,13 +1007,13 @@ oc get all --output jsonpath='{range .items[*]}{"oc delete "}{.kind}{" "}{.metad
 oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
 
 # Switch Project
-oc project PROJECTID-cd
+oc project foo-cd
 
 # Delete all feature pipelines (may take some time)
-oc get bc --output jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.strategy.type}{"\n"}{end}' | grep -e "JenkinsPipeline" | cut -f1 | grep -e "COMPONENTID-feature-" | while read -r line; do oc delete bc $line && sleep 10s; done
+oc get bc --output jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.strategy.type}{"\n"}{end}' | grep -e "JenkinsPipeline" | cut -f1 | grep -e "app-feature-" | while read -r line; do oc delete bc $line && sleep 10s; done
 
 # Delete all release pipelines (may take some time)
-oc get bc --output custom-columns=NAME:.metadata.name | grep -e "COMPONENTID-release-" | while read -r line; do oc delete bc $line && sleep 10s; done
+oc get bc --output custom-columns=NAME:.metadata.name | grep -e "app-release-" | while read -r line; do oc delete bc $line && sleep 10s; done
 
 # Delete all ods quickstarter pipelines (may take some time)
 oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | while read -r line; do oc delete bc $line && sleep 10s; done
