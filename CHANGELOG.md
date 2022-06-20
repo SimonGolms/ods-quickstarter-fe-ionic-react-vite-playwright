@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.3...v1.0.4) (2022-06-20)
+
+
+### Build System
+
+* **deps:** udpate dependencies ([a79eac9](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/a79eac9e859d72fc92f4717767875af95072f0b6))
+
 ## [1.0.3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.2...v1.0.3) (2022-06-14)
 
 
