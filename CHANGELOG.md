@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.4...v1.0.5) (2022-06-21)
+
+
+### Bug Fixes
+
+* **user-menu:** use logged in user data ([c83f345](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/c83f3453a3aa710310094917c2d50c18ecfaef2d))
+
 ## [1.0.4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.3...v1.0.4) (2022-06-20)
 
 
