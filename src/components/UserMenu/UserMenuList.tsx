@@ -3,10 +3,10 @@ import { settingsOutline } from 'ionicons/icons';
 import { ItemLogOut } from '../ButtonLogOut/ItemLogOut';
 import styles from './UserMenuList.module.css';
 
-export const UserMenuList: React.FC<TProps> = ({ lines = 'full', ...rest }) => {
+export const UserMenuList: React.FC<TProps> = ({ headerTitle, lines = 'full', ...rest }) => {
   return (
     <IonList class="ion-padding-vertical" lines={lines} {...rest}>
-      <IonListHeader className={isPlatform('ios') ? styles['header-ios'] : ''}>Golms,Simon (IT EDS) BIG-DE-B</IonListHeader>
+      <IonListHeader className={isPlatform('ios') ? styles['header-ios'] : ''}>{headerTitle}</IonListHeader>
       <IonItem routerDirection="root" routerLink="/settings" type="button">
         <IonLabel>Settings</IonLabel>
         <IonIcon icon={settingsOutline} slot="start" />
@@ -16,4 +16,6 @@ export const UserMenuList: React.FC<TProps> = ({ lines = 'full', ...rest }) => {
   );
 };
 
-type TProps = React.ComponentProps<typeof IonList>;
+type TProps = React.ComponentProps<typeof IonList> & {
+  headerTitle?: string | null;
+};
