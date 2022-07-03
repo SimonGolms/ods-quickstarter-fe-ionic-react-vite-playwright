@@ -14,10 +14,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
+      # Ignore README.md from find results to avoid unintentionally changes on the release step
       - name: Setup Quickstarter (Project ID)
-        run: find . -type f -exec sed --expression 's/PROJECTID/foo/g' --in-place {} +
+        run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/PROJECTID/foo/g' {} +
+      # Ignore README.md from find results to avoid unintentionally changes on the release step
       - name: Setup Quickstarter (Component ID)
-        run: find . -type f -exec sed --expression 's/COMPONENTID/app/g' --in-place {} +
+        run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/COMPONENTID/app/g' {} +
       - name: Install Dependencies
         run: npm install
       - name: Release
