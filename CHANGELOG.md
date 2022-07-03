@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.6](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.5...v1.0.6) (2022-07-03)
+
+
+### Documentation
+
+* **README:** restore content by unintentionally changing by github actions ([0f5d740](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/0f5d7405239d24f4a33d0f3074aca76aed3c07b3))
+
+
+### Continuous Integration
+
+* **github:** fix steps to setup quickstarter ([5f4acbd](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/commit/5f4acbd1bc6fae42115fe43c45d44dbb86879873))
+
 ## [1.0.5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/compare/v1.0.4...v1.0.5) (2022-06-21)
 
 
