@@ -18,8 +18,8 @@ export const REDIRECT_REQUEST: RedirectRequest = {
 // see: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/master/lib/msal-browser/docs/configuration.md
 const MSAL_CONFIG: Configuration = {
   auth: {
-    authority: `https://login.microsoftonline.com/${env.REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID}`,
-    clientId: env.REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID,
+    authority: `https://login.microsoftonline.com/${env.VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID}`,
+    clientId: env.VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID,
     navigateToLoginRequestUrl: false,
     postLogoutRedirectUri: '/logout',
     redirectUri: '/',

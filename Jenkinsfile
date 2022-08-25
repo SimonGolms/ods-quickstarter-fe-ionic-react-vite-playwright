@@ -125,11 +125,6 @@ def stageDebug(def context) {
       script: 'printenv | sort',
     )
   }
-  stage('DEBUG: Context') {
-      echo "context.environment: ${context.environment}"
-      echo "context.targetProject: ${context.targetProject}"
-      echo "context.triggeredByOrchestrationPipeline: ${context.triggeredByOrchestrationPipeline}"
-  }
 }
 
 def stageInstallDependency(def context) {
@@ -245,13 +240,11 @@ def stageTest(def context) {
 def stageBuild(def context) {
   stage('Build') {
     withEnv([
-      "DISABLE_ESLINT_PLUGIN=true", // ESLint rules already checked in 'stageAnalyzeCode'; no need to double check
-      "GENERATE_SOURCEMAP=false", // Nothing in place to take advantage of sourcemaps; no need to generate one
-      "REACT_APP_VERSION=${APP_VERSION}",
+      "VITE_VERSION=${APP_VERSION}",
     ]) {
       sh(
         label: 'Build App as a static web application for production',
-        script: 'npx ionic build',
+        script: 'npm run build',
       )
     }
   }
@@ -266,6 +259,11 @@ def stageDeploy(def context) {
   }
 }
 
+/**
+  * This is a wild mix of fake test results which have come together through several attempts from error messages and test
+  * results to be able to perform a rollout for the workaround type 'ods-infra' with and without the release manager.
+  * Of course, the test cases should be replaced by correct test results.
+  */
 def stageWorkaroundFakeTest(def context) {
   stage('Fake Test Results') {
     sh(
