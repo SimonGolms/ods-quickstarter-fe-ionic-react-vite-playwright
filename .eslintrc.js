@@ -67,6 +67,7 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-restricted-imports': [
       'error',
       {
