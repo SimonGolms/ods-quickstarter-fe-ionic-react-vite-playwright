@@ -38,8 +38,8 @@ odsComponentPipeline(
    */
   // odsComponentFindOpenShiftImageOrElse(context) {
   stageWorkaroundFindOpenShiftImageOrElse(context, [
-    imageTag: "${env.appVersion}",
-    resourceName: "${env.appName}",
+    imageTag: "${APP_VERSION}",
+    resourceName: "${APP_NAME}",
   ]) {
     // stageDebug(context)
     stageAnalyzeCode(context)
@@ -49,8 +49,8 @@ odsComponentPipeline(
     stageBuild(context)
     stageDeploy(context)
     odsComponentStageBuildOpenShiftImage(context, [
-      imageTag: "${env.appVersion}",
-      resourceName: "${env.appName}",
+      imageTag: "${APP_VERSION}",
+      resourceName: "${APP_NAME}",
     ])
   }
 
@@ -83,13 +83,13 @@ def stageInitialize(def context) {
     }
 
     // Replace all non-alphanumeric characters with a dash
-    env.branchName = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
+    def branchName = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
 
     /**
      * odsComponentStageBuildOpenShiftImage will fail in case of appName = ${context.componentId}-${branchName}
      * See: https://github.com/opendevstack/ods-jenkins-shared-library/issues/877
      */
-    env.appName = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_NAME = "${context.projectId}-${context.componentId}-${branchName}"
 
     /**
      * Replace '${context.projectId}-${context.componentId}' with your preferred URL template, but keep in mind that there can only be one unique URL per OpenShift instance
@@ -98,12 +98,12 @@ def stageInitialize(def context) {
      * With this approach, the feature environments of application is for example accessible at the following URLs:
      * https://PROJECTID-COMPONENTID-feature-foo.dev.apps.OPENSHIFT_DOMAIN_DEV
      */
-    env.appUrl = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_URL = "${context.projectId}-${context.componentId}-${branchName}"
   }
 }
 
 def stageInitializeWithReleaseManager(def context) {
-  env.appName = "${context.componentId}"
+  APP_NAME = "${context.componentId}"
 
   /**
    * Replace '${context.projectId}-${context.componentId}' with your preferred URL template, but keep in mind that there can only be one unique URL per OpenShift instance
@@ -115,7 +115,7 @@ def stageInitializeWithReleaseManager(def context) {
    * PROJECTID-test: https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV
    * PROJECTID-dev: https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV
    */
-  env.appUrl = context.environment == 'prod' ? "${context.projectId}-${context.componentId}" : "${context.projectId}-${context.componentId}-${context.environment}"
+  APP_URL = context.environment == 'prod' ? "${context.projectId}-${context.componentId}" : "${context.projectId}-${context.componentId}-${context.environment}"
 }
 
 def stageDebug(def context) {
@@ -154,7 +154,7 @@ def stageVersioning(def context) {
 
 def stageVersioningWithReleaseManager(def context) {
   stage('Versioning (Release Manager)') {
-    env.appVersion = "${env.RELEASE_PARAM_VERSION}"
+    APP_VERSION = "${env.RELEASE_PARAM_VERSION}"
   }
 }
 
@@ -179,7 +179,7 @@ def stageVersioningWithSemanticRelease(def context) {
           label: 'Test version file',
           script: "test -e .VERSION || (echo ${context.shortGitCommit} > .VERSION)",
         )
-        env.appVersion = sh(
+        APP_VERSION = sh(
           label: 'Provide version as env variable',
           script: 'cat .VERSION',
           returnStdout: true
@@ -247,7 +247,7 @@ def stageBuild(def context) {
     withEnv([
       "DISABLE_ESLINT_PLUGIN=true", // ESLint rules already checked in 'stageAnalyzeCode'; no need to double check
       "GENERATE_SOURCEMAP=false", // Nothing in place to take advantage of sourcemaps; no need to generate one
-      "REACT_APP_VERSION=${env.appVersion}",
+      "REACT_APP_VERSION=${APP_VERSION}",
     ]) {
       sh(
         label: 'Build App as a static web application for production',
@@ -333,13 +333,13 @@ def stageRolloutWithHelm(def context) {
 
     // Name of the Helm release (defaults to context.componentId). Change this value if you want to install separate instances of the Helm chart in the same namespace.
     // In that case, make sure to use {{ .Release.Name }} in resource names to avoid conflicts.
-    def helmReleaseName = "${env.appName}"
+    def helmReleaseName = "${APP_NAME}"
 
     // helmValues: Key/value pairs to pass as values (by default, the key imageTag is set to the config option imageTag).
     def helmValues = [
-      'appUrl': "${env.appUrl}",
-      'imageTag': "${env.appVersion}",
-      'nameOverride': "${env.appName}",
+      'appUrl': "${APP_URL}",
+      'imageTag': "${APP_VERSION}",
+      'nameOverride': "${APP_NAME}",
       'odsApplicationDomain': openShiftService.getApplicationDomain(context.targetProject),
     ]
 
