@@ -479,6 +479,18 @@ N/A
       + azureActiveDirectoryTenantId: "abc...-prod-...xyz"
       ```
 
+   5. [`./Jenkinsfile`](./Jenkinsfile)
+
+      _Please make sure that you use the correct client id and tenant id from your app registration for the `dev` environment._
+
+      ```diff
+      - 'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555555',
+      + 'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=123...-dev-...789',
+      ...
+      - 'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+      + 'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=abc...-dev-...xyz',
+      ```
+
    More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
 
 ## Local Development
