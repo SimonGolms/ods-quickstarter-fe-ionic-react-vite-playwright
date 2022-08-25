@@ -35,7 +35,7 @@ module.exports = {
            sed -i 's/appVersion:.*/appVersion: \"${nextRelease.version}\"/g' chart/Chart.yaml && \
            sed -i 's/imageTag:.*/imageTag: ${nextRelease.version}/g' chart/values.yaml && \
            sed -i 's/version:.*/version: ${nextRelease.version}/g' metadata.yml && \
-           sed -i 's/version-.*-blue/version-${nextRelease.version}-blue/g' README.md",
+           sed -i 's/version-.*-blue/version-${nextRelease.version.replace(/-/g, '--')}-blue/g' README.md",
       },
     ],
   ],
