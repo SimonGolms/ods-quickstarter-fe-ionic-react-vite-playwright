@@ -372,8 +372,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
 **Testing**:
 
-[![React Testing Library](https://img.shields.io/badge/React--Testing--Library-E33332.svg?style=for-the-badge&logo=testing-library&logoColor=white)](https://testing-library.com/docs/react-testing-library/intro)
-[![Jest](https://img.shields.io/badge/Jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/docs/getting-started)
+[![Playwright](https://img.shields.io/badge/playwright-2EAD33.svg?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
 
 **Tracking**:
 
@@ -384,17 +383,17 @@ N/A
 [![ESLint](https://img.shields.io/badge/ESlint-4B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Stylelint](https://img.shields.io/badge/stylelint-263238.svg?style=for-the-badge&logo=stylelint&logoColor=white)](https://stylelint.io/)
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E.svg?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
-[![Commitlint](https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&&logoColor=black)](https://commitlint.js.org/)
+[![Commitlint](https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&logo=commitlint&logoColor=white)](https://commitlint.js.org/)
 
 **Compiler**:
 
-[![react-scripts](<https://img.shields.io/badge/react--scripts%20(CRA)-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB>)](https://create-react-app.dev/)
+[![vitejs](https://img.shields.io/badge/vite-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
 ### CI/CD
 
 [![OpenDevStack](https://img.shields.io/badge/OpenDevStack-222.svg?style=for-the-badge&logoColor=white)](https://www.opendevstack.org/)
 [![Jenkins](https://img.shields.io/badge/Jenkins-D24939.svg?style=for-the-badge&logo=jenkins&logoColor=white)](https://nginx.org/)
-[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://helm.sh/)
+[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://www.opendevstack.org/)
 [![Semantic Release](https://img.shields.io/badge/Semantic%20Release-494949.svg?style=for-the-badge&logo=semantic-release&logoColor=white)](https://semantic-release.gitbook.io/semantic-release/)
 [![Husky](https://img.shields.io/badge/%F0%9F%90%B6%20Husky-42b983.svg?style=for-the-badge)](https://typicode.github.io/husky/#/)
 
