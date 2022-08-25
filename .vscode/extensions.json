@@ -9,9 +9,10 @@
     "mikestead.dotenv",
     "ms-azuretools.vscode-docker",
     "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-playwright.playwright",
     "streetsidesoftware.code-spell-checker",
+    "stylelint.vscode-stylelint",
     "visualstudioexptteam.vscodeintellicode",
-    "yzhang.markdown-all-in-one",
-    "stylelint.vscode-stylelint"
+    "yzhang.markdown-all-in-one"
   ]
 }

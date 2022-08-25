@@ -1,6 +1,7 @@
+import { expect, test } from '@playwright/experimental-ct-react';
 import { getGreetingTextByHour, GREETING } from './Greeter.utils';
 
-describe('get greeting text by hour', () => {
+test.describe.parallel('Greeter', () => {
   test('Hour: 00:00', () => {
     expect(getGreetingTextByHour(0)).toBe(GREETING.EVENING);
   });

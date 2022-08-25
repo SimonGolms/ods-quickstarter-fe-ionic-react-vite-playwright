@@ -5,7 +5,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    // 'plugin:jest/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:sonarjs/recommended',
     'plugin:typescript-sort-keys/recommended',
@@ -16,7 +15,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
-    // 'jest',
     'jsx-a11y',
     'react-hooks',
     'react',
@@ -35,13 +33,11 @@ module.exports = {
       'error',
       {
         ignoreExports: [
+          'playwright/index.ts',
           'src/index.tsx',
-          'src/setupTests.ts',
           'src/**/*.d.ts',
-          'src/**/*.test.ts',
-          'src/**/*.test.tsx',
-          '*.ts', // mostly configuration files
-          '*.js', // mostly configuration files
+          'src/**/*.{spec,test}.{ts,tsx}',
+          '*.{js,ts}', // mostly configuration files
         ],
         missingExports: true,
         src: ['.'],

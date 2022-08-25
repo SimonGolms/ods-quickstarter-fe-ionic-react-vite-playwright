@@ -23,6 +23,21 @@ odsComponentPipeline(
       resourceRequestCpu: '10m',
       resourceRequestMemory: '1Gi',
       workingDir: '/tmp'
+    ),
+    containerTemplate(
+      alwaysPullImage: true,
+      envVars: [
+        envVar(key: 'HOME', value: '/tmp')
+      ],
+      image: "mcr.microsoft.com/playwright:v1.25.1-focal",
+      name: 'playwright',
+      // Before you increase the resources, make sure that the quotas provide the appropriate resources.
+      // resourceLimitCpu: '1',
+      // resourceLimitMemory: '4Gi',
+      // resourceRequestCpu: '10m',
+      // resourceRequestMemory: '1Gi',
+      ttyEnabled: true,
+      workingDir: '/tmp'
     )
   ],
 ) { context ->
@@ -46,6 +61,7 @@ odsComponentPipeline(
     odsComponentStageScanWithSonar(context, [
       analyzePullRequests: false,
     ])
+    stageTest(context)
     stageBuild(context)
     stageDeploy(context)
     odsComponentStageBuildOpenShiftImage(context, [
@@ -128,11 +144,13 @@ def stageDebug(def context) {
 }
 
 def stageInstallDependency(def context) {
-  stage('Install Dependencies') {
-    sh(
-      label: 'Install exact version of Dependencies',
-      script: 'npm ci',
-    )
+  container('playwright') {
+    stage('Install Dependencies') {
+      sh(
+        label: 'Install exact version of Dependencies',
+        script: 'npm ci',
+      )
+    }
   }
 }
 
@@ -154,31 +172,33 @@ def stageVersioningWithReleaseManager(def context) {
 }
 
 def stageVersioningWithSemanticRelease(def context) {
-  stage('Versioning (Semantic Release)') {
-    def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
+  container('playwright') {
+    stage('Versioning (Semantic Release)') {
+      def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
 
-    withCredentials([
-      usernameColonPassword(
-        credentialsId: bitbucketService.getPasswordCredentialsId(),
-        variable: 'GIT_CREDENTIALS'
-      )
-    ]) {
-      withEnv([
-        "BRANCH_NAME=${context.gitBranch}"
+      withCredentials([
+        usernameColonPassword(
+          credentialsId: bitbucketService.getPasswordCredentialsId(),
+          variable: 'GIT_CREDENTIALS'
+        )
       ]) {
-        sh(
-          label: 'Identify semantic-release version',
-          script: 'npm run release:version',
-        )
-        sh(
-          label: 'Test version file',
-          script: "test -e .VERSION || (echo ${context.shortGitCommit} > .VERSION)",
-        )
-        APP_VERSION = sh(
-          label: 'Provide version as env variable',
-          script: 'cat .VERSION',
-          returnStdout: true
-        ).trim()
+        withEnv([
+          "BRANCH_NAME=${context.gitBranch}",
+        ]) {
+          sh(
+            label: 'Identify semantic-release version',
+            script: 'npm run release:version',
+          )
+          sh(
+            label: 'Test version file',
+            script: "test -e .VERSION || (echo ${context.shortGitCommit} > .VERSION)",
+          )
+          APP_VERSION = sh(
+            label: 'Provide version as env variable',
+            script: 'cat .VERSION',
+            returnStdout: true
+          ).trim()
+        }
       }
     }
   }
@@ -213,10 +233,12 @@ def stageWorkaroundFindOpenShiftImageOrElse(def context, Map config = [:], Closu
 
 def stageAnalyzeCode(def context) {
   stage('Analyze Code') {
-    sh(
-      label: 'Check ESLint Rules',
-      script: 'npm run lint',
-    )
+    container('playwright') {
+      sh(
+        label: 'Check ESLint Rules',
+        script: 'npm run lint',
+      )
+    }
     sh(
       label: 'Check Helm Chart',
       script: 'helm lint chart --strict',
@@ -225,27 +247,33 @@ def stageAnalyzeCode(def context) {
 }
 
 def stageTest(def context) {
-  stage('Test Component') {
-    /**
-     * Run tests in the same thread to improve the speed
-     * See: https://jestjs.io/docs/troubleshooting#tests-are-extremely-slow-on-docker-andor-continuous-integration-ci-server
-     */
-    sh(
-      label: 'Test React Components',
-      script: 'npm run test -- --runInBand',
-    )
+  container('playwright') {
+    stage('Test Components') {
+      withEnv([
+        'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555555',
+        // IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
+        'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+      ]) {
+        sh(
+          label: 'Test React Components',
+          script: 'npm run test',
+        )
+      }
+    }
   }
 }
 
 def stageBuild(def context) {
-  stage('Build') {
-    withEnv([
-      "VITE_VERSION=${APP_VERSION}",
-    ]) {
-      sh(
-        label: 'Build App as a static web application for production',
-        script: 'npm run build',
-      )
+  container('playwright') {
+    stage('Build') {
+      withEnv([
+        "VITE_VERSION=${APP_VERSION}",
+      ]) {
+        sh(
+          label: 'Build App as a static web application for production',
+          script: 'npm run build',
+        )
+      }
     }
   }
 }
@@ -394,22 +422,24 @@ def stageReleaseWithReleaseManager (def context) {
 }
 
 def stageReleaseWithSemanticRelease(def context) {
-  stage('Release (Semenatic Release)') {
-    def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
+  container('playwright') {
+    stage('Release (Semenatic Release)') {
+      def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
 
-    withCredentials([
-      usernameColonPassword(
-        credentialsId: bitbucketService.getPasswordCredentialsId(),
-        variable: 'GIT_CREDENTIALS'
-      )
-    ]) {
-      withEnv([
-        "BRANCH_NAME=${context.gitBranch}",
-      ]) {
-        sh(
-          label: 'Run Semantic Release',
-          script: 'npm run release',
+      withCredentials([
+        usernameColonPassword(
+          credentialsId: bitbucketService.getPasswordCredentialsId(),
+          variable: 'GIT_CREDENTIALS'
         )
+      ]) {
+        withEnv([
+          "BRANCH_NAME=${context.gitBranch}",
+        ]) {
+          sh(
+            label: 'Run Semantic Release',
+            script: 'npm run release',
+          )
+        }
       }
     }
   }
