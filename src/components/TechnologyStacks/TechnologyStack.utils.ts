@@ -78,14 +78,9 @@ export const PROGRAMMING_LANGUAGE: TechnologyStackItemProps[] = [
 
 export const TESTING: TechnologyStackItemProps[] = [
   {
-    alt: 'React Testing Library',
-    href: 'https://testing-library.com/docs/react-testing-library/intro',
-    src: 'https://img.shields.io/badge/React--Testing--Library-E33332.svg?style=for-the-badge&logo=testing-library&logoColor=white',
-  },
-  {
-    alt: 'Jest',
-    href: 'https://jestjs.io/docs/getting-started',
-    src: 'https://img.shields.io/badge/Jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white',
+    alt: 'Playwright',
+    href: 'https://playwright.dev',
+    src: 'https://img.shields.io/badge/playwright-2EAD33.svg?style=for-the-badge&logo=playwright&logoColor=white',
   },
 ];
 
@@ -108,15 +103,15 @@ export const LINTER: TechnologyStackItemProps[] = [
   {
     alt: 'Commitlint',
     href: 'https://commitlint.js.org/',
-    src: 'https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&&logoColor=black',
+    src: 'https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&logo=commitlint&logoColor=white',
   },
 ];
 
 export const COMPILER: TechnologyStackItemProps[] = [
   {
-    alt: 'react-scripts',
-    href: 'https://create-react-app.dev/',
-    src: 'https://img.shields.io/badge/react--scripts%20(CRA)-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB',
+    alt: 'vite',
+    href: 'https://vitejs.dev/',
+    src: 'https://img.shields.io/badge/vite-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white',
   },
 ];
 
