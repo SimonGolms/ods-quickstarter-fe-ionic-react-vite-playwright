@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement, useCallback, useState } from 'react';
+import { cloneElement, isValidElement, useCallback, useState } from 'react';
 import { AvatarButton, AvatarButtonProps } from './AvatarButton';
 
 export const AvatarButtonDialog: React.FC<TProps> = ({ id, expand, children }) => {
