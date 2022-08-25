@@ -1,15 +1,15 @@
-import { Storage as storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { type Storage } from 'redux-persist';
 
 export const capacitorStorage: Storage = {
   getItem: async (key: string) => {
-    const { value } = await storage.get({ key });
+    const { value } = await Preferences.get({ key });
     return value || '';
   },
   removeItem: async (key: string) => {
-    return storage.remove({ key });
+    return Preferences.remove({ key });
   },
   setItem: async (key: string, value: string) => {
-    return storage.set({ key, value });
+    return Preferences.set({ key, value });
   },
 };
