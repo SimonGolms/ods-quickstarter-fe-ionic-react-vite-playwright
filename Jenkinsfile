@@ -348,8 +348,20 @@ def stageRolloutWithHelm(def context) {
 
     // Go to directory where the helm chart is located
     dir('chart'){
-      // we'll simply reuse the instance from above to do the actual helm rollout
-      openShiftService.helmUpgrade("${context.targetProject}", helmReleaseName, helmValuesFiles, helmValues, helmDefaultFlags, helmAdditionalFlags, helmDiff)
+      try {
+        openShiftService.helmUpgrade("${context.targetProject}", helmReleaseName, helmValuesFiles, helmValues, helmDefaultFlags, helmAdditionalFlags, helmDiff)
+      } catch (Exception exception) {
+        /**
+        * In case the rollout with Helm does not go through successfully, e.g. due to a faulty nginx configuration
+        * that prevents the pod from starting, you have to make sure that the already deployed image is deleted again,
+        * otherwise the elseBlock of stageWorkaroundFindOpenShiftImageOrElse will not be executed anymore.
+        */
+        sh(
+          label: 'Delete deployed Imagestream Tag',
+          script: "oc tag --delete --namespace ${context.cdProject} ${JOB_APP_NAME}:${JOB_APP_VERSION}",
+        )
+        throw exception
+      }
     }
   }
 }
