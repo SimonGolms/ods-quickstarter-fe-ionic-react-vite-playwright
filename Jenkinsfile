@@ -58,7 +58,7 @@ odsComponentPipeline(
    * ! IMPORTANT - WORKAROUND
    * Create missing (fake) test result reports that are necessary for type 'ods-infra' when triggered via Release Manager
    */
-  stageWorkaroundUnitTest(context)
+  stageWorkaroundFakeTest(context)
 
   /**
    * ! IMPORTANT - WORKAROUND
@@ -266,23 +266,26 @@ def stageDeploy(def context) {
   }
 }
 
-def stageWorkaroundUnitTest(def context) {
-  stage('Unit Test') {
-    /**
-     * This is a wild mix of fake test results which have come together through several attempts from error messages and test
-     * results to be able to perform a rollout for the workaround type 'ods-infra' with and without the release manager.
-     * Of course, the test cases should be replaced by correct test results.
-     */
+def stageWorkaroundFakeTest(def context) {
+  stage('Fake Test Results') {
     sh(
-      label: 'Create Fake Unit Test Results',
-      script: 'mkdir --parent build/test-results && touch build/test-results/stub.log',
+      label: 'Create Test Results Folder',
+      script: 'mkdir --parent build/test-results',
     )
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "acceptance-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    sh(
+      label: 'Create Fake Log Files',
+      script: 'touch build/test-results/stub.log',
+    )
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "changes-${context.componentId}-${context.buildNumber}")
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "installation-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "integration-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "state-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "target-${context.componentId}-${context.buildNumber}")
+    sh(
+      label: 'Create Fake Test Reports',
+      script: 'echo \'<testsuites name="fake-suites"><testsuite name="fake-suite" tests="0"><testcase name="fake-testcase"/></testsuite></testsuites>\' > build/test-results/results.xml',
+    )
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "acceptance-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "installation-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "integration-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
   }
 }
@@ -342,6 +345,11 @@ def stageRolloutWithHelm(def context) {
       'nameOverride': "${APP_NAME}",
       'odsApplicationDomain': openShiftService.getApplicationDomain(context.targetProject),
     ]
+
+    if( context.gitBranch.startsWith('feature/') ) {
+      echo 'gitBranch starts with feature/'
+      helmValues.put('apiUrl', "http://PROJECTID-api-${BRANCH_NAME}.PROJECTID-dev.svc.cluster.local:8080/api")
+    }
 
     // helmValuesFiles: List of paths to values files (empty by default).
     def helmValuesFiles = ["values.${context.environment}.yaml"]
