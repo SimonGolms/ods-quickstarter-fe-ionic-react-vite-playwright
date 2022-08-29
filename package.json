@@ -35,7 +35,7 @@
     "@ionic/react": "6.2.4",
     "@ionic/react-router": "6.2.4",
     "@reduxjs/toolkit": "1.8.5",
-    "ionicons": "6.0.2",
+    "ionicons": "6.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.0.2",
@@ -58,8 +58,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "4.1.0",
-    "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3",
+    "@commitlint/cli": "17.1.1",
+    "@commitlint/config-conventional": "17.1.0",
     "@ionic/cli": "6.20.1",
     "@microsoft/microsoft-graph-types": "2.23.0",
     "@playwright/experimental-ct-react": "1.25.1",
@@ -76,7 +76,7 @@
     "@typescript-eslint/parser": "5.35.1",
     "@vitejs/plugin-react": "2.0.1",
     "conventional-changelog-conventionalcommits": "5.0.0",
-    "eslint": "8.22.0",
+    "eslint": "8.23.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-react-app": "7.0.1",
     "eslint-import-resolver-typescript": "3.5.0",
@@ -96,7 +96,7 @@
     "stylelint-config-standard": "28.0.0",
     "stylelint-order": "5.0.0",
     "stylelint-prettier": "2.0.0",
-    "typescript": "4.7.4",
+    "typescript": "4.8.2",
     "vite": "3.0.9"
   }
 }
