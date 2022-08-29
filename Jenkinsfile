@@ -15,13 +15,13 @@ odsComponentPipeline(
     containerTemplate(
       alwaysPullImage: true,
       args: '${computer.jnlpmac} ${computer.name}',
-      image: 'image-registry.openshift-image-registry.svc:5000/PROJECTID-cd/jenkins-agent-nodejs-16:latest',
+      image: 'image-registry.openshift-image-registry.svc:5000/ods/jenkins-agent-nodejs16:4.x',
       name: 'jnlp',
-      // Before you increase the resources, make sure that the quotas provide the appropriate resources.
-      resourceLimitCpu: '1',
-      resourceLimitMemory: '4Gi',
-      resourceRequestCpu: '10m',
-      resourceRequestMemory: '1Gi',
+      // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
+      // resourceLimitCpu: '1',
+      // resourceLimitMemory: '4Gi',
+      // resourceRequestCpu: '10m',
+      // resourceRequestMemory: '1Gi',
       workingDir: '/tmp'
     ),
     containerTemplate(
@@ -31,7 +31,7 @@ odsComponentPipeline(
       ],
       image: "mcr.microsoft.com/playwright:v1.25.1-focal",
       name: 'playwright',
-      // Before you increase the resources, make sure that the quotas provide the appropriate resources.
+      // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
       // resourceLimitCpu: '1',
       // resourceLimitMemory: '4Gi',
       // resourceRequestCpu: '10m',
