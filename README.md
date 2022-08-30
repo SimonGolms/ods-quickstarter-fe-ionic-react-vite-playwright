@@ -1,10 +1,10 @@
-# OpenDevStack - Quickstarter - Frontend Ionic React
+# OpenDevStack - Quickstarter - Frontend Ionic React Vite Playwright
 
-> An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
+> An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework, react, vite and playwright.
 
 ![Version](https://img.shields.io/badge/version-1.0.6-blue.svg?style=for-the-badge&cacheSeconds=2592000)
-[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-jenkins-agent-nodejs?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/blob/master/LICENSE)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/graphs/commit-activity)
+[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
 ![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
 ![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
@@ -15,7 +15,7 @@
 - Single-Sign-On (SSO) for user authentication and authorization with Azure Active Directory
 - OpenDevStack (ODS) CI/CD configuration out of the box with the basic setup for Docker (incl. injecting Runtime Variables), Jenkins (incl. feature environments, release-manager rollout) and OpenShift (managed with Helm)
   - Ionic Appflow (coming soon)
-- Setup for ESlint, Stylelint, Prettier, commitlint, Husky (git hooks) and semantic versioning for a better developer experience
+- Setup for Vite, Playwright, ESlint, Stylelint, Prettier, commitlint, Husky (git hooks) and semantic versioning for a better developer experience
 
 ---
 
@@ -98,7 +98,7 @@ find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_DEV/YOUR_OPENSHIFT_DOM
 
 #### 5. Set OpenShift prod domain URLs
 
-Replace `OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `prod.ocp.company.com`
+Replace `YOUR_OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `prod.ocp.company.com`
 
 <details><summary>How do I find out the <code>YOUR_OPENSHIFT_DOMAIN_PROD</code> value?</summary>
 
@@ -186,39 +186,7 @@ oc version
 
 More Information: <https://docs.openshift.com/container-platform/4.9/cli_reference/openshift_cli/getting-started-cli.html>
 
-#### 10. Provision Jenkins Agent with Node.js `16.x`
-
-It might happen that your `ODS@4.x` setup only provides a Jenkins agent with Node.js `12.x`. However, in order to be able to work with the latest version and to have potential security holes closed, a Jenkins agent with the latest Node.js version is required for the build process in the CI/CD process.
-
-<details><summary>How do I find out which a Jenkins Agent with Node.js are available in my <code>ODS@4.x</code> setup?</summary>
-
-Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.openshift.io~v1~BuildConfig?name=jenkins-agent-nodejs>
-
-</details>
-
-In case it does not exist yet, it can be easily created with the following commands:
-
-<details><summary>How to find the <code>oc</code> login token</summary>
-
-1. Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/oauth/token/display>
-2. Click on `Display token` or `Request another token`
-
-</details>
-
-```sh
-# Login to OpenShift dev instance
-oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
-
-# Switch project
-oc project PROJECTID-cd
-
-# Provision jenkins-agent-nodejs-16
-oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
-```
-
-For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
-
-#### 11. Setup Bitbucket Code Repository
+#### 10. Setup Bitbucket Code Repository
 
 1. Create BitBucket Repository
 
@@ -227,7 +195,7 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    ```sh
    # For security reasons (e.g. terminal history) --user 'USERNAME:PASSWORD' should be avoided.
    # Instead, a prompt will show up for the password if --user 'USERNAME' is used!
-   curl --data '{"defaultBranch":"master","description":"📱 Repo of the app from PROJECTID build with ionic and react","name":"PROJECTID-COMPONENTID"}' \
+   curl --data '{"defaultBranch":"master","description":"📱 Repo of COMPONENTID from PROJECTID that is build with ionic and react","name":"PROJECTID-COMPONENTID"}' \
      --header "Content-Type: application/json" \
      --request POST \
      --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/ \
@@ -956,7 +924,7 @@ class openshift-dev,openshift-prod classOpenShift
 
 ## Housekeeping
 
-💡 From time to time, obsolete resources should be cleaned up. It would be best to have this automated at a later time.
+💡 From time to time, obsolete resources should be cleaned up. It would be best to have this automated at a later time. However, at the moment, this is not yet possible, because the webhook-proxy captures the `deleted` event and cannot be further customized, see: <https://github.com/opendevstack/ods-core/blob/99d26527df60fbb4d72ba15a8c233e325ff37fe1/jenkins/webhook-proxy/main.go#L541-L556>
 
 ### Git Branches
 
@@ -977,12 +945,12 @@ git branch -r | grep 'origin' | grep --invert-match 'master$' | grep --invert-ma
 ### Git Tags
 
 ```sh
-# Delete all local tags that do NOT match a pattern of a semantic version
-git tag -l | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]' | xargs git tag -d
+# Delete all local tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
+git tag -l | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | xargs git tag -d
 
-# Delete all remote tags that do NOT match a pattern of a semantic version (e.g. ods-generated-v20220518.001)
+# Delete all remote tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
 # Skip git hooks with '--no-verify'
-git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]' | grep -v '}$'| xargs git push --delete --no-verify origin
+git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | grep -v '}$' | xargs git push --delete --no-verify origin
 ```
 
 ### OpenShift
@@ -1036,11 +1004,105 @@ oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | whil
 - [ ] Implement Android
 - [ ] Implement iOS
 - [ ] Implement Ionic Appflow
-- [ ] Improve Testing
+- [x] Improve Testing
+
+## FAQ
+
+### Jenkins
+
+<details><summary>How do I find out which a Jenkins Agent with Node.js are available in my <code>ODS@4.x</code> setup?</summary>
+
+Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.openshift.io~v1~BuildConfig?name=jenkins-agent-nodejs>
+
+</details>
+
+### Openshift
+
+<details><summary>How to find the <code>oc</code> login token</summary>
+
+1. Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/oauth/token/display>
+2. Click on `Display token` or `Request another token`
+
+</details>
+
+## Known Issues
+
+### Bitbucket
+
+<details><summary>A Pull Request shows a merge conflict on <code>chart/Chart.yaml</code>, <code>chart/values.yaml</code>, <code>CHANGELOG.md</code>, <code>metadata.yml</code>, <code>package-lock.json</code>, <code>package.json</code>, <code>README.md</code></summary>
+
+This happens mainly when e.g. a new `feature` branch has already been created from `master` branch before the Jenkins job has been successfully completed with a release commit.
+
+To avoid resolving all merge conflicts manually, this can already be specified in the `merge` command by the [`--strategy-option=theirs`](https://www.git-scm.com/docs/git-merge#Documentation/git-merge.txt---strategy-optionltoptiongt) option to automatically accept all incoming changes.
+
+**Solution:**
+
+```sh
+# Merge the remote master branch into the current one without opening a text editor (accept the auto-generated message) and accept all incoming changes on merge conflicts
+git merge origin/master --no-edit --strategy-option=theirs
+
+# (Optional) Add `skip ci` command to the previous merge commit
+git commit --amend -m "$(git log --format=%s --max-count=1) [skip ci]"
+
+# Push the changes to the remote repository
+git push
+```
+
+</details>
+
+### Jenkins
+
+<details><summary>The Jenkins pipeline does not start and shows the following error message:<code>[Failed] Failed to pull image "image-registry.openshift-image-registry.svc:5000/ods/jenkins-agent-nodejs16:4.x" ... [Failed] Error: ImagePullBackOff</code></summary>
+
+It might happen that your `ODS@4.x` setup only provides a Jenkins agent with Node.js `12.x`. However, in order to be able to work with the latest version and to have potential security holes closed, a Jenkins agent with the latest Node.js version is required for the build process in the CI/CD process.
+
+[FAQ: How do I find out which a Jenkins Agent with Node.js are available in my `ODS@4.x` setup?](#faq)
+
+In case it does not exist yet, it can be easily created with the following commands
+
+[FAQ: How to find the `oc` login token](#faq)
+
+**Solution:**
+
+```sh
+# Login to OpenShift dev instance
+oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
+
+# Switch project
+oc project PROJECTID-cd
+
+# Provision jenkins-agent-nodejs-16
+oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
+```
+
+For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
+
+</details>
+
+<details><summary>The Release Manager finishes the release to the <code>qa</code>/<code>test</code> environment with the following yellow message: <code>Finished: UNSTABLE</code></summary>
+
+This state is already set at the beginning by the following message in the Jenkins log: `WARN: app@<GIT-HASH-1> is NOT a descendant of <GIT-HASH-2>, which has previously been promoted to 'Q'. If <GIT-HASH-2> has been promoted to 'P' as well, promotion to 'P' will fail. Proceed with caution.`
+
+Before you can deploy a release into `qa`/`test` environment, you need to merge the release branch into your master branch to pass the checks in the Jenkins shared library stage [`odsOrchestrationPipeline`](https://github.com/opendevstack/ods-jenkins-shared-library/blob/4.x/vars/odsOrchestrationPipeline.groovy), see comment in [`metadata.yml`](./metadata.yml) for more details:
+
+**Solution:**
+
+```sh
+# Switch to master branch
+git checkout master
+
+# Merge the remote release branch into master without opening a text editor and accept the auto-generated message
+git merge origin/release/<VERSION> --no-edit
+
+# Push the changes to the remote repository
+git push
+```
+
+</details>
 
 ## Author
 
-**Simon Golms**
+**Simon Golms:**
 
 - Digital Card: `npx simongolms`
 - Github: [@SimonGolms](https://github.com/SimonGolms)
