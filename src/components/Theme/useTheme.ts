@@ -6,7 +6,7 @@ import { getThemeById, getThemeClasses, THEME_DEFAULT, ThemeId } from './theme.u
 
 export const useTheme = () => {
   const dispatch = useAppDispatch();
-  const themeId = useAppSelector(selectUserThemeId);
+  const userThemeId = useAppSelector(selectUserThemeId);
 
   const setTheme = useCallback(
     (themeId: ThemeId) => {
@@ -15,7 +15,7 @@ export const useTheme = () => {
     [dispatch]
   );
 
-  const theme = useMemo(() => getThemeById(themeId) || THEME_DEFAULT, [themeId]);
+  const theme = useMemo(() => getThemeById(userThemeId) || THEME_DEFAULT, [userThemeId]);
 
   useEffect(() => {
     // eslint-disable-next-line no-type-assertion/no-type-assertion
