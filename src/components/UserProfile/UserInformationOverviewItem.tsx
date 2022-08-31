@@ -1,6 +1,6 @@
 import { IonIcon, IonItem, IonLabel } from '@ionic/react';
 
-export const UserInformationOverviewItem: React.FC<TProps> = ({ icon, label, value }) => {
+export const UserInformationOverviewItem = ({ icon, label, value }: TProps) => {
   return (
     <IonItem>
       <IonIcon icon={icon} slot="start" />

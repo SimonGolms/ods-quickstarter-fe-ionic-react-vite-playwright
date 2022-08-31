@@ -3,7 +3,7 @@ import { settingsOutline } from 'ionicons/icons';
 import { ItemLogOut } from '../ButtonLogOut/ItemLogOut';
 import styles from './UserMenuList.module.css';
 
-export const UserMenuList: React.FC<TProps> = ({ headerTitle, lines = 'full', ...rest }) => {
+export const UserMenuList = ({ headerTitle, lines = 'full', ...rest }: TProps) => {
   return (
     <IonList class="ion-padding-vertical" lines={lines} {...rest}>
       <IonListHeader className={isPlatform('ios') ? styles['header-ios'] : ''}>{headerTitle}</IonListHeader>

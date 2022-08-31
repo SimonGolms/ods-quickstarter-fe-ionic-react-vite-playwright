@@ -5,7 +5,7 @@ import { LoginPage } from './Login/LoginPage';
 import { LogoutPage } from './Logout/LogoutPage';
 import { ProtectedPages } from './ProtectedPages';
 
-export const Pages: React.FC = () => {
+export const Pages = () => {
   return (
     <IonReactRouter>
       <IonRouterOutlet>

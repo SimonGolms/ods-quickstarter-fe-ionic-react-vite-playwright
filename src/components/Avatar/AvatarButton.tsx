@@ -1,7 +1,7 @@
 import { IonButton } from '@ionic/react';
 import { Avatar, AvatarProps } from './Avatar';
 
-export const AvatarButton: React.FC<AvatarButtonProps> = ({ id, expand, ...rest }) => {
+export const AvatarButton = ({ id, expand, ...rest }: AvatarButtonProps) => {
   return (
     <IonButton shape="round" {...rest}>
       <Avatar expand={expand} id={id} slot="icon-only" />

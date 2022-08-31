@@ -3,7 +3,7 @@ import { AvatarButtonDialog } from '../../components/Avatar/AvatarButtonDialog';
 import { UserMenuPopover } from '../../components/UserMenu/UserMenuPopover';
 import { useGetMeQuery } from '../../services/microsoft-graph/api.me';
 
-export const RootPageLayout: React.FC<TProps> = ({ children, className, color, title }) => {
+export const RootPageLayout = ({ children, className, color, title }: TProps) => {
   const { data } = useGetMeQuery();
 
   return (

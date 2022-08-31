@@ -5,7 +5,7 @@ import styles from './Avatar.module.css';
 import { AvatarIcon } from './AvatarIcon';
 import { AvatarSkeleton } from './AvatarSkeleton';
 
-export const Avatar: React.FC<AvatarProps> = ({ id, expand, ...rest }) => {
+export const Avatar = ({ id, expand, ...rest }: AvatarProps) => {
   const { data, isFetching, isError } = useGetUserPhotoByIdQuery(getIdPayloadOrSkipToken(id));
 
   if (isFetching) {

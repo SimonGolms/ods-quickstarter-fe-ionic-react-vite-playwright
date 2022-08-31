@@ -2,7 +2,7 @@ import { IonList, IonListHeader } from '@ionic/react';
 import { UserInformation } from './UserInformation';
 import { UserInformationOverview } from './UserInformationOverview';
 
-export const UserInformations: React.FC<TProps> = ({ id }) => {
+export const UserInformations = ({ id }: TProps) => {
   return (
     <IonList>
       <IonListHeader>Information</IonListHeader>

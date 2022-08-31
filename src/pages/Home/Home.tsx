@@ -3,7 +3,7 @@ import { TechnologyStacks } from '../../components/TechnologyStacks/TechnologySt
 import { RootPageLayout } from '../Layout/RootPageLayout';
 import styles from './HomePage.module.css';
 
-export const HomePage: React.FC = () => {
+export const HomePage = () => {
   return (
     <RootPageLayout className="ion-padding" color="primary" title="Home">
       <div className={styles.container}>

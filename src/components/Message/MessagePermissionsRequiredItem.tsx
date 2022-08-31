@@ -1,7 +1,7 @@
 import { IonIcon, IonItem, IonLabel } from '@ionic/react';
 import { alertCircleOutline } from 'ionicons/icons';
 
-export const MessagePermissionsRequiredItem: React.FC<TProps> = ({ children, color = 'danger', ...rest }) => {
+export const MessagePermissionsRequiredItem = ({ children, color = 'danger', ...rest }: TProps) => {
   return (
     <IonItem color={color} {...rest}>
       <IonIcon icon={alertCircleOutline} slot="start" />

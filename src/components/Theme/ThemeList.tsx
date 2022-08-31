@@ -3,7 +3,7 @@ import { IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup, Rad
 import { ThemeId, THEMES } from './theme.utils';
 import { useTheme } from './useTheme';
 
-export const ThemeList: React.FC = () => {
+export const ThemeList = () => {
   const { theme, setTheme } = useTheme();
 
   const handleChange = useCallback(

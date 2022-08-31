@@ -2,7 +2,7 @@ import { IonLabel, IonList, IonListHeader } from '@ionic/react';
 import { ItemAppVersion } from '../Base/Item/ItemAppVersion';
 import { ItemResetUserState } from '../ButtonReset/ItemResetUserState';
 
-export const SettingsApplicationList: React.FC = () => {
+export const SettingsApplicationList = () => {
   return (
     <IonList>
       <IonListHeader>

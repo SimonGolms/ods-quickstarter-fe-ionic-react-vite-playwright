@@ -10,7 +10,7 @@ import { LoginPage } from './Login/LoginPage';
 import { SettingsPage } from './Settings/SettingsPage';
 import { UserPage } from './User/UserPage';
 
-export const ProtectedPages: React.FC = () => {
+export const ProtectedPages = () => {
   const { inProgress } = useMsal();
   const isAuthenticated = useIsAuthenticated();
 
