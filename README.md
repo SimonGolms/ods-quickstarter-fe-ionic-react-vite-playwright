@@ -3,8 +3,8 @@
 > An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework, react, vite and playwright.
 
 ![Version](https://img.shields.io/badge/version-1.0.6-blue.svg?style=for-the-badge&cacheSeconds=2592000)
-[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react/blob/master/LICENSE)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react/graphs/commit-activity)
+[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
 ![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
 ![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
@@ -37,17 +37,17 @@ To provision this Quickstarter, you need a deployed ODS project with the corresp
 - Option 1 (recommended): Clone the repository
 
   ```sh
-  git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react.git
-  cd ods-quickstarter-fe-ionic-react
+  git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright.git
+  cd ods-quickstarter-fe-ionic-react-vite-playwright
   ```
 
 - Option 2: Download the repository
 
   ```sh
-  curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/archive/refs/heads/main.tar.gz && \
+  curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/archive/refs/heads/main.tar.gz && \
   tar -xvzf main.tar.gz && \
   rm main.tar.gz
-  cd ods-quickstarter-fe-ionic-react-main
+  cd ods-quickstarter-fe-ionic-react-vite-playwright-main
   ```
 
 #### 2. Set Project Id
@@ -1119,7 +1119,7 @@ Give a ⭐️ if this project helped you!
 ## License
 
 Copyright © 2022 [Simon Golms](https://github.com/SimonGolms).<br />
-This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/blob/master/LICENSE) licensed.
+This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE) licensed.
 
 ## Further Resources
 
