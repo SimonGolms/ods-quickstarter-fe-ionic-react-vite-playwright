@@ -16,7 +16,7 @@ test.describe('MessageAccessInformation', () => {
     await expect(component).toContainText('Explore:');
   });
 
-  test('click on quote to navigate to microsoft docs about role-based access control', async ({ context, mount, page }) => {
+  test('click on quote to navigate to microsoft docs about role-based access control', async ({ context, mount }) => {
     const component = await mount(
       <div>
         <MessageAccessInformation />
@@ -30,7 +30,7 @@ test.describe('MessageAccessInformation', () => {
     await expect(await newPage.title()).toBeTruthy();
   });
 
-  test('click on link to navigate to microsoft docs about app roles', async ({ context, mount, page }) => {
+  test('click on link to navigate to microsoft docs about app roles', async ({ context, mount }) => {
     const component = await mount(
       <div>
         <MessageAccessInformation />

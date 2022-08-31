@@ -16,7 +16,7 @@ test.describe('MessagePermissionsInformation', () => {
     await expect(component).toContainText('Explore:');
   });
 
-  test('click on quote to navigate to microsoft docs about user concept overview', async ({ context, mount, page }) => {
+  test('click on quote to navigate to microsoft docs about user concept overview', async ({ context, mount }) => {
     const component = await mount(
       <div>
         <MessagePermissionsInformation />
@@ -30,7 +30,7 @@ test.describe('MessagePermissionsInformation', () => {
     await expect(await newPage.title()).toBeTruthy();
   });
 
-  test('click on link to navigate to microsoft docs about microsoft graph', async ({ context, mount, page }) => {
+  test('click on link to navigate to microsoft docs about microsoft graph', async ({ context, mount }) => {
     const component = await mount(
       <div>
         <MessagePermissionsInformation />
@@ -44,7 +44,7 @@ test.describe('MessagePermissionsInformation', () => {
     await expect(await newPage.title()).toBeTruthy();
   });
 
-  test('click on link to navigate to microsoft docs about permissions and consent', async ({ context, mount, page }) => {
+  test('click on link to navigate to microsoft docs about permissions and consent', async ({ context, mount }) => {
     const component = await mount(
       <div>
         <MessagePermissionsInformation />

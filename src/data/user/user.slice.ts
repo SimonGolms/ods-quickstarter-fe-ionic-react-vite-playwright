@@ -12,7 +12,7 @@ const initialState: UserState = {
 
 const userSlice = createSlice({
   extraReducers: (builder) => {
-    builder.addCase(PURGE, (state) => {
+    builder.addCase(PURGE, (_state) => {
       return initialState;
     });
   },
