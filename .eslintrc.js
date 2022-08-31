@@ -1,17 +1,35 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2022: true,
+    node: true,
+    worker: true,
+  },
   extends: [
-    'react-app',
-    'react-app/jest',
+    'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
+    'plugin:playwright/playwright-test',
     'plugin:sonarjs/recommended',
     'plugin:typescript-sort-keys/recommended',
     // HINT: prettier must be the last extension to work
     'plugin:prettier/recommended',
   ],
   ignorePatterns: ['build', 'docker', 'node_modules', 'openshift', 'public'],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
@@ -26,6 +44,14 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/sort-type-union-intersection-members': 'error',
     camelcase: 'warn',
     curly: 'error',
@@ -64,15 +90,8 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: ['@mui/*/*/*', '!@mui/material/test-utils/*'],
-      },
-    ],
     'no-type-assertion/no-type-assertion': 'error',
     'prettier/prettier': 'error',
-    'react/display-name': 'off',
     'react/jsx-sort-default-props': 'error',
     'react/jsx-sort-props': [
       'error',
@@ -85,8 +104,7 @@ module.exports = {
         shorthandLast: false,
       },
     ],
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off', // do not overeager and inferred the type
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'sort-imports': [
@@ -112,6 +130,9 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true,
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };

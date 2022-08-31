@@ -1,8 +1,8 @@
 module.exports = {
   '*.css': ['stylelint --fix', 'git add --force'],
   '*.{js,jsx,ts,tsx}': [
-    // Extend rule set of .eslintrc.js with 'no-console' and 'no-unused-vars'
-    "eslint --fix --rule 'no-console: [error, { allow: [warn, error] }]' --rule 'no-unused-vars: error'",
+    // Extend rule levels based on .eslintrc.js
+    "eslint --fix --rule '@typescript-eslint/no-unused-vars: error' --rule 'no-console: error'",
     'git add --force',
   ],
   '*.json': ['prettier --write', 'git add --force'],
