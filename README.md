@@ -404,62 +404,31 @@ N/A
 
    Update the following entries with the `Application (client) ID` and `Directory (tenant) ID` from the corresponding app registry environment
 
-   1. [`.env`](./.env)
+   1. Replace `YOUR_CLIENT_ID_DEV` with the `Application (client) ID` from your app registration for the `dev` environment
 
-      ```diff
-      # Azure - SSO
-      - REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=""
-      + REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID="123...789"
-      - REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID=""
-      + REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID="123...789"
+      ```sh
+      find \( -wholename "./.env" -or -wholename "./chart/values.dev.yaml" -or -wholename "./Jenkinsfile" \) -exec sed --expression 's/11111111-2222-3333-4444-555555555dev/YOUR_CLIENT_ID_DEV/g' --in-place {} +
       ```
 
-   2. [`./chart/values.dev.yaml`](./chart/values.dev.yaml)
+   2. Replace `YOUR_CLIENT_ID_TEST` with the `Application (client) ID` from your app registration for the `test` environment
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `dev` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-dev-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-dev-...xyz"
+      ```sh
+      find -wholename "./chart/values.test.yaml" -exec sed --expression 's/11111111-2222-3333-4444-55555555test/YOUR_CLIENT_ID_TEST/g' --in-place {} +
       ```
 
-   3. [`./chart/values.test.yaml`](./chart/values.test.yaml)
+   3. Replace `YOUR_CLIENT_ID_PROD` with the `Application (client) ID` from your app registration for the `prod` environment
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `test` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-test-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-test-...xyz"
+      ```sh
+      find -wholename "./chart/values.prod.yaml" -exec sed --expression 's/11111111-2222-3333-4444-55555555prod/YOUR_CLIENT_ID_PROD/g' --in-place {} +
       ```
 
-   4. [`./chart/values.prod.yaml`](./chart/values.prod.yaml)
+   4. Replace `YOUR_TENANT_ID` with the `Directory (tenant) ID` from your app registration, which is basically the same for per environment (`dev`/`test`/`prod`)
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `prod` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-prod-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-prod-...xyz"
+      ```sh
+      find \( -wholename "./.env" -or -wholename "./chart/values.*.yaml" -or -wholename "./Jenkinsfile" \) -exec sed --expression 's/common/YOUR_TENANT_ID/g' --in-place {} +
       ```
 
-   5. [`./Jenkinsfile`](./Jenkinsfile)
-
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `dev` environment._
-
-      ```diff
-      - 'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555555',
-      + 'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=123...-dev-...789',
-      ...
-      - 'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
-      + 'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=abc...-dev-...xyz',
-      ```
-
-   More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
+More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
 
 ## Local Development
 
@@ -479,7 +448,13 @@ nvm install --lts --latest-npm
 
 ### Set Environment Variables
 
-See `.env.template` to create appropriate `.env` file. Ask your colleagues which values are currently necessary!
+Create appropriate `.env` file from `.env.template`.
+
+```sh
+cp .env.template .env
+```
+
+Ask your colleagues which values are currently necessary!
 
 ### Install Dependencies
 

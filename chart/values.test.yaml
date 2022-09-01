@@ -1,5 +1,5 @@
-azureActiveDirectoryClientId: '11111111-2222-3333-4444-555555555555'
-azureActiveDirectoryTenantId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+azureActiveDirectoryClientId: '11111111-2222-3333-4444-55555555test'
+azureActiveDirectoryTenantId: 'common'
 
 # apiUrl is the backend api url
 apiUrl: 'http://localhost:3000/api'

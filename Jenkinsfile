@@ -250,9 +250,9 @@ def stageTest(def context) {
   container('playwright') {
     stage('Test Components') {
       withEnv([
-        'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555555',
+        'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555dev',
         // IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
-        'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+        'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=common',
       ]) {
         sh(
           label: 'Test React Components',
