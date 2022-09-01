@@ -325,7 +325,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 [![HTML](https://img.shields.io/badge/html5-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/css3-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/)
-[![Node.JS](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Markdown](https://img.shields.io/badge/markdown-000000.svg?style=for-the-badge&logo=markdown&logoColor=white)](https://daringfireball.net/projects/markdown/)
 
 ### Frameworks and libraries
@@ -1072,6 +1072,28 @@ git merge origin/release/<VERSION> --no-edit
 # Push the changes to the remote repository
 git push
 ```
+
+</details>
+
+### WSL
+
+<details><summary>When committing via the VS Code interface, the following error message appears <code>.husky/commit-msg: 4: npx: not found</code></summary>
+
+Since we are using [`nvm`](https://github.com/nvm-sh/nvm) as our versions manager for Node.js, we first need to tell husky where to find the appropriate binaries. This is done by creating and configuring the file `~/.huskyrc`. Further Information: <https://typicode.github.io/husky/#/?id=command-not-found>
+
+**Solution:**
+
+1. Create `~/.huskyrc` file with `nvm` configuration
+
+   ```sh
+   cat > ~/.huskyrc << EOF
+   # This loads nvm.sh and sets the correct PATH before running hook
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+   EOF
+   ```
+
+2. Restart VS Code
 
 </details>
 
