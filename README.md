@@ -1128,3 +1128,4 @@ This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-i
 - <https://ionicframework.com>
 - <https://reactjs.org>
 - <https://www.opendevstack.org/>
+- <https://github.com/typescript-cheatsheets/react>
