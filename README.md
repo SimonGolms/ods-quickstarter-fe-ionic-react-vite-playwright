@@ -9,7 +9,7 @@
 ![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
 ![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
 
-## Features
+## Features ✨
 
 - Ionic/React with Typescript for building cross-platform native and web app
 - Single-Sign-On (SSO) for user authentication and authorization with Azure Active Directory
@@ -21,7 +21,7 @@
 
 <!-- Feel free to delete the section 'Provision Quickstarter' after you successfully provisioned the quickstarter -->
 
-## Provision Quickstarter
+## Provision Quickstarter 🚀
 
 For an official ODS Quickstarter, the provisioning app takes care of the provisioning in combination with the Jenkinsfile in the associated Quickstarter template.
 However, since this is an extended Quickstarter, which is developed independently and decoupled from ODS, the necessary steps of the provisioning app and Jenkins itself must be performed, which are covered in this section.
@@ -316,7 +316,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
 ---
 
-## Technology Stack
+## Technology Stack 💻
 
 ### Programming Language
 
@@ -390,7 +390,7 @@ N/A
 
 ---
 
-## Prerequisites
+## Prerequisites ☝️
 
 1. **Azure App Registration**
 
@@ -430,7 +430,7 @@ N/A
 
 More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
 
-## Local Development
+## Local Development 👨‍💻
 
 ### Requirements
 
@@ -504,7 +504,7 @@ docker run -p 8080:8080 --env-file .env PROJECTID-COMPONENTID
 
 Starts the [nginx](https://nginx.org) server and makes your application accessible at `localhost:8080`.
 
-## Continuous Integration/Continuous Delivery (CI/CD)
+## Continuous Integration/Continuous Delivery (CI/CD) ♾️
 
 This CI/CD setup has been developed for the 'trunk-based development' approach.
 
@@ -897,7 +897,7 @@ class aqua-aqua,jenkins,jenkinsfile-PROJECTID-COMPONENTID,jenkinsfile-releaseman
 class openshift-dev,openshift-prod classOpenShift
 ```
 
-## Housekeeping
+## Housekeeping 🧹
 
 💡 From time to time, obsolete resources should be cleaned up. It would be best to have this automated at a later time. However, at the moment, this is not yet possible, because the webhook-proxy captures the `deleted` event and cannot be further customized, see: <https://github.com/opendevstack/ods-core/blob/99d26527df60fbb4d72ba15a8c233e325ff37fe1/jenkins/webhook-proxy/main.go#L541-L556>
 
@@ -973,7 +973,7 @@ oc get bc --output custom-columns=NAME:.metadata.name | grep -e "COMPONENTID-rel
 oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | while read -r line; do oc delete bc $line && sleep 10s; done
 ```
 
-## Roadmap
+## Roadmap 🛣️
 
 - [x] Improve Documentation
 - [ ] Implement Android
@@ -981,7 +981,7 @@ oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | whil
 - [ ] Implement Ionic Appflow
 - [x] Improve Testing
 
-## FAQ
+## FAQ ❓❗
 
 ### Jenkins
 
@@ -1000,7 +1000,7 @@ Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.opensh
 
 </details>
 
-## Known Issues
+## Known Issues 🚧
 
 ### Bitbucket
 
@@ -1097,7 +1097,7 @@ Since we are using [`nvm`](https://github.com/nvm-sh/nvm) as our versions manage
 
 </details>
 
-## Author
+## Author 🖊
 
 **Simon Golms:**
 
@@ -1105,20 +1105,20 @@ Since we are using [`nvm`](https://github.com/nvm-sh/nvm) as our versions manage
 - Github: [@SimonGolms](https://github.com/SimonGolms)
 - Website: [gol.ms](https://gol.ms)
 
-## Contributing
+## Contributing 🤝
 
 Contributions, issues and feature requests are welcome!
 
-## Show your support
+## Show your support 👏
 
 Give a ⭐️ if this project helped you!
 
-## License
+## License 📜
 
 Copyright © 2022 [Simon Golms](https://github.com/SimonGolms).<br />
 This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE) licensed.
 
-## Further Resources
+## Further Resources 📖
 
 - <https://docs.atlassian.com/bitbucket-server/rest/7.6.12/bitbucket-rest.html>
 - <https://helm.sh/>
