@@ -7,9 +7,9 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:import/recommended',
     'plugin:import/typescript',
@@ -104,7 +104,6 @@ module.exports = {
         shorthandLast: false,
       },
     ],
-    'react/prop-types': 'off', // do not overeager and inferred the type
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'sort-imports': [
