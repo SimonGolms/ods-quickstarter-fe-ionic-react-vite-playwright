@@ -1,5 +1,5 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
 # Due to device performance, the tests are run only on one project and with increased timeout, while the tests stop immediately at the first failure.
 npm run test -- --project="Desktop Chromium" --timeout=30000 -x
