@@ -3,7 +3,7 @@ import { User } from '@microsoft/microsoft-graph-types';
 import { Avatar } from '../Avatar/Avatar';
 import styles from './UserContactItem.module.css';
 
-export const UserContactItem: React.FC<TProps> = ({ lines = 'none', data, ...rest }) => {
+export const UserContactItem = ({ lines = 'none', data, ...rest }: TProps) => {
   return (
     <IonItem lines={lines} {...rest}>
       <Avatar id={data?.id} slot="start" />

@@ -1,11 +1,18 @@
-import { act } from '@testing-library/react';
+import { expect, test } from '@playwright/experimental-ct-react';
 import { App } from './App';
-import { customRender } from './utils/test-utils';
+import { AppProviders } from './AppProviders';
 
-test('App renders without crashing', async () => {
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  await act(async () => {
-    const { container } = customRender(<App />);
-    expect(container).toBeTruthy();
+test.describe('App', () => {
+  test('renders', async ({ mount }, testInfo) => {
+    // Extend timeout for this test by 30 seconds.
+    test.setTimeout(testInfo.timeout + 30000);
+
+    const component = await mount(
+      <AppProviders>
+        <App />
+      </AppProviders>
+    );
+
+    await expect(component).toContainText('Ready to create an app?');
   });
 });

@@ -1,7 +1,7 @@
 import { ThemeList } from '../Theme/ThemeList';
 import { SettingsApplicationList } from './SettingsApplicationList';
 
-export const SettingsList: React.FC = () => {
+export const SettingsList = () => {
   return (
     <>
       <ThemeList />

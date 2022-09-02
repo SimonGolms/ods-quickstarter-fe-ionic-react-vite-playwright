@@ -1,7 +1,7 @@
 import styles from './TechnologyStack.module.css';
 import { TechnologyStackItem, TechnologyStackItemProps } from './TechnologyStackItem';
 
-export const TechnologyStack: React.FC<TProps> = ({ items, title }) => {
+export const TechnologyStack = ({ items, title }: TProps) => {
   return (
     <div>
       <h3>{title}</h3>

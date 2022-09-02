@@ -1,7 +1,7 @@
 import { IonList, IonListHeader } from '@ionic/react';
 import { UserPeopleItem } from './UserPeopleItem';
 
-export const UserPeoples: React.FC<TProps> = ({ id }) => {
+export const UserPeoples = ({ id }: TProps) => {
   return (
     <IonList>
       <IonListHeader>Peoples</IonListHeader>

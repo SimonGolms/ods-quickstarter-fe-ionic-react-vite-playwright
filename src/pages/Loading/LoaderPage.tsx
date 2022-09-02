@@ -1,7 +1,7 @@
 import { IonContent, IonPage, IonSpinner } from '@ionic/react';
 import styles from './LoaderPage.module.css';
 
-export const LoaderPage: React.FC = () => {
+export const LoaderPage = () => {
   return (
     <IonPage>
       <IonContent fullscreen>

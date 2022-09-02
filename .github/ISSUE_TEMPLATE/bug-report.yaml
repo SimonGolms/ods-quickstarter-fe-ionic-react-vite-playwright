@@ -7,7 +7,7 @@ body:
       label: Prerequisites
       description: Please ensure you have completed all of the following.
       options:
-        - label: I have searched for [existing issues](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/issues) that already report this problem, without success.
+        - label: I have searched for [existing issues](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/issues) that already report this problem, without success.
           required: true
   - type: textarea
     attributes:

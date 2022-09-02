@@ -1,12 +1,14 @@
 {
+  "cSpell.words": ["Kubernetes", "persistor", "stylelint"],
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "markdownlint.ignore": [".gitattributes", ".gitignore"],
-  "cSpell.words": ["Kubernetes", "persistor"],
-  "jest.autoRun": { "watch": true, "onStartup": ["all-tests"] },
-  "jest.jestCommandLine": "npm run test --"
+  "markdownlint.config": {
+    "MD024": { "siblings_only": true },
+    "MD033": { "allowed_elements": ["br", "code", "details", "summary"] }
+  },
+  "markdownlint.ignore": [".gitattributes", ".gitignore"]
 }

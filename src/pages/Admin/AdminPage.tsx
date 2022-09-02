@@ -5,7 +5,7 @@ import { useAccountRole } from '../../utils/authentication/useAccountRole';
 import { RootPageLayout } from '../Layout/RootPageLayout';
 import styles from './AdminPage.module.css';
 
-export const AdminPage: React.FC = () => {
+export const AdminPage = () => {
   const { isAdmin } = useAccountRole();
 
   return (

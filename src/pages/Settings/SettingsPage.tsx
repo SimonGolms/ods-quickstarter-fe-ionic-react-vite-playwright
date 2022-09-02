@@ -1,7 +1,7 @@
 import { SettingsList } from '../../components/Settings/SettingsList';
 import { RootPageLayout } from '../Layout/RootPageLayout';
 
-export const SettingsPage: React.FC = () => {
+export const SettingsPage = () => {
   return (
     <RootPageLayout color="primary" title="Settings">
       <SettingsList />

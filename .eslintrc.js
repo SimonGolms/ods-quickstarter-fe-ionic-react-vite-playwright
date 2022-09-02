@@ -1,22 +1,38 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2022: true,
+    node: true,
+    worker: true,
+  },
   extends: [
-    'react-app',
-    'react-app/jest',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    // 'plugin:jest/recommended',
     'plugin:jsx-a11y/recommended',
+    'plugin:playwright/playwright-test',
     'plugin:sonarjs/recommended',
     'plugin:typescript-sort-keys/recommended',
     // HINT: prettier must be the last extension to work
     'plugin:prettier/recommended',
   ],
   ignorePatterns: ['build', 'docker', 'node_modules', 'openshift', 'public'],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
-    // 'jest',
     'jsx-a11y',
     'react-hooks',
     'react',
@@ -28,6 +44,14 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/sort-type-union-intersection-members': 'error',
     camelcase: 'warn',
     curly: 'error',
@@ -35,13 +59,11 @@ module.exports = {
       'error',
       {
         ignoreExports: [
+          'playwright/index.ts',
           'src/index.tsx',
-          'src/setupTests.ts',
           'src/**/*.d.ts',
-          'src/**/*.test.ts',
-          'src/**/*.test.tsx',
-          '*.ts', // mostly configuration files
-          '*.js', // mostly configuration files
+          'src/**/*.{spec,test}.{ts,tsx}',
+          '*.{js,ts}', // mostly configuration files
         ],
         missingExports: true,
         src: ['.'],
@@ -67,15 +89,9 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: ['@mui/*/*/*', '!@mui/material/test-utils/*'],
-      },
-    ],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-type-assertion/no-type-assertion': 'error',
     'prettier/prettier': 'error',
-    'react/display-name': 'off',
     'react/jsx-sort-default-props': 'error',
     'react/jsx-sort-props': [
       'error',
@@ -88,8 +104,6 @@ module.exports = {
         shorthandLast: false,
       },
     ],
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'sort-imports': [
@@ -115,6 +129,9 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true,
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };

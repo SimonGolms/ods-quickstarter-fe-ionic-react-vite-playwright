@@ -2,7 +2,7 @@ import { IonContent, IonPopover } from '@ionic/react';
 import type { User } from '@microsoft/microsoft-graph-types';
 import { UserMenuList } from './UserMenuList';
 
-export const UserMenuPopover: React.FC<TProps> = ({ userData, ...rest }) => {
+export const UserMenuPopover = ({ userData, ...rest }: TProps) => {
   return (
     <IonPopover {...rest}>
       <IonContent>

@@ -15,13 +15,28 @@ odsComponentPipeline(
     containerTemplate(
       alwaysPullImage: true,
       args: '${computer.jnlpmac} ${computer.name}',
-      image: 'image-registry.openshift-image-registry.svc:5000/PROJECTID-cd/jenkins-agent-nodejs-16:latest',
+      image: 'image-registry.openshift-image-registry.svc:5000/ods/jenkins-agent-nodejs16:4.x',
       name: 'jnlp',
-      // Before you increase the resources, make sure that the quotas provide the appropriate resources.
-      resourceLimitCpu: '1',
-      resourceLimitMemory: '4Gi',
-      resourceRequestCpu: '10m',
-      resourceRequestMemory: '1Gi',
+      // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
+      // resourceLimitCpu: '1',
+      // resourceLimitMemory: '4Gi',
+      // resourceRequestCpu: '10m',
+      // resourceRequestMemory: '1Gi',
+      workingDir: '/tmp'
+    ),
+    containerTemplate(
+      alwaysPullImage: true,
+      envVars: [
+        envVar(key: 'HOME', value: '/tmp')
+      ],
+      image: "mcr.microsoft.com/playwright:v1.25.1-focal",
+      name: 'playwright',
+      // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
+      // resourceLimitCpu: '1',
+      // resourceLimitMemory: '4Gi',
+      // resourceRequestCpu: '10m',
+      // resourceRequestMemory: '1Gi',
+      ttyEnabled: true,
       workingDir: '/tmp'
     )
   ],
@@ -38,19 +53,20 @@ odsComponentPipeline(
    */
   // odsComponentFindOpenShiftImageOrElse(context) {
   stageWorkaroundFindOpenShiftImageOrElse(context, [
-    imageTag: "${env.appVersion}",
-    resourceName: "${env.appName}",
+    imageTag: "${APP_VERSION}",
+    resourceName: "${APP_NAME}",
   ]) {
     // stageDebug(context)
     stageAnalyzeCode(context)
     odsComponentStageScanWithSonar(context, [
       analyzePullRequests: false,
     ])
+    stageTest(context)
     stageBuild(context)
     stageDeploy(context)
     odsComponentStageBuildOpenShiftImage(context, [
-      imageTag: "${env.appVersion}",
-      resourceName: "${env.appName}",
+      imageTag: "${APP_VERSION}",
+      resourceName: "${APP_NAME}",
     ])
   }
 
@@ -58,7 +74,7 @@ odsComponentPipeline(
    * ! IMPORTANT - WORKAROUND
    * Create missing (fake) test result reports that are necessary for type 'ods-infra' when triggered via Release Manager
    */
-  stageWorkaroundUnitTest(context)
+  stageWorkaroundFakeTest(context)
 
   /**
    * ! IMPORTANT - WORKAROUND
@@ -83,13 +99,13 @@ def stageInitialize(def context) {
     }
 
     // Replace all non-alphanumeric characters with a dash
-    env.branchName = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
+    def branchName = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
 
     /**
      * odsComponentStageBuildOpenShiftImage will fail in case of appName = ${context.componentId}-${branchName}
      * See: https://github.com/opendevstack/ods-jenkins-shared-library/issues/877
      */
-    env.appName = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_NAME = "${context.projectId}-${context.componentId}-${branchName}"
 
     /**
      * Replace '${context.projectId}-${context.componentId}' with your preferred URL template, but keep in mind that there can only be one unique URL per OpenShift instance
@@ -98,12 +114,12 @@ def stageInitialize(def context) {
      * With this approach, the feature environments of application is for example accessible at the following URLs:
      * https://PROJECTID-COMPONENTID-feature-foo.dev.apps.OPENSHIFT_DOMAIN_DEV
      */
-    env.appUrl = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_URL = "${context.projectId}-${context.componentId}-${branchName}"
   }
 }
 
 def stageInitializeWithReleaseManager(def context) {
-  env.appName = "${context.componentId}"
+  APP_NAME = "${context.componentId}"
 
   /**
    * Replace '${context.projectId}-${context.componentId}' with your preferred URL template, but keep in mind that there can only be one unique URL per OpenShift instance
@@ -115,7 +131,7 @@ def stageInitializeWithReleaseManager(def context) {
    * PROJECTID-test: https://PROJECTID-COMPONENTID-test.apps.OPENSHIFT_DOMAIN_DEV
    * PROJECTID-dev: https://PROJECTID-COMPONENTID-dev.apps.OPENSHIFT_DOMAIN_DEV
    */
-  env.appUrl = context.environment == 'prod' ? "${context.projectId}-${context.componentId}" : "${context.projectId}-${context.componentId}-${context.environment}"
+  APP_URL = context.environment == 'prod' ? "${context.projectId}-${context.componentId}" : "${context.projectId}-${context.componentId}-${context.environment}"
 }
 
 def stageDebug(def context) {
@@ -125,19 +141,16 @@ def stageDebug(def context) {
       script: 'printenv | sort',
     )
   }
-  stage('DEBUG: Context') {
-      echo "context.environment: ${context.environment}"
-      echo "context.targetProject: ${context.targetProject}"
-      echo "context.triggeredByOrchestrationPipeline: ${context.triggeredByOrchestrationPipeline}"
-  }
 }
 
 def stageInstallDependency(def context) {
-  stage('Install Dependencies') {
-    sh(
-      label: 'Install exact version of Dependencies',
-      script: 'npm ci',
-    )
+  container('playwright') {
+    stage('Install Dependencies') {
+      sh(
+        label: 'Install exact version of Dependencies',
+        script: 'npm ci',
+      )
+    }
   }
 }
 
@@ -154,36 +167,38 @@ def stageVersioning(def context) {
 
 def stageVersioningWithReleaseManager(def context) {
   stage('Versioning (Release Manager)') {
-    env.appVersion = "${env.RELEASE_PARAM_VERSION}"
+    APP_VERSION = "${env.RELEASE_PARAM_VERSION}"
   }
 }
 
 def stageVersioningWithSemanticRelease(def context) {
-  stage('Versioning (Semantic Release)') {
-    def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
+  container('playwright') {
+    stage('Versioning (Semantic Release)') {
+      def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
 
-    withCredentials([
-      usernameColonPassword(
-        credentialsId: bitbucketService.getPasswordCredentialsId(),
-        variable: 'GIT_CREDENTIALS'
-      )
-    ]) {
-      withEnv([
-        "BRANCH_NAME=${context.gitBranch}"
+      withCredentials([
+        usernameColonPassword(
+          credentialsId: bitbucketService.getPasswordCredentialsId(),
+          variable: 'GIT_CREDENTIALS'
+        )
       ]) {
-        sh(
-          label: 'Identify semantic-release version',
-          script: 'npm run release:version',
-        )
-        sh(
-          label: 'Test version file',
-          script: "test -e .VERSION || (echo ${context.shortGitCommit} > .VERSION)",
-        )
-        env.appVersion = sh(
-          label: 'Provide version as env variable',
-          script: 'cat .VERSION',
-          returnStdout: true
-        ).trim()
+        withEnv([
+          "BRANCH_NAME=${context.gitBranch}",
+        ]) {
+          sh(
+            label: 'Identify semantic-release version',
+            script: 'npm run release:version',
+          )
+          sh(
+            label: 'Test version file',
+            script: "test -e .VERSION || (echo ${context.shortGitCommit} > .VERSION)",
+          )
+          APP_VERSION = sh(
+            label: 'Provide version as env variable',
+            script: 'cat .VERSION',
+            returnStdout: true
+          ).trim()
+        }
       }
     }
   }
@@ -218,10 +233,12 @@ def stageWorkaroundFindOpenShiftImageOrElse(def context, Map config = [:], Closu
 
 def stageAnalyzeCode(def context) {
   stage('Analyze Code') {
-    sh(
-      label: 'Check ESLint Rules',
-      script: 'npm run lint',
-    )
+    container('playwright') {
+      sh(
+        label: 'Check ESLint Rules',
+        script: 'npm run lint',
+      )
+    }
     sh(
       label: 'Check Helm Chart',
       script: 'helm lint chart --strict',
@@ -230,29 +247,33 @@ def stageAnalyzeCode(def context) {
 }
 
 def stageTest(def context) {
-  stage('Test Component') {
-    /**
-     * Run tests in the same thread to improve the speed
-     * See: https://jestjs.io/docs/troubleshooting#tests-are-extremely-slow-on-docker-andor-continuous-integration-ci-server
-     */
-    sh(
-      label: 'Test React Components',
-      script: 'npm run test -- --runInBand',
-    )
+  container('playwright') {
+    stage('Test Components') {
+      withEnv([
+        'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555dev',
+        // IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
+        'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=common',
+      ]) {
+        sh(
+          label: 'Test React Components',
+          script: 'npm run test',
+        )
+      }
+    }
   }
 }
 
 def stageBuild(def context) {
-  stage('Build') {
-    withEnv([
-      "DISABLE_ESLINT_PLUGIN=true", // ESLint rules already checked in 'stageAnalyzeCode'; no need to double check
-      "GENERATE_SOURCEMAP=false", // Nothing in place to take advantage of sourcemaps; no need to generate one
-      "REACT_APP_VERSION=${env.appVersion}",
-    ]) {
-      sh(
-        label: 'Build App as a static web application for production',
-        script: 'npx ionic build',
-      )
+  container('playwright') {
+    stage('Build') {
+      withEnv([
+        "VITE_VERSION=${APP_VERSION}",
+      ]) {
+        sh(
+          label: 'Build App as a static web application for production',
+          script: 'npm run build',
+        )
+      }
     }
   }
 }
@@ -266,23 +287,31 @@ def stageDeploy(def context) {
   }
 }
 
-def stageWorkaroundUnitTest(def context) {
-  stage('Unit Test') {
-    /**
-     * This is a wild mix of fake test results which have come together through several attempts from error messages and test
-     * results to be able to perform a rollout for the workaround type 'ods-infra' with and without the release manager.
-     * Of course, the test cases should be replaced by correct test results.
-     */
+/**
+  * This is a wild mix of fake test results which have come together through several attempts from error messages and test
+  * results to be able to perform a rollout for the workaround type 'ods-infra' with and without the release manager.
+  * Of course, the test cases should be replaced by correct test results.
+  */
+def stageWorkaroundFakeTest(def context) {
+  stage('Fake Test Results') {
     sh(
-      label: 'Create Fake Unit Test Results',
-      script: 'mkdir --parent build/test-results && touch build/test-results/stub.log',
+      label: 'Create Test Results Folder',
+      script: 'mkdir --parent build/test-results',
     )
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "acceptance-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    sh(
+      label: 'Create Fake Log Files',
+      script: 'touch build/test-results/stub.log',
+    )
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "changes-${context.componentId}-${context.buildNumber}")
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "installation-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
-    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "integration-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "state-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.log', name: "target-${context.componentId}-${context.buildNumber}")
+    sh(
+      label: 'Create Fake Test Reports',
+      script: 'echo \'<testsuites name="fake-suites"><testsuite name="fake-suite" tests="0"><testcase name="fake-testcase"/></testsuite></testsuites>\' > build/test-results/results.xml',
+    )
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "acceptance-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "installation-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
+    stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "integration-test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
     stash(allowEmpty: true, includes: 'build/test-results/**.xml', name: "test-reports-junit-xml-${context.componentId}-${context.buildNumber}")
   }
 }
@@ -333,23 +362,40 @@ def stageRolloutWithHelm(def context) {
 
     // Name of the Helm release (defaults to context.componentId). Change this value if you want to install separate instances of the Helm chart in the same namespace.
     // In that case, make sure to use {{ .Release.Name }} in resource names to avoid conflicts.
-    def helmReleaseName = "${env.appName}"
+    def helmReleaseName = "${APP_NAME}"
 
     // helmValues: Key/value pairs to pass as values (by default, the key imageTag is set to the config option imageTag).
     def helmValues = [
-      'appUrl': "${env.appUrl}",
-      'imageTag': "${env.appVersion}",
-      'nameOverride': "${env.appName}",
+      'appUrl': "${APP_URL}",
+      'imageTag': "${APP_VERSION}",
+      'nameOverride': "${APP_NAME}",
       'odsApplicationDomain': openShiftService.getApplicationDomain(context.targetProject),
     ]
+
+    if( context.gitBranch.startsWith('feature/') ) {
+      echo 'gitBranch starts with feature/'
+      helmValues.put('apiUrl', "http://PROJECTID-api-${BRANCH_NAME}.PROJECTID-dev.svc.cluster.local:8080/api")
+    }
 
     // helmValuesFiles: List of paths to values files (empty by default).
     def helmValuesFiles = ["values.${context.environment}.yaml"]
 
     // Go to directory where the helm chart is located
     dir('chart'){
-      // we'll simply reuse the instance from above to do the actual helm rollout
-      openShiftService.helmUpgrade("${context.targetProject}", helmReleaseName, helmValuesFiles, helmValues, helmDefaultFlags, helmAdditionalFlags, helmDiff)
+      try {
+        openShiftService.helmUpgrade("${context.targetProject}", helmReleaseName, helmValuesFiles, helmValues, helmDefaultFlags, helmAdditionalFlags, helmDiff)
+      } catch (Exception exception) {
+        /**
+        * In case the rollout with Helm does not go through successfully, e.g. due to a faulty nginx configuration
+        * that prevents the pod from starting, you have to make sure that the already deployed image is deleted again,
+        * otherwise the elseBlock of stageWorkaroundFindOpenShiftImageOrElse will not be executed anymore.
+        */
+        sh(
+          label: 'Delete deployed Imagestream Tag',
+          script: "oc tag --delete --namespace ${context.cdProject} ${JOB_APP_NAME}:${JOB_APP_VERSION}",
+        )
+        throw exception
+      }
     }
   }
 }
@@ -376,22 +422,24 @@ def stageReleaseWithReleaseManager (def context) {
 }
 
 def stageReleaseWithSemanticRelease(def context) {
-  stage('Release (Semenatic Release)') {
-    def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
+  container('playwright') {
+    stage('Release (Semenatic Release)') {
+      def bitbucketService = ServiceRegistry.instance.get(BitbucketService)
 
-    withCredentials([
-      usernameColonPassword(
-        credentialsId: bitbucketService.getPasswordCredentialsId(),
-        variable: 'GIT_CREDENTIALS'
-      )
-    ]) {
-      withEnv([
-        "BRANCH_NAME=${context.gitBranch}",
-      ]) {
-        sh(
-          label: 'Run Semantic Release',
-          script: 'npm run release',
+      withCredentials([
+        usernameColonPassword(
+          credentialsId: bitbucketService.getPasswordCredentialsId(),
+          variable: 'GIT_CREDENTIALS'
         )
+      ]) {
+        withEnv([
+          "BRANCH_NAME=${context.gitBranch}",
+        ]) {
+          sh(
+            label: 'Run Semantic Release',
+            script: 'npm run release',
+          )
+        }
       }
     }
   }

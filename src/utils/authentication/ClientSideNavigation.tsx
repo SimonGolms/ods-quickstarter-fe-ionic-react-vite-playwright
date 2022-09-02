@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { CustomNavigationClient } from './NavigationClient';
 
 // This component is needed to take advantage of the router's navigate functions when MSAL redirects between pages in your app
-export const ClientSideNavigation: React.FC<TProps> = ({ children, instance }) => {
+export const ClientSideNavigation = ({ children, instance }: TProps) => {
   const navigate = useHistory();
   const navigationClient = new CustomNavigationClient(navigate);
   instance.setNavigationClient(navigationClient);

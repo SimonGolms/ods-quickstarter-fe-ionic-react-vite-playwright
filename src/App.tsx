@@ -24,7 +24,7 @@ import './theme/index.css';
 
 setupIonicReact();
 
-export const App: React.FC = () => {
+export const App = () => {
   useTheme();
 
   return (

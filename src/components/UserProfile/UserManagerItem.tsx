@@ -4,7 +4,7 @@ import { ItemAvatarSkeleton } from '../Base/Item/ItemAvatarSkeleton';
 import { MessagePermissionsRequiredItem } from '../Message/MessagePermissionsRequiredItem';
 import { UserContactItem } from './UserContactItem';
 
-export const UserManagerItem: React.FC<TProps> = ({ id }) => {
+export const UserManagerItem = ({ id }: TProps) => {
   const { data = {}, isFetching, error } = useGetUserManagerByIdQuery(getIdPayloadOrSkipToken(id));
 
   if (isFetching) {

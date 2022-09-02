@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
       - env:
-        - name: REACT_APP_API_URL
-          value: {{ .Values.reactAppApiUrl }}
-        - name: REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID
+        - name: VITE_API_URL
+          value: {{ .Values.apiUrl }}
+        - name: VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID
           value: {{ .Values.azureActiveDirectoryClientId }}
-        - name: REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID
+        - name: VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID
           value: {{ .Values.azureActiveDirectoryTenantId }}
         image: "default-route-openshift-image-registry.apps.OPENSHIFT_DOMAIN_DEV/PROJECTID-cd/{{ include "chart.name" . }}:{{ .Values.imageTag }}"
         imagePullPolicy: Always

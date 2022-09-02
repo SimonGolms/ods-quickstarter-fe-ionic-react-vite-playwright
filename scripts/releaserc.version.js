@@ -31,11 +31,12 @@ module.exports = {
         verifyReleaseCmd:
           "echo ${nextRelease.version} > .VERSION && \
            npm version ${nextRelease.version} --no-git-tag-version --allow-same-version && \
-           sed -i 's/version:.*/version: ${nextRelease.version}/g' chart/Chart.yaml && \
-           sed -i 's/appVersion:.*/appVersion: \"${nextRelease.version}\"/g' chart/Chart.yaml && \
-           sed -i 's/imageTag:.*/imageTag: ${nextRelease.version}/g' chart/values.yaml && \
-           sed -i 's/version:.*/version: ${nextRelease.version}/g' metadata.yml && \
-           sed -i 's/version-.*-blue/version-${nextRelease.version}-blue/g' README.md",
+           if [[ \"$OSTYPE\" == \"darwin\"* ]]; then SEDOPTION=\" \"; fi && \
+           sed -i$SEDOPTION'' -e 's/version:.*/version: ${nextRelease.version}/g' chart/Chart.yaml && \
+           sed -i$SEDOPTION'' -e 's/appVersion:.*/appVersion: \"${nextRelease.version}\"/g' chart/Chart.yaml && \
+           sed -i$SEDOPTION'' -e 's/imageTag:.*/imageTag: ${nextRelease.version}/g' chart/values.yaml && \
+           sed -i$SEDOPTION'' -e 's/version:.*/version: ${nextRelease.version}/g' metadata.yml && \
+           sed -i$SEDOPTION'' -e 's/version-.*-blue/version-${nextRelease.version.replace(/-/g, '--')}-blue/g' README.md",
       },
     ],
   ],

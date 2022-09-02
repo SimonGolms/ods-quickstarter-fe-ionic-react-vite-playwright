@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { IonItem, IonLabel } from '@ionic/react';
 import { persistor } from '../../store';
 
-export const ItemResetUserState: React.FC<TProps> = ({ label = 'Reset', labelColor = 'danger', ...rest }) => {
+export const ItemResetUserState = ({ label = 'Reset', labelColor = 'danger', ...rest }: TProps) => {
   const handleClick = useCallback(() => {
     persistor.purge();
   }, []);

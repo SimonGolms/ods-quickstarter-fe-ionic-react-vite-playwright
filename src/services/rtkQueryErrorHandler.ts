@@ -7,7 +7,7 @@ export const rtkQueryErrorHandler: Middleware = (_api: MiddlewareAPI) => (next) 
     return next(action);
   }
 
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
     console.error(action);
   }

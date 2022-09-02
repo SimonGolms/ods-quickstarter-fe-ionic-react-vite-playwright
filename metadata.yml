@@ -1,7 +1,7 @@
 # Documentation: https://www.opendevstack.org/ods-documentation/opendevstack/4.x/quickstarters/metadata.html
 description: An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
 name: PROJECTID-COMPONENTID
-supplier: https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react
+supplier: https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright
 # ! IMPORTANT - WORKAROUND
 # To make a rollout with Helm in an OpenShift 4 cluster and with the Release Manager possible, the type 'ods' must be replaced with 'ods-infra'.
 # The current tool 'tailor', which was responsible for rolling out the release, does not officially support OpenShift 4.

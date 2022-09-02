@@ -4,7 +4,7 @@ import { UserInformations } from './UserInformations';
 import { UserManager } from './UserManager';
 import { UserPeoples } from './UserPeoples';
 
-export const UserProfile: React.FC = () => {
+export const UserProfile = () => {
   const { data = {}, isFetching } = useGetMeQuery();
 
   if (isFetching) {

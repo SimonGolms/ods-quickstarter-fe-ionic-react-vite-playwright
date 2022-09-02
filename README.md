@@ -1,27 +1,27 @@
-# OpenDevStack - Quickstarter - Frontend Ionic React
+# OpenDevStack - Quickstarter - Frontend Ionic React Vite Playwright
 
-> An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework and react.
+> An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework, react, vite and playwright.
 
 ![Version](https://img.shields.io/badge/version-1.0.6-blue.svg?style=for-the-badge&cacheSeconds=2592000)
-[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-jenkins-agent-nodejs?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/blob/master/LICENSE)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-jenkins-agent-nodejs/graphs/commit-activity)
+[![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
 ![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
 ![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
 
-## Features
+## Features ✨
 
 - Ionic/React with Typescript for building cross-platform native and web app
 - Single-Sign-On (SSO) for user authentication and authorization with Azure Active Directory
 - OpenDevStack (ODS) CI/CD configuration out of the box with the basic setup for Docker (incl. injecting Runtime Variables), Jenkins (incl. feature environments, release-manager rollout) and OpenShift (managed with Helm)
   - Ionic Appflow (coming soon)
-- Setup for ESlint, Stylelint, Prettier, commitlint, Husky (git hooks) and semantic versioning for a better developer experience
+- Setup for Vite, Playwright, ESlint, Stylelint, Prettier, commitlint, Husky (git hooks) and semantic versioning for a better developer experience
 
 ---
 
 <!-- Feel free to delete the section 'Provision Quickstarter' after you successfully provisioned the quickstarter -->
 
-## Provision Quickstarter
+## Provision Quickstarter 🚀
 
 For an official ODS Quickstarter, the provisioning app takes care of the provisioning in combination with the Jenkinsfile in the associated Quickstarter template.
 However, since this is an extended Quickstarter, which is developed independently and decoupled from ODS, the necessary steps of the provisioning app and Jenkins itself must be performed, which are covered in this section.
@@ -37,17 +37,17 @@ To provision this Quickstarter, you need a deployed ODS project with the corresp
 - Option 1 (recommended): Clone the repository
 
   ```sh
-  git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react.git
-  cd ods-quickstarter-fe-ionic-react
+  git clone https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright.git
+  cd ods-quickstarter-fe-ionic-react-vite-playwright
   ```
 
 - Option 2: Download the repository
 
   ```sh
-  curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/archive/refs/heads/main.tar.gz && \
+  curl --location --remote-name https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/archive/refs/heads/main.tar.gz && \
   tar -xvzf main.tar.gz && \
   rm main.tar.gz
-  cd ods-quickstarter-fe-ionic-react-main
+  cd ods-quickstarter-fe-ionic-react-vite-playwright-main
   ```
 
 #### 2. Set Project Id
@@ -98,7 +98,7 @@ find . -type f -exec sed --expression 's/OPENSHIFT_DOMAIN_DEV/YOUR_OPENSHIFT_DOM
 
 #### 5. Set OpenShift prod domain URLs
 
-Replace `OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `prod.ocp.company.com`
+Replace `YOUR_OPENSHIFT_DOMAIN_PROD` with your OpenShift 4 Dev Cluster Domain, e.g. `prod.ocp.company.com`
 
 <details><summary>How do I find out the <code>YOUR_OPENSHIFT_DOMAIN_PROD</code> value?</summary>
 
@@ -186,39 +186,7 @@ oc version
 
 More Information: <https://docs.openshift.com/container-platform/4.9/cli_reference/openshift_cli/getting-started-cli.html>
 
-#### 10. Provision Jenkins Agent with Node.js `16.x`
-
-It might happen that your `ODS@4.x` setup only provides a Jenkins agent with Node.js `12.x`. However, in order to be able to work with the latest version and to have potential security holes closed, a Jenkins agent with the latest Node.js version is required for the build process in the CI/CD process.
-
-<details><summary>How do I find out which a Jenkins Agent with Node.js are available in my <code>ODS@4.x</code> setup?</summary>
-
-Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.openshift.io~v1~BuildConfig?name=jenkins-agent-nodejs>
-
-</details>
-
-In case it does not exist yet, it can be easily created with the following commands:
-
-<details><summary>How to find the <code>oc</code> login token</summary>
-
-1. Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/oauth/token/display>
-2. Click on `Display token` or `Request another token`
-
-</details>
-
-```sh
-# Login to OpenShift dev instance
-oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
-
-# Switch project
-oc project PROJECTID-cd
-
-# Provision jenkins-agent-nodejs-16
-oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
-```
-
-For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
-
-#### 11. Setup Bitbucket Code Repository
+#### 10. Setup Bitbucket Code Repository
 
 1. Create BitBucket Repository
 
@@ -227,7 +195,7 @@ For more information about the Jenkins agent, see: <https://github.com/SimonGolm
    ```sh
    # For security reasons (e.g. terminal history) --user 'USERNAME:PASSWORD' should be avoided.
    # Instead, a prompt will show up for the password if --user 'USERNAME' is used!
-   curl --data '{"defaultBranch":"master","description":"📱 Repo of the app from PROJECTID build with ionic and react","name":"PROJECTID-COMPONENTID"}' \
+   curl --data '{"defaultBranch":"master","description":"📱 Repo of COMPONENTID from PROJECTID that is build with ionic and react","name":"PROJECTID-COMPONENTID"}' \
      --header "Content-Type: application/json" \
      --request POST \
      --url https://BITBUCKET_DOMAIN/rest/api/1.0/projects/PROJECTID/repos/ \
@@ -348,7 +316,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
 ---
 
-## Technology Stack
+## Technology Stack 💻
 
 ### Programming Language
 
@@ -357,7 +325,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 [![HTML](https://img.shields.io/badge/html5-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/css3-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/)
-[![Node.JS](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Markdown](https://img.shields.io/badge/markdown-000000.svg?style=for-the-badge&logo=markdown&logoColor=white)](https://daringfireball.net/projects/markdown/)
 
 ### Frameworks and libraries
@@ -372,8 +340,7 @@ Assuming the Jenkins build has been successfully completed, the application shou
 
 **Testing**:
 
-[![React Testing Library](https://img.shields.io/badge/React--Testing--Library-E33332.svg?style=for-the-badge&logo=testing-library&logoColor=white)](https://testing-library.com/docs/react-testing-library/intro)
-[![Jest](https://img.shields.io/badge/Jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/docs/getting-started)
+[![Playwright](https://img.shields.io/badge/playwright-2EAD33.svg?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
 
 **Tracking**:
 
@@ -384,17 +351,17 @@ N/A
 [![ESLint](https://img.shields.io/badge/ESlint-4B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Stylelint](https://img.shields.io/badge/stylelint-263238.svg?style=for-the-badge&logo=stylelint&logoColor=white)](https://stylelint.io/)
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E.svg?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io/)
-[![Commitlint](https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&&logoColor=black)](https://commitlint.js.org/)
+[![Commitlint](https://img.shields.io/badge/commitlint-121212.svg?style=for-the-badge&logo=commitlint&logoColor=white)](https://commitlint.js.org/)
 
 **Compiler**:
 
-[![react-scripts](<https://img.shields.io/badge/react--scripts%20(CRA)-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB>)](https://create-react-app.dev/)
+[![vitejs](https://img.shields.io/badge/vite-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
 ### CI/CD
 
 [![OpenDevStack](https://img.shields.io/badge/OpenDevStack-222.svg?style=for-the-badge&logoColor=white)](https://www.opendevstack.org/)
 [![Jenkins](https://img.shields.io/badge/Jenkins-D24939.svg?style=for-the-badge&logo=jenkins&logoColor=white)](https://nginx.org/)
-[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://helm.sh/)
+[![Helm](https://img.shields.io/badge/Helm-0F1689.svg?style=for-the-badge&logo=helm&logoColor=white)](https://www.opendevstack.org/)
 [![Semantic Release](https://img.shields.io/badge/Semantic%20Release-494949.svg?style=for-the-badge&logo=semantic-release&logoColor=white)](https://semantic-release.gitbook.io/semantic-release/)
 [![Husky](https://img.shields.io/badge/%F0%9F%90%B6%20Husky-42b983.svg?style=for-the-badge)](https://typicode.github.io/husky/#/)
 
@@ -423,7 +390,7 @@ N/A
 
 ---
 
-## Prerequisites
+## Prerequisites ☝️
 
 1. **Azure App Registration**
 
@@ -437,52 +404,33 @@ N/A
 
    Update the following entries with the `Application (client) ID` and `Directory (tenant) ID` from the corresponding app registry environment
 
-   1. [`.env`](./.env)
+   1. Replace `YOUR_CLIENT_ID_DEV` with the `Application (client) ID` from your app registration for the `dev` environment
 
-      ```diff
-      # Azure - SSO
-      - REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=""
-      + REACT_APP_AZURE_ACTIVE_DIRECTORY_CLIENT_ID="123...789"
-      - REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID=""
-      + REACT_APP_AZURE_ACTIVE_DIRECTORY_TENANT_ID="123...789"
+      ```sh
+      find \( -wholename "./.env" -or -wholename "./chart/values.dev.yaml" -or -wholename "./Jenkinsfile" \) -exec sed --expression 's/11111111-2222-3333-4444-555555555dev/YOUR_CLIENT_ID_DEV/g' --in-place {} +
       ```
 
-   2. [`./chart/values.dev.yaml`](./chart/values.dev.yaml)
+   2. Replace `YOUR_CLIENT_ID_TEST` with the `Application (client) ID` from your app registration for the `test` environment
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `dev` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-dev-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-dev-...xyz"
+      ```sh
+      find -wholename "./chart/values.test.yaml" -exec sed --expression 's/11111111-2222-3333-4444-55555555test/YOUR_CLIENT_ID_TEST/g' --in-place {} +
       ```
 
-   3. [`./chart/values.test.yaml`](./chart/values.test.yaml)
+   3. Replace `YOUR_CLIENT_ID_PROD` with the `Application (client) ID` from your app registration for the `prod` environment
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `test` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-test-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-test-...xyz"
+      ```sh
+      find -wholename "./chart/values.prod.yaml" -exec sed --expression 's/11111111-2222-3333-4444-55555555prod/YOUR_CLIENT_ID_PROD/g' --in-place {} +
       ```
 
-   4. [`./chart/values.prod.yaml`](./chart/values.prod.yaml)
+   4. Replace `YOUR_TENANT_ID` with the `Directory (tenant) ID` from your app registration, which is basically the same for per environment (`dev`/`test`/`prod`)
 
-      _Please make sure that you use the correct client id and tenant id from your app registration for the `prod` environment._
-
-      ```diff
-      - azureActiveDirectoryClientId: "11111111-2222-3333-4444-555555555555"
-      + azureActiveDirectoryClientId: "123...-prod-...789"
-      - azureActiveDirectoryTenantId: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
-      + azureActiveDirectoryTenantId: "abc...-prod-...xyz"
+      ```sh
+      find \( -wholename "./.env" -or -wholename "./chart/values.*.yaml" -or -wholename "./Jenkinsfile" \) -exec sed --expression 's/common/YOUR_TENANT_ID/g' --in-place {} +
       ```
 
-   More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
+More information: <https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-app-registration>
 
-## Local Development
+## Local Development 👨‍💻
 
 ### Requirements
 
@@ -500,7 +448,13 @@ nvm install --lts --latest-npm
 
 ### Set Environment Variables
 
-See `.env.template` to create appropriate `.env` file. Ask your colleagues which values are currently necessary!
+Create appropriate `.env` file from `.env.template`.
+
+```sh
+cp .env.template .env
+```
+
+Ask your colleagues which values are currently necessary!
 
 ### Install Dependencies
 
@@ -550,7 +504,7 @@ docker run -p 8080:8080 --env-file .env PROJECTID-COMPONENTID
 
 Starts the [nginx](https://nginx.org) server and makes your application accessible at `localhost:8080`.
 
-## Continuous Integration/Continuous Delivery (CI/CD)
+## Continuous Integration/Continuous Delivery (CI/CD) ♾️
 
 This CI/CD setup has been developed for the 'trunk-based development' approach.
 
@@ -943,9 +897,9 @@ class aqua-aqua,jenkins,jenkinsfile-PROJECTID-COMPONENTID,jenkinsfile-releaseman
 class openshift-dev,openshift-prod classOpenShift
 ```
 
-## Housekeeping
+## Housekeeping 🧹
 
-💡 From time to time, obsolete resources should be cleaned up. It would be best to have this automated at a later time.
+💡 From time to time, obsolete resources should be cleaned up. It would be best to have this automated at a later time. However, at the moment, this is not yet possible, because the webhook-proxy captures the `deleted` event and cannot be further customized, see: <https://github.com/opendevstack/ods-core/blob/99d26527df60fbb4d72ba15a8c233e325ff37fe1/jenkins/webhook-proxy/main.go#L541-L556>
 
 ### Git Branches
 
@@ -966,12 +920,12 @@ git branch -r | grep 'origin' | grep --invert-match 'master$' | grep --invert-ma
 ### Git Tags
 
 ```sh
-# Delete all local tags that do NOT match a pattern of a semantic version
-git tag -l | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]' | xargs git tag -d
+# Delete all local tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
+git tag -l | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | xargs git tag -d
 
-# Delete all remote tags that do NOT match a pattern of a semantic version (e.g. ods-generated-v20220518.001)
+# Delete all remote tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
 # Skip git hooks with '--no-verify'
-git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]' | grep -v '}$'| xargs git push --delete --no-verify origin
+git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | grep -v '}$' | xargs git push --delete --no-verify origin
 ```
 
 ### OpenShift
@@ -1019,39 +973,156 @@ oc get bc --output custom-columns=NAME:.metadata.name | grep -e "COMPONENTID-rel
 oc get bc --output custom-columns=NAME:.metadata.name | grep -e "ods-qs-" | while read -r line; do oc delete bc $line && sleep 10s; done
 ```
 
-## Roadmap
+## Roadmap 🛣️
 
 - [x] Improve Documentation
 - [ ] Implement Android
 - [ ] Implement iOS
 - [ ] Implement Ionic Appflow
-- [ ] Improve Testing
+- [x] Improve Testing
 
-## Author
+## FAQ ❓❗
 
-**Simon Golms**
+### Jenkins
+
+<details><summary>How do I find out which a Jenkins Agent with Node.js are available in my <code>ODS@4.x</code> setup?</summary>
+
+Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/k8s/ns/ods/build.openshift.io~v1~BuildConfig?name=jenkins-agent-nodejs>
+
+</details>
+
+### Openshift
+
+<details><summary>How to find the <code>oc</code> login token</summary>
+
+1. Go to <https://oauth-openshift.apps.OPENSHIFT_DOMAIN_DEV/oauth/token/display>
+2. Click on `Display token` or `Request another token`
+
+</details>
+
+## Known Issues 🚧
+
+### Bitbucket
+
+<details><summary>A Pull Request shows a merge conflict on <code>chart/Chart.yaml</code>, <code>chart/values.yaml</code>, <code>CHANGELOG.md</code>, <code>metadata.yml</code>, <code>package-lock.json</code>, <code>package.json</code>, <code>README.md</code></summary>
+
+This happens mainly when e.g. a new `feature` branch has already been created from `master` branch before the Jenkins job has been successfully completed with a release commit.
+
+To avoid resolving all merge conflicts manually, this can already be specified in the `merge` command by the [`--strategy-option=theirs`](https://www.git-scm.com/docs/git-merge#Documentation/git-merge.txt---strategy-optionltoptiongt) option to automatically accept all incoming changes.
+
+**Solution:**
+
+```sh
+# Merge the remote master branch into the current one without opening a text editor (accept the auto-generated message) and accept all incoming changes on merge conflicts
+git merge origin/master --no-edit --strategy-option=theirs
+
+# (Optional) Add `skip ci` command to the previous merge commit
+git commit --amend -m "$(git log --format=%s --max-count=1) [skip ci]"
+
+# Push the changes to the remote repository
+git push
+```
+
+</details>
+
+### Jenkins
+
+<details><summary>The Jenkins pipeline does not start and shows the following error message:<code>[Failed] Failed to pull image "image-registry.openshift-image-registry.svc:5000/ods/jenkins-agent-nodejs16:4.x" ... [Failed] Error: ImagePullBackOff</code></summary>
+
+It might happen that your `ODS@4.x` setup only provides a Jenkins agent with Node.js `12.x`. However, in order to be able to work with the latest version and to have potential security holes closed, a Jenkins agent with the latest Node.js version is required for the build process in the CI/CD process.
+
+[FAQ: How do I find out which a Jenkins Agent with Node.js are available in my `ODS@4.x` setup?](#faq)
+
+In case it does not exist yet, it can be easily created with the following commands
+
+[FAQ: How to find the `oc` login token](#faq)
+
+**Solution:**
+
+```sh
+# Login to OpenShift dev instance
+oc login --server=https://api.OPENSHIFT_DOMAIN_DEV:6443 --token=123...456
+
+# Switch project
+oc project PROJECTID-cd
+
+# Provision jenkins-agent-nodejs-16
+oc process -f https://raw.githubusercontent.com/SimonGolms/ods-jenkins-agent-nodejs/main/jenkins-agent-nodejs-16-template.yaml | oc create -f -
+```
+
+For more information about the Jenkins agent, see: <https://github.com/SimonGolms/ods-jenkins-agent-nodejs>
+
+</details>
+
+<details><summary>The Release Manager finishes the release to the <code>qa</code>/<code>test</code> environment with the following yellow message: <code>Finished: UNSTABLE</code></summary>
+
+This state is already set at the beginning by the following message in the Jenkins log: `WARN: app@<GIT-HASH-1> is NOT a descendant of <GIT-HASH-2>, which has previously been promoted to 'Q'. If <GIT-HASH-2> has been promoted to 'P' as well, promotion to 'P' will fail. Proceed with caution.`
+
+Before you can deploy a release into `qa`/`test` environment, you need to merge the release branch into your master branch to pass the checks in the Jenkins shared library stage [`odsOrchestrationPipeline`](https://github.com/opendevstack/ods-jenkins-shared-library/blob/4.x/vars/odsOrchestrationPipeline.groovy), see comment in [`metadata.yml`](./metadata.yml) for more details:
+
+**Solution:**
+
+```sh
+# Switch to master branch
+git checkout master
+
+# Merge the remote release branch into master without opening a text editor and accept the auto-generated message
+git merge origin/release/<VERSION> --no-edit
+
+# Push the changes to the remote repository
+git push
+```
+
+</details>
+
+### WSL
+
+<details><summary>When committing via the VS Code interface, the following error message appears <code>.husky/commit-msg: 4: npx: not found</code></summary>
+
+Since we are using [`nvm`](https://github.com/nvm-sh/nvm) as our versions manager for Node.js, we first need to tell husky where to find the appropriate binaries. This is done by creating and configuring the file `~/.huskyrc`. Further Information: <https://typicode.github.io/husky/#/?id=command-not-found>
+
+**Solution:**
+
+1. Create `~/.huskyrc` file with `nvm` configuration
+
+   ```sh
+   cat > ~/.huskyrc << EOF
+   # This loads nvm.sh and sets the correct PATH before running hook
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+   EOF
+   ```
+
+2. Restart VS Code
+
+</details>
+
+## Author 🖊
+
+**Simon Golms:**
 
 - Digital Card: `npx simongolms`
 - Github: [@SimonGolms](https://github.com/SimonGolms)
 - Website: [gol.ms](https://gol.ms)
 
-## Contributing
+## Contributing 🤝
 
 Contributions, issues and feature requests are welcome!
 
-## Show your support
+## Show your support 👏
 
 Give a ⭐️ if this project helped you!
 
-## License
+## License 📜
 
 Copyright © 2022 [Simon Golms](https://github.com/SimonGolms).<br />
-This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react/blob/master/LICENSE) licensed.
+This project is [Apache-2.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE) licensed.
 
-## Further Resources
+## Further Resources 📖
 
 - <https://docs.atlassian.com/bitbucket-server/rest/7.6.12/bitbucket-rest.html>
 - <https://helm.sh/>
 - <https://ionicframework.com>
 - <https://reactjs.org>
 - <https://www.opendevstack.org/>
+- <https://github.com/typescript-cheatsheets/react>

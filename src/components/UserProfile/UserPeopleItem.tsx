@@ -4,7 +4,7 @@ import { ItemAvatarSkeleton } from '../Base/Item/ItemAvatarSkeleton';
 import { MessagePermissionsRequiredItem } from '../Message/MessagePermissionsRequiredItem';
 import { UserContactItem } from './UserContactItem';
 
-export const UserPeopleItem: React.FC<TProps> = ({ id }) => {
+export const UserPeopleItem = ({ id }: TProps) => {
   const { data = [], isFetching, error } = useGetUserPeopleByIdQuery(getIdPayloadOrSkipToken(id));
 
   if (isFetching) {

@@ -6,7 +6,7 @@ import { REDIRECT_REQUEST } from '../../auth';
 import { useSearchParams } from '../../utils/useSearchParams';
 import styles from './ButtonLogIn.module.css';
 
-export const ButtonLogIn: React.FC<TProps> = ({ prompt }) => {
+export const ButtonLogIn = ({ prompt }: TProps) => {
   const { instance, accounts, inProgress } = useMsal();
 
   /**

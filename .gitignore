@@ -7,9 +7,13 @@
 
 # testing
 /coverage
+/playwright-report/
+/playwright/.cache/
+/test-results/
 
 # production
 /build
+/dist
 /docker/build
 
 # misc

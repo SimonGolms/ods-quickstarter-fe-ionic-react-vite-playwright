@@ -5,7 +5,7 @@ import { msalInstance } from './auth';
 import { persistor, store } from './store';
 import { ClientSideNavigation } from './utils/authentication/ClientSideNavigation';
 
-export const AppProviders: React.FC<TProps> = ({ children }) => {
+export const AppProviders = ({ children }: TProps) => {
   return (
     <ClientSideNavigation instance={msalInstance}>
       <MsalProvider instance={msalInstance}>

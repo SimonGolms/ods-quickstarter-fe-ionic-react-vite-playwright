@@ -1,7 +1,8 @@
 import { useGetMeQuery } from '../../services/microsoft-graph/api.me';
 import { getGreetingTextByHour } from './Greeter.utils';
 
-export const Greeter: React.FC<TProps> = ({ hour = new Date().getHours() }) => {
+// HINT: Using new Date(Date.now()) makes code a lot easier to test.
+export const Greeter = ({ hour = new Date(Date.now()).getHours() }: TProps) => {
   const { data } = useGetMeQuery();
   const greetingText = getGreetingTextByHour(hour);
 

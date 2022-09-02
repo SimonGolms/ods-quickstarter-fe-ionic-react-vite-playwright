@@ -2,7 +2,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/query';
 
 export const blobToBase64 = async (blob: Blob) => {
-  return new Promise((resolve, _) => {
+  return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onloadend = () => resolve(reader.result?.toString() || '');
     reader.readAsDataURL(blob);
