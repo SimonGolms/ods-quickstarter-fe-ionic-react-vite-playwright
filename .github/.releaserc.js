@@ -9,6 +9,7 @@ module.exports = {
         },
         preset: 'angular',
         releaseRules: [
+          { breaking: true, release: 'major' },
           { release: 'patch', type: 'chore' },
           { release: 'patch', type: 'ci' },
           { release: 'patch', type: 'refactor' },
