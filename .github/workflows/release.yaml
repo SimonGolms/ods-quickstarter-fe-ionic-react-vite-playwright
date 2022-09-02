@@ -5,6 +5,9 @@ on:
       - main
 jobs:
   release:
+    env:
+      # Disable husky (git hooks) in CI, see: https://typicode.github.io/husky/#/?id=disable-husky-in-cidocker
+      HUSKY: 0
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +24,7 @@ jobs:
       - name: Setup Quickstarter (Component ID)
         run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/COMPONENTID/app/g' {} +
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Release
         env:
           GIT_AUTHOR_NAME: 'Simon Golms'
