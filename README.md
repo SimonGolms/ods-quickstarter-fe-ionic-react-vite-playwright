@@ -1062,16 +1062,41 @@ Before you can deploy a release into `qa`/`test` environment, you need to merge 
 
 **Solution:**
 
-```sh
-# Switch to master branch
-git checkout master
+1. Merge release branch into master
 
-# Merge the remote release branch into master without opening a text editor and accept the auto-generated message
-git merge origin/release/<VERSION> --no-edit
+   ```sh
+   # Switch to master branch
+   git checkout master
 
-# Push the changes to the remote repository
-git push
-```
+   # Merge the remote release branch into master without opening a text editor and accept the auto-generated message
+   git merge origin/release/<VERSION> --no-edit
+
+   # Push the changes to the remote repository
+   git push
+   ```
+
+2. Repeat step 1 for all other relevant code repositories which are also specified in the `metadata.yml` of the Release Manager code repository and are rolled out with helm, like a backend.
+
+3. In the Release Manager code repository fix the inconsistent ods state by deleting the `./ods-state` folder
+
+   ```sh
+   # Switch to master branch
+   git checkout master
+
+   # Fetch latest state to match the remote branch
+   git pull
+
+   # Remove inconsistent ods state
+   rm -rf ods-state
+
+   # Commit all changes
+   git commit --all --message="chore(ods): remove inconsistent state"
+
+   # Push the changes to the remote repository
+   git push
+   ```
+
+4. Re-run the Release Manager pipeline with a new version. This time, be sure to merge the release branch into `master` before the further rollout towards `qa`/`test` environment!
 
 </details>
 
