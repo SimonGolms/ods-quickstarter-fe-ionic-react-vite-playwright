@@ -29,7 +29,7 @@ odsComponentPipeline(
       envVars: [
         envVar(key: 'HOME', value: '/tmp')
       ],
-      image: "mcr.microsoft.com/playwright:v1.25.1-focal",
+      image: "mcr.microsoft.com/playwright:v1.27.1-focal",
       name: 'playwright',
       // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
       // resourceLimitCpu: '1',
