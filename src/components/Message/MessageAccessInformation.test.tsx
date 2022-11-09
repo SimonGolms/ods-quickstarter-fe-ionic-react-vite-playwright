@@ -24,7 +24,7 @@ test.describe('MessageAccessInformation', () => {
     );
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      component.locator('a', { hasText: 'Microsoft Docs' }).click(), // Opens a new tab
+      component.getByRole('link', { name: 'Microsoft Docs' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
     await expect(await newPage.title()).toBeTruthy();
@@ -38,7 +38,7 @@ test.describe('MessageAccessInformation', () => {
     );
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      component.locator('a', { hasText: 'How to add app roles in Azure AD apps' }).click(), // Opens a new tab
+      component.getByRole('link', { name: 'How to add app roles in Azure AD apps' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
     await expect(await newPage.title()).toBeTruthy();

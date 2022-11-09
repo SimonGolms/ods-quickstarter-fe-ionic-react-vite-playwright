@@ -24,7 +24,7 @@ test.describe('MessagePermissionsInformation', () => {
     );
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      component.locator('a', { hasText: 'Microsoft Docs' }).click(), // Opens a new tab
+      component.getByRole('link', { name: 'Microsoft Docs' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
     await expect(await newPage.title()).toBeTruthy();
@@ -38,7 +38,7 @@ test.describe('MessagePermissionsInformation', () => {
     );
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      component.locator('a', { hasText: 'Microsoft Graph' }).click(), // Opens a new tab
+      component.getByRole('link', { name: 'Microsoft Graph' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
     await expect(await newPage.title()).toBeTruthy();
@@ -52,7 +52,7 @@ test.describe('MessagePermissionsInformation', () => {
     );
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      component.locator('a', { hasText: 'Permissions and consent in the Microsoft identity platform' }).click(), // Opens a new tab
+      component.getByRole('link', { name: 'Permissions and consent in the Microsoft identity platform' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
     await expect(await newPage.title()).toBeTruthy();
