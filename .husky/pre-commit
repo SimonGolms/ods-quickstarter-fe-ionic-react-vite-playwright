@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# The (feature) branch name is part of the helm release name and only supports a maximum number of characters.
+# The number is unknown for the moment, since it's also depends on Project Id and Component Id.
+# However, the recommendation is that the branch name should not be longer than 32 characters.
+BRANCH_NAME_LENGTH=$(git branch --show-current | wc -m)
+BRANCH_NAME_MAX_LENGTH=32
+if [ $BRANCH_NAME_LENGTH -gt $BRANCH_NAME_MAX_LENGTH ]
+then
+ echo "\033[1;31m✖ Branch name too long ($((BRANCH_NAME_LENGTH))), only $((BRANCH_NAME_MAX_LENGTH)) characters are allowed. Change with 'git branch -m \"new-name\"'\033[0m" && exit;
+fi
+
 npx --no lint-staged
 helm lint chart --strict
