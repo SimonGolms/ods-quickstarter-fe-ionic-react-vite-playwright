@@ -281,8 +281,8 @@ def stageBuild(def context) {
 def stageDeploy(def context) {
   stage('Deploy') {
     sh(
-      label: 'Move build folder into docker directory',
-      script: 'mv build docker/',
+      label: 'Move dist folder into docker directory',
+      script: 'mv dist docker/',
     )
   }
 }

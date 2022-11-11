@@ -6,7 +6,7 @@ FROM public.ecr.aws/nginx/nginx:alpine
 RUN apk update && apk upgrade
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf.template
-COPY build/ /usr/share/nginx/html
+COPY dist/ /usr/share/nginx/html
 
 COPY nginx-inject-env.sh /docker-entrypoint.d
 

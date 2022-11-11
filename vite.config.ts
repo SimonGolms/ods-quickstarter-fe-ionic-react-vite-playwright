@@ -7,9 +7,6 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
 
   return {
-    build: {
-      outDir: 'build',
-    },
     plugins: [react()],
     server: {
       open: Boolean(process.env.BROWSER),
