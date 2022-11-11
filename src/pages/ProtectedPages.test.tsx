@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/experimental-ct-react';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProviders } from '../AppProviders';
 import { MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME } from '../utils/test/api.me.mock';
+import { MsalMock } from '../utils/test/MsalMock';
 import { ProtectedPages } from './ProtectedPages';
 
 test.beforeEach(async ({ page }) => {
@@ -18,9 +19,11 @@ test.describe('ProtectedPages', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(
       <BrowserRouter>
-        <AppProviders>
-          <ProtectedPages />
-        </AppProviders>
+        <MsalMock>
+          <AppProviders>
+            <ProtectedPages />
+          </AppProviders>
+        </MsalMock>
       </BrowserRouter>
     );
 

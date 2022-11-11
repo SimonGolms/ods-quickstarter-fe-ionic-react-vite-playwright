@@ -1,5 +1,4 @@
 import { setupIonicReact } from '@ionic/react';
-import { setupMsalMock } from '../src/utils/test/setupMsalMock';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,5 +20,3 @@ import '@ionic/react/css/display.css';
 import '../src/theme/index.css';
 
 setupIonicReact();
-
-setupMsalMock();
