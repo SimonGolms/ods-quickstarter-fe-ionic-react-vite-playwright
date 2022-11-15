@@ -29,10 +29,12 @@ module.exports = {
       {
         analyzeCommitsCmd: 'echo ${lastRelease.version} > .VERSION',
         // HINT: Make sure that the changed files are part of the 'assets' property in @semantic-release/git in the release script
+        // WORKAROUND: Use of `case` command, because not all shell versions can interpret the `if` statement syntax correctly.
+        // Maximum system compatibility between Windows, Linux and MacOS, since `sed -i` behaves differently on each type.
         verifyReleaseCmd:
           "echo ${nextRelease.version} > .VERSION && \
            npm version ${nextRelease.version} --no-git-tag-version --allow-same-version && \
-           if [[ \"$OSTYPE\" == \"darwin\"* ]]; then SEDOPTION=\" \"; fi && \
+           case $OSTYPE in darwin*) SEDOPTION=\" \";; esac && \
            sed -i$SEDOPTION'' -e 's/version:.*/version: ${nextRelease.version}/g' chart/Chart.yaml && \
            sed -i$SEDOPTION'' -e 's/appVersion:.*/appVersion: \"${nextRelease.version}\"/g' chart/Chart.yaml && \
            sed -i$SEDOPTION'' -e 's/imageTag:.*/imageTag: ${nextRelease.version}/g' chart/values.yaml && \
