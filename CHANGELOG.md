@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.1...v2.0.2) (2022-11-17)
+
+
+### Continuous Integration
+
+* **github:** disable `build-and-test` workflow on main branch ([1d8f96f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/1d8f96f28bc258da25744c618414edbdc929573a))
+
 ## [2.0.1](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.0...v2.0.1) (2022-11-17)
 
 
