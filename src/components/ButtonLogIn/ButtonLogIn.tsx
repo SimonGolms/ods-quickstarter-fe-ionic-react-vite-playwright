@@ -18,8 +18,8 @@ export const ButtonLogIn = ({ prompt }: TProps) => {
    * However, this can also be overridden with the props parameter 'prompt'.
    * see: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-js-prompt-behavior
    */
-  const query = useSearchParams();
-  const promptBehavior = useMemo(() => (query.get('prompt') || prompt) ?? undefined, [prompt, query]);
+  const { searchParams } = useSearchParams();
+  const promptBehavior = useMemo(() => (searchParams?.prompt || prompt) ?? undefined, [prompt, searchParams]);
 
   const handleClickLoginRedirect = useCallback(() => {
     instance.loginRedirect({

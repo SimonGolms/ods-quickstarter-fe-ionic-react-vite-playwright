@@ -27,10 +27,13 @@ const loadTokenOptions: LoadTokenOptions = {
   extendedExpiresOn: 6599,
 };
 
-export const setupMsalMock = () => {
+export const MsalMock = ({ children }: TProps) => {
   msalInstance.getTokenCache().loadExternalTokens(silentRequest, serverResponse, loadTokenOptions);
-
   const accounts = msalInstance.getAllAccounts();
-
   msalInstance.setActiveAccount(accounts[0]);
+  return <>{children}</>;
+};
+
+type TProps = {
+  children: React.ReactNode;
 };

@@ -10,7 +10,7 @@ export const MessageAccessInformation = () => {
             access to, what they can do with those resources, and who manages which resources."
       />
       <br />
-      Explore: {''}
+      Explore:{' '}
       <a
         href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps"
         rel="noopener noreferrer"

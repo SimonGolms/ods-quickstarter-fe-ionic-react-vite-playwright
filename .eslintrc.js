@@ -20,7 +20,7 @@ module.exports = {
     // HINT: prettier must be the last extension to work
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['build', 'docker', 'node_modules', 'openshift', 'public'],
+  ignorePatterns: ['build', 'dist', 'docker', 'node_modules', 'openshift', 'public'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

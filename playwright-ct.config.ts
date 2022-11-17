@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/experimental-ct-react';
-import { devices } from '@playwright/experimental-ct-react';
+import { devices, type PlaywrightTestConfig } from '@playwright/experimental-ct-react';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -15,24 +14,15 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'Desktop Chromium',
-      use: {
-        browserName: 'chromium',
-        viewport: { height: 720, width: 1280 },
-      },
+      use: devices['Desktop Chrome'],
     },
     {
       name: 'Desktop Safari',
-      use: {
-        browserName: 'webkit',
-        viewport: { height: 720, width: 1280 },
-      },
+      use: devices['Desktop Safari'],
     },
     {
       name: 'Desktop Firefox',
-      use: {
-        browserName: 'firefox',
-        viewport: { height: 720, width: 1280 },
-      },
+      use: devices['Desktop Firefox'],
     },
     {
       name: 'Mobile Chrome',
@@ -47,7 +37,10 @@ const config: PlaywrightTestConfig = {
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? [['junit', { outputFile: 'build/test-results/test/component-test-results.xml' }]] : 'list',
 
-  /* Retry on CI only */
+  /**
+   * Retry on CI only - Test that passes on a second retry is 'flaky'
+   * see: https://playwright.dev/docs/api/class-testcase#test-case-outcome
+   */
   retries: process.env.CI ? 2 : 0,
 
   /* The base directory, relative to the config file, for snapshot files created with toMatchSnapshot and toHaveScreenshot. */

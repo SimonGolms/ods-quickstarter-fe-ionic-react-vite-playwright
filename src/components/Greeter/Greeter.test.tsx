@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/experimental-ct-react';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProviders } from '../../AppProviders';
 import { MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME } from '../../utils/test/api.me.mock';
+import { MsalMock } from '../../utils/test/MsalMock';
 import { Greeter } from './Greeter';
 
 test.beforeEach(({ page }) => {
@@ -18,11 +19,13 @@ test.describe('Greeter', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(
       <BrowserRouter>
-        <AppProviders>
-          <div>
-            <Greeter />
-          </div>
-        </AppProviders>
+        <MsalMock>
+          <AppProviders>
+            <div>
+              <Greeter />
+            </div>
+          </AppProviders>
+        </MsalMock>
       </BrowserRouter>
     );
 
@@ -36,11 +39,13 @@ test.describe('Greeter', () => {
 
     const component = await mount(
       <BrowserRouter>
-        <AppProviders>
-          <div>
-            <Greeter />
-          </div>
-        </AppProviders>
+        <MsalMock>
+          <AppProviders>
+            <div>
+              <Greeter />
+            </div>
+          </AppProviders>
+        </MsalMock>
       </BrowserRouter>
     );
 
@@ -50,11 +55,13 @@ test.describe('Greeter', () => {
   test('renders with defined hour', async ({ mount }) => {
     const component = await mount(
       <BrowserRouter>
-        <AppProviders>
-          <div>
-            <Greeter hour={18} />
-          </div>
-        </AppProviders>
+        <MsalMock>
+          <AppProviders>
+            <div>
+              <Greeter hour={18} />
+            </div>
+          </AppProviders>
+        </MsalMock>
       </BrowserRouter>
     );
 
