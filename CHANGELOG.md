@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.2...v2.0.3) (2022-12-01)
+
+
+### Build System
+
+* **eslint:** enable strict rule set form [@typescript-eslint](https://github.com/typescript-eslint) ([ffd8d87](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ffd8d87253d5f6933bef16b4eeef239ebb73fae7))
+* **husky:** fix coloring in output text ([d1008e7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d1008e777d8c143afa0fff9180d5608a744744eb))
+* **npm:** install exact package version as default ([b93342b](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/b93342b23d089518ae40daedaeb372fddf8ee728))
+* **deps:** update dependencies ([ed173df](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ed173df1d2da473e6d85d5f6af63f7eb9c57f116))
+* **deps:** update dependencies ([8632e77](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/8632e770e5dfaa479e6948cd20d0dc610f5e8801))
+
 ## [2.0.2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.1...v2.0.2) (2022-11-17)
 
 
