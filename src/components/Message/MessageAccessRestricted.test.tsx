@@ -4,7 +4,7 @@ import { MessageAccessRestricted } from './MessageAccessRestricted';
 test.describe('MessageAccessRestricted', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(<MessageAccessRestricted />);
-    await expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   test('shows text', async ({ mount }) => {

@@ -11,7 +11,7 @@ import { Avatar } from './Avatar';
 const { mail } = MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME;
 
 test.beforeEach(async ({ page }) => {
-  page.route(`**/v1.0/users/${mail}/photos/64x64/$value`, async (route) => {
+  await page.route(`**/v1.0/users/${mail}/photos/64x64/$value`, async (route) => {
     return route.fulfill({
       body: Buffer.from(MOCK_RESPONST_MICROSOFT_GRAPH_GET_USERS_PHOTOS_64_VALUE, 'base64'),
       contentType: 'image/jpeg',

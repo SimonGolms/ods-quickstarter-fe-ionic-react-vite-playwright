@@ -6,10 +6,10 @@ import styles from './UserContactItem.module.css';
 export const UserContactItem = ({ lines = 'none', data, ...rest }: TProps) => {
   return (
     <IonItem lines={lines} {...rest}>
-      <Avatar id={data?.id} slot="start" />
+      <Avatar id={data.id} slot="start" />
       <IonLabel className="ion-text-wrap">
-        <IonText className={data?.mail ? styles.bold : ''}>{data?.displayName}</IonText>
-        <p>{data?.mail}</p>
+        <IonText className={data.mail ? styles.bold : ''}>{data.displayName}</IonText>
+        <p>{data.mail}</p>
       </IonLabel>
     </IonItem>
   );

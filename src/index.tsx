@@ -6,7 +6,7 @@ import reportWebVitals from './report-web-vitals';
 import * as serviceWorkerRegistration from './service-worker-registration';
 
 const container = document.getElementById('root');
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, no-type-assertion/no-type-assertion
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
 
 root.render(

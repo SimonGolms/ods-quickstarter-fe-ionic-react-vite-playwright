@@ -7,14 +7,13 @@ const processEnv = {
   VITE_VERSION: import.meta.env.VITE_VERSION || packageJson.version || '1.0.0',
 };
 
-const injectedEnv = window.injectedEnv || {};
-
-export const env: typeof processEnv = {
+export const env = {
   ...processEnv,
-  ...injectedEnv,
+  ...window.injectedEnv,
 };
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
     injectedEnv: Partial<typeof processEnv>;
   }

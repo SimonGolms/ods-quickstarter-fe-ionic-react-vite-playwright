@@ -14,8 +14,8 @@ export const UserProfile = () => {
   return (
     <>
       <UserInformations id={data.id} />
-      <UserManager id={data?.id} />
-      <UserPeoples id={data?.id} />
+      <UserManager id={data.id} />
+      <UserPeoples id={data.id} />
     </>
   );
 };

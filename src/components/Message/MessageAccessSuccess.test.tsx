@@ -4,7 +4,7 @@ import { MessageAccessSuccess } from './MessageAccessSuccess';
 test.describe('MessageAccessSuccess', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(<MessageAccessSuccess />);
-    await expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   test('shows text', async ({ mount }) => {

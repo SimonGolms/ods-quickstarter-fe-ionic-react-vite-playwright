@@ -4,7 +4,7 @@ import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/query';
 export const blobToBase64 = async (blob: Blob) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result?.toString() || '');
+    reader.onloadend = () => resolve(reader.result?.toString() ?? '');
     reader.readAsDataURL(blob);
   });
 };
@@ -33,9 +33,9 @@ export const getErrorStatus = (error: FetchBaseQueryError | SerializedError | un
  * @param id
  * @returns
  */
-export function getIdPayloadOrSkipToken(id?: string | null) {
+export const getIdPayloadOrSkipToken = (id?: string | null) => {
   return id ? { id } : skipToken;
-}
+};
 
 /**
  * Type guard as rtk-query error can have the Serialized error type if the fetchBaseQuery function returns an error.

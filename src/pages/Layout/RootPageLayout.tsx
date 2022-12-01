@@ -12,7 +12,7 @@ export const RootPageLayout = ({ children, className, color, title }: TProps) =>
         <IonToolbar color={color}>
           <IonTitle>{title}</IonTitle>
           <IonButtons slot="end">
-            <AvatarButtonDialog expand="full" id={data?.mail || undefined}>
+            <AvatarButtonDialog expand="full" id={data?.mail ?? undefined}>
               <UserMenuPopover userData={data} />
             </AvatarButtonDialog>
           </IonButtons>

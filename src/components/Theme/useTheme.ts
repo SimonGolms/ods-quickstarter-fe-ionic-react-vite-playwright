@@ -15,12 +15,10 @@ export const useTheme = () => {
     [dispatch]
   );
 
-  const theme = useMemo(() => getThemeById(userThemeId) || THEME_DEFAULT, [userThemeId]);
+  const theme = useMemo(() => getThemeById(userThemeId) ?? THEME_DEFAULT, [userThemeId]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     document.body.classList.remove(...(getThemeClasses() as string[]));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     document.body.classList.add(theme.className as string);
   }, [theme]);
 

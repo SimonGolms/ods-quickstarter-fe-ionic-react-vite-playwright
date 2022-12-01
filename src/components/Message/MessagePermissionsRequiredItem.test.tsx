@@ -4,7 +4,7 @@ import { MessagePermissionsRequiredItem } from './MessagePermissionsRequiredItem
 test.describe('MessagePermissionsRequiredItem', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(<MessagePermissionsRequiredItem />);
-    await expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   test('shows text', async ({ mount }) => {

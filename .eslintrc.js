@@ -9,6 +9,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/strict',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:import/recommended',
@@ -31,6 +33,10 @@ module.exports = {
     },
   ],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: ['./tsconfig.json'],
+    tsconfigRootDir: __dirname,
+  },
   plugins: [
     '@typescript-eslint',
     'jsx-a11y',
@@ -39,11 +45,18 @@ module.exports = {
     'sonarjs',
     'sort-keys-fix',
     'typescript-sort-keys',
-    'no-type-assertion',
     // HINT: prettier must be the last plugin to work
     'prettier',
   ],
   rules: {
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: false,
+      },
+    ],
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
@@ -90,7 +103,6 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'no-type-assertion/no-type-assertion': 'error',
     'prettier/prettier': 'error',
     'react/jsx-sort-default-props': 'error',
     'react/jsx-sort-props': [
