@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-/* eslint-disable import/no-unused-modules, no-restricted-globals, sonarjs/prefer-single-boolean-return */
+/* eslint-disable */
 
 // This service worker can be customized!
 // See https://developers.google.com/web/tools/workbox/modules

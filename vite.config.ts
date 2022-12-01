@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       open: Boolean(process.env.BROWSER),
-      port: Number(process.env.PORT) ?? 5173,
+      port: Number(process.env.PORT) || 5173,
     },
   };
 });

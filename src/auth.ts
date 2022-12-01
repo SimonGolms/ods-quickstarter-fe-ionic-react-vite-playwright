@@ -1,8 +1,8 @@
 import {
-  AuthenticationResult,
+  type AuthenticationResult,
   BrowserAuthError,
   type Configuration,
-  EventMessage,
+  type EventMessage,
   EventType,
   InteractionRequiredAuthError,
   PublicClientApplication,
@@ -44,7 +44,6 @@ msalInstance.enableAccountStorageEvents();
 
 msalInstance.addEventCallback((event: EventMessage) => {
   if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const payload = event.payload as AuthenticationResult;
     const account = payload.account;
     msalInstance.setActiveAccount(account);
@@ -52,7 +51,7 @@ msalInstance.addEventCallback((event: EventMessage) => {
 });
 
 export const aquireTokenMsal = async () => {
-  const account = msalInstance.getActiveAccount() || undefined;
+  const account = msalInstance.getActiveAccount() ?? undefined;
 
   return msalInstance
     .acquireTokenSilent({
@@ -70,8 +69,8 @@ export const aquireTokenMsal = async () => {
           account,
           scopes: ['User.Read'],
         })
-        .catch((errorSsoSilent: Error) => {
-          msalInstance.acquireTokenRedirect({
+        .catch(async (errorSsoSilent: Error) => {
+          await msalInstance.acquireTokenRedirect({
             account,
             prompt: 'select_account',
             scopes: ['User.Read'],

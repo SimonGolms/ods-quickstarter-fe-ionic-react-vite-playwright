@@ -1,13 +1,12 @@
-import { isRejectedWithValue } from '@reduxjs/toolkit';
-import type { Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
+import { type Action, isRejectedWithValue, type Middleware, type MiddlewareAPI } from '@reduxjs/toolkit';
 
-// see: https://redux-toolkit.js.org/rtk-query/usage/error-handling#handling-errors-at-a-macro-level
-export const rtkQueryErrorHandler: Middleware = (_api: MiddlewareAPI) => (next) => (action) => {
-  if (!isRejectedWithValue(action)) {
-    return next(action);
-  }
-
-  if (import.meta.env.DEV) {
+/**
+ * Log an error during development
+ *
+ * @see https://redux-toolkit.js.org/rtk-query/usage/error-handling#handling-errors-at-a-macro-level
+ */
+export const rtkQueryErrorHandler: Middleware = (_api: MiddlewareAPI) => (next) => (action: Action) => {
+  if (import.meta.env.DEV && isRejectedWithValue(action)) {
     // eslint-disable-next-line no-console
     console.error(action);
   }

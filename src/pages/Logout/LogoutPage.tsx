@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { LoaderPage } from '../Loading/LoaderPage';
 
-export function LogoutPage() {
+export const LogoutPage = () => {
   useEffect(() => {
-    const logout = async () => {
+    const logout = () => {
       // Add your logout logic here, e.g. clean cache, etc
 
       // Navigate to root page
@@ -16,4 +16,4 @@ export function LogoutPage() {
   }, []);
 
   return <LoaderPage />;
-}
+};

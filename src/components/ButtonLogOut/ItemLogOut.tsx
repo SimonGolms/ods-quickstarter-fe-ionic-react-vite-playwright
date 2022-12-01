@@ -9,8 +9,8 @@ export const ItemLogOut = () => {
 
   const isDisabled = useMemo(() => inProgress === InteractionStatus.Logout, [inProgress]);
 
-  const handleClickLoginRedirect = useCallback(() => {
-    instance.logoutRedirect();
+  const handleClickLoginRedirect = useCallback(async () => {
+    await instance.logoutRedirect();
   }, [instance]);
 
   return (

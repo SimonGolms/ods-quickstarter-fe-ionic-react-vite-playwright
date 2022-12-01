@@ -2,7 +2,7 @@ import { IonImg, IonPage } from '@ionic/react';
 import { ButtonLogIn } from '../../components/ButtonLogIn/ButtonLogIn';
 import styles from './LoginPage.module.css';
 
-export function LoginPage() {
+export const LoginPage = () => {
   return (
     <IonPage>
       <div className="ion-padding ion-text-center">
@@ -16,4 +16,4 @@ export function LoginPage() {
       </div>
     </IonPage>
   );
-}
+};

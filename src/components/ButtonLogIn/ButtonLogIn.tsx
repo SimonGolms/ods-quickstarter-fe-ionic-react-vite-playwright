@@ -19,10 +19,10 @@ export const ButtonLogIn = ({ prompt }: TProps) => {
    * see: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-js-prompt-behavior
    */
   const { searchParams } = useSearchParams();
-  const promptBehavior = useMemo(() => (searchParams?.prompt || prompt) ?? undefined, [prompt, searchParams]);
+  const promptBehavior = useMemo(() => (searchParams.prompt || prompt) ?? undefined, [prompt, searchParams]);
 
-  const handleClickLoginRedirect = useCallback(() => {
-    instance.loginRedirect({
+  const handleClickLoginRedirect = useCallback(async () => {
+    await instance.loginRedirect({
       ...REDIRECT_REQUEST,
       prompt: promptBehavior,
     });

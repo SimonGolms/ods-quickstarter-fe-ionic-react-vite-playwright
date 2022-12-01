@@ -18,7 +18,7 @@ export const Avatar = ({ id, expand, ...rest }: AvatarProps) => {
 
   return (
     <IonAvatar className={expand ? styles.expand : ''} {...rest}>
-      <img alt={`avatar-${id}`} src={data} />
+      <img alt={`avatar-${id ?? 'default'}`} src={data} />
     </IonAvatar>
   );
 };

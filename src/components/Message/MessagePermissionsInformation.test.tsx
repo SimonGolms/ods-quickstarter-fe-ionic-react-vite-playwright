@@ -4,7 +4,7 @@ import { MessagePermissionsInformation } from './MessagePermissionsInformation';
 test.describe('MessagePermissionsInformation', () => {
   test('renders', async ({ mount }) => {
     const component = await mount(<MessagePermissionsInformation />);
-    await expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   test('shows text', async ({ mount }) => {
@@ -27,7 +27,7 @@ test.describe('MessagePermissionsInformation', () => {
       component.getByRole('link', { name: 'Microsoft Docs' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
-    await expect(await newPage.title()).toBeTruthy();
+    expect(await newPage.title()).toBeTruthy();
   });
 
   test('click on link to navigate to microsoft docs about microsoft graph', async ({ context, mount }) => {
@@ -41,7 +41,7 @@ test.describe('MessagePermissionsInformation', () => {
       component.getByRole('link', { name: 'Microsoft Graph' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
-    await expect(await newPage.title()).toBeTruthy();
+    expect(await newPage.title()).toBeTruthy();
   });
 
   test('click on link to navigate to microsoft docs about permissions and consent', async ({ context, mount }) => {
@@ -55,6 +55,6 @@ test.describe('MessagePermissionsInformation', () => {
       component.getByRole('link', { name: 'Permissions and consent in the Microsoft identity platform' }).click(), // Opens a new tab
     ]);
     await newPage.waitForLoadState();
-    await expect(await newPage.title()).toBeTruthy();
+    expect(await newPage.title()).toBeTruthy();
   });
 });

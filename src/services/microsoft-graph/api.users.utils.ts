@@ -16,9 +16,8 @@ export const getAppropriateAvailablePhotoSize = (size: number) => {
   const availablePhotoSizes = [48, 64, 96, 120, 240, 360, 432, 504, 648];
 
   const largestSize = Math.max(...availablePhotoSizes);
-  const nextSize = availablePhotoSizes.find((availableSize) => availableSize >= size) || largestSize;
+  const nextSize = availablePhotoSizes.find((availableSize) => availableSize >= size) ?? largestSize;
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return `${nextSize}x${nextSize}` as '48x48' | '64x64' | '96x96' | '120x120' | '240x240' | '360x360' | '432x432' | '504x504' | '648x648';
 };
 
@@ -34,7 +33,7 @@ export const responseHandlerPhoto = (response: Response) => {
 };
 
 export const responseHandlerValue = async (response: Response) => {
-  const { value } = await response.json();
+  const { value } = (await response.json()) as Record<'value', unknown>;
   return value;
 };
 

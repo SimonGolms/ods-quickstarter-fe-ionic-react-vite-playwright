@@ -26,6 +26,6 @@ export class CustomNavigationClient extends NavigationClient {
       this.history.push(relativePath);
     }
 
-    return false;
+    return new Promise<boolean>((resolve) => resolve(false));
   }
 }
