@@ -57,6 +57,7 @@
     "workbox-streams": "6.5.4"
   },
   "devDependencies": {
+    "@capacitor/assets": "2.0.4",
     "@capacitor/cli": "4.6.0",
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
