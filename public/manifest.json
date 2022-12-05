@@ -1,52 +1,48 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "background_color": "#003366",
   "description": "An advanced OpenDevStack Frontend Quickstarter to build desktop, mobile and pwa apps with the ionic framework and react.",
   "display": "standalone",
+  "id": "COMPONENTID",
   "icons": [
-    {
-      "src": "assets/icons/icon-192.webp",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
     {
       "src": "assets/icons/icon-48.webp",
       "type": "image/png",
-      "sizes": "48x48",
-      "purpose": "any maskable"
+      "sizes": "48x48"
     },
     {
       "src": "assets/icons/icon-72.webp",
       "type": "image/png",
-      "sizes": "72x72",
-      "purpose": "any maskable"
+      "sizes": "72x72"
     },
     {
       "src": "assets/icons/icon-96.webp",
       "type": "image/png",
-      "sizes": "96x96",
-      "purpose": "any maskable"
+      "sizes": "96x96"
     },
     {
       "src": "assets/icons/icon-128.webp",
       "type": "image/png",
-      "sizes": "128x128",
-      "purpose": "any maskable"
+      "sizes": "128x128"
+    },
+    {
+      "src": "assets/icons/icon-192.webp",
+      "type": "image/png",
+      "sizes": "192x192"
     },
     {
       "src": "assets/icons/icon-256.webp",
       "type": "image/png",
-      "sizes": "256x256",
-      "purpose": "any maskable"
+      "sizes": "256x256"
     },
     {
       "src": "assets/icons/icon-512.webp",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
   ],
   "name": "COMPONENTID",
+  "protocol_handlers": [{ "protocol": "web+COMPONENTID", "url": "%s" }],
   "short_name": "COMPONENTID",
   "start_url": ".",
   "theme_color": "#003366"
