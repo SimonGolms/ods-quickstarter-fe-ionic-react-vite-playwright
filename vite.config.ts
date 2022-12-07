@@ -1,5 +1,17 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
+import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
+import manifest from './public/manifest.json';
+
+export const pwaOptions: Partial<VitePWAOptions> = {
+  base: '/',
+  devOptions: {
+    enabled: true,
+    navigateFallback: 'index.html',
+    type: 'module',
+  },
+  manifest,
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -7,7 +19,7 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
 
   return {
-    plugins: [react()],
+    plugins: [react(), VitePWA(pwaOptions)],
     server: {
       open: Boolean(process.env.BROWSER),
       port: Number(process.env.PORT) || 5173,
