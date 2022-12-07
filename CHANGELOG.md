@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.3...v2.0.4) (2022-12-07)
+
+
+### Build System
+
+* **scripts:** add script to generate icons ([67ba771](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/67ba771880760330af471350796a89e6907767d1))
+* **pwa:** handle configuration with `vite-plugin-pwa` ([cf53fad](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/cf53fad146703a7ae445cab370898233c397ed28))
+* **deps:** install dependency @capacitor/assets@2.0.4 ([de77a53](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/de77a53a4f54409c64c95c5579dbaea151c68b93))
+* **deps:** install dependency vite-plugin-pwa@0.13.3 ([3fabf7b](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/3fabf7b8ba538d882c3a1a2fa85298aef86e9ae2))
+* **deps:** update dependencies ([f3ef97a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/f3ef97ada2f9809bd7be2a69432523156c4be3b3))
+* **deps:** update dependencies ([a7ce4e5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a7ce4e5655d546720ca3eb42a5405ee680f4ef77))
+
 ## [2.0.3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.2...v2.0.3) (2022-12-01)
 
 
