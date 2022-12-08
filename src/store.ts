@@ -1,17 +1,17 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-import userSlice from './data/user/user.slice';
-import { apiMicrosoftGraph } from './services/microsoft-graph/api.microsoftGraph';
-import { rtkQueryErrorHandler } from './services/rtkQueryErrorHandler';
-import { capacitorStorage } from './utils/capacitorStorage';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import userSlice from "./data/user/user.slice";
+import { apiMicrosoftGraph } from "./services/microsoft-graph/api.microsoftGraph";
+import { rtkQueryErrorHandler } from "./services/rtkQueryErrorHandler";
+import { capacitorStorage } from "./utils/capacitorStorage";
 
 const persistConfig = {
   debug: false,
-  key: 'root',
+  key: "root",
   storage: capacitorStorage,
   version: 1,
-  whitelist: ['user'],
+  whitelist: ["user"],
 };
 
 /**

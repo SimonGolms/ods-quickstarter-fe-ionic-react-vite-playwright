@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { useAccount } from '@azure/msal-react';
+import { useMemo } from "react";
+import { useAccount } from "@azure/msal-react";
 
-const ROLE_ADMIN = 'admin';
+const ROLE_ADMIN = "admin";
 
 export const useAccountRole = () => {
   const account = useAccount();

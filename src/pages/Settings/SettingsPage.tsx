@@ -1,5 +1,5 @@
-import { SettingsList } from '../../components/Settings/SettingsList';
-import { RootPageLayout } from '../Layout/RootPageLayout';
+import { SettingsList } from "../../components/Settings/SettingsList";
+import { RootPageLayout } from "../Layout/RootPageLayout";
 
 export const SettingsPage = () => {
   return (

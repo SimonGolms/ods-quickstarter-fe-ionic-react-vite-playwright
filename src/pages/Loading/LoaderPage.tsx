@@ -1,5 +1,5 @@
-import { IonContent, IonPage, IonSpinner } from '@ionic/react';
-import styles from './LoaderPage.module.css';
+import { IonContent, IonPage, IonSpinner } from "@ionic/react";
+import styles from "./LoaderPage.module.css";
 
 export const LoaderPage = () => {
   return (

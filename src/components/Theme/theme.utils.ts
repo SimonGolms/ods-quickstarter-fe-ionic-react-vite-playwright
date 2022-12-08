@@ -1,27 +1,27 @@
-export type ThemeId = 'dark' | 'light' | 'system';
+export type ThemeId = "dark" | "light" | "system";
 
 type Theme = {
-  className: Omit<ThemeId, 'system'>;
+  className: Omit<ThemeId, "system">;
   id: ThemeId;
   label: string;
 };
 
 export const THEME_DEFAULT: Theme = {
-  className: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-  id: 'system',
-  label: 'System (default)',
+  className: window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+  id: "system",
+  label: "System (default)",
 };
 
 export const THEMES: Theme[] = [
   {
-    className: 'dark',
-    id: 'dark',
-    label: 'Dark',
+    className: "dark",
+    id: "dark",
+    label: "Dark",
   },
   {
-    className: 'light',
-    id: 'light',
-    label: 'Light',
+    className: "light",
+    id: "light",
+    label: "Light",
   },
   THEME_DEFAULT,
 ];

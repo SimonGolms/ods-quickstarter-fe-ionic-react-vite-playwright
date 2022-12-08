@@ -1,5 +1,6 @@
 .history/
 build/
+dev-dist/
 dist/
 node_modules/
 openshift/ods-deployments.json

@@ -1,5 +1,5 @@
-import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
-import { TABS } from './TabsLayout.utils';
+import { IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs } from "@ionic/react";
+import { TABS } from "./TabsLayout.utils";
 
 export const TabsLayout = ({ children }: TProps) => {
   return (

@@ -1,10 +1,10 @@
 export const GREETING = {
-  AFTERNOON: 'Good afternoon',
-  DEFAULT: 'Hello',
-  EVENING: 'Good evening',
-  FORENOON: 'Hello',
-  MIDDAY: 'Hi',
-  MORNING: 'Good morning',
+  AFTERNOON: "Good afternoon",
+  DEFAULT: "Hello",
+  EVENING: "Good evening",
+  FORENOON: "Hello",
+  MIDDAY: "Hi",
+  MORNING: "Good morning",
 };
 
 export const getGreetingTextByHour = (hour = -1) => {

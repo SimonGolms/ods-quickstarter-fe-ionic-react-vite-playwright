@@ -1,5 +1,5 @@
-import { IonItem, IonLabel } from '@ionic/react';
-import { env } from '../../../config';
+import { IonItem, IonLabel } from "@ionic/react";
+import { env } from "../../../config";
 
 export const ItemAppVersion = (props: TProps) => {
   return (
@@ -9,4 +9,4 @@ export const ItemAppVersion = (props: TProps) => {
   );
 };
 
-type TProps = Omit<React.ComponentProps<typeof IonItem>, 'children'>;
+type TProps = Omit<React.ComponentProps<typeof IonItem>, "children">;

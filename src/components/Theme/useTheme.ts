@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { selectUserThemeId } from '../../data/user/user.selector';
-import { setThemeId } from '../../data/user/user.slice';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { getThemeById, getThemeClasses, THEME_DEFAULT, ThemeId } from './theme.utils';
+import { useCallback, useEffect, useMemo } from "react";
+import { selectUserThemeId } from "../../data/user/user.selector";
+import { setThemeId } from "../../data/user/user.slice";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { getThemeById, getThemeClasses, THEME_DEFAULT, ThemeId } from "./theme.utils";
 
 export const useTheme = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
-import { MessagePermissionsInformation } from '../../components/Message/MessagePermissionsInformation';
-import { UserProfile } from '../../components/UserProfile/UserProfile';
-import { RootPageLayout } from '../Layout/RootPageLayout';
+import { MessagePermissionsInformation } from "../../components/Message/MessagePermissionsInformation";
+import { UserProfile } from "../../components/UserProfile/UserProfile";
+import { RootPageLayout } from "../Layout/RootPageLayout";
 
 export const UserPage = () => {
   return (

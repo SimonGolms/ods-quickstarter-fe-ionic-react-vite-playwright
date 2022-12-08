@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { PublicClientApplication } from '@azure/msal-browser';
-import { useHistory } from 'react-router-dom';
-import { CustomNavigationClient } from './NavigationClient';
+import { useEffect, useState } from "react";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { useHistory } from "react-router-dom";
+import { CustomNavigationClient } from "./NavigationClient";
 
 // This component is needed to take advantage of the router's navigate functions when MSAL redirects between pages in your app
 export const ClientSideNavigation = ({ children, instance }: TProps) => {

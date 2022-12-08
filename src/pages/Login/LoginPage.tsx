@@ -1,6 +1,6 @@
-import { IonImg, IonPage } from '@ionic/react';
-import { ButtonLogIn } from '../../components/ButtonLogIn/ButtonLogIn';
-import styles from './LoginPage.module.css';
+import { IonImg, IonPage } from "@ionic/react";
+import { ButtonLogIn } from "../../components/ButtonLogIn/ButtonLogIn";
+import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {
   return (

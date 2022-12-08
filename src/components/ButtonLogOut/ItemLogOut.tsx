@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react';
-import { InteractionStatus } from '@azure/msal-browser';
-import { useMsal } from '@azure/msal-react';
-import { IonIcon, IonItem, IonLabel } from '@ionic/react';
-import { logOutOutline } from 'ionicons/icons';
+import { useCallback, useMemo } from "react";
+import { InteractionStatus } from "@azure/msal-browser";
+import { useMsal } from "@azure/msal-react";
+import { IonIcon, IonItem, IonLabel } from "@ionic/react";
+import { logOutOutline } from "ionicons/icons";
 
 export const ItemLogOut = () => {
   const { instance, inProgress } = useMsal();

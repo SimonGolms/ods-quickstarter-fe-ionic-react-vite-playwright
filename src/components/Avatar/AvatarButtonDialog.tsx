@@ -1,5 +1,5 @@
-import { cloneElement, isValidElement, useCallback, useState } from 'react';
-import { AvatarButton, AvatarButtonProps } from './AvatarButton';
+import { cloneElement, isValidElement, useCallback, useState } from "react";
+import { AvatarButton, AvatarButtonProps } from "./AvatarButton";
 
 export const AvatarButtonDialog = ({ id, expand, children }: TProps) => {
   const [popoverState, setShowPopover] = useState<React.MouseEvent<HTMLIonButtonElement> | undefined>(undefined);

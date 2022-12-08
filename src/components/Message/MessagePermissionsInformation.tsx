@@ -1,4 +1,4 @@
-import { Blockquote } from '../Base/Blockquote/Blockquote';
+import { Blockquote } from "../Base/Blockquote/Blockquote";
 
 export const MessagePermissionsInformation = () => {
   return (
@@ -11,11 +11,11 @@ export const MessagePermissionsInformation = () => {
         To access a user's information and data, you'll need to get access on their behalf. Authenticating your application with admin consent enables you to work with and update a wider range of entities associated with a user."
       />
       <br />
-      Explore:{' '}
+      Explore:{" "}
       <a href="https://docs.microsoft.com/en-us/graph/" rel="noopener noreferrer" target="_blank">
         Microsoft Graph
       </a>
-      ,{' '}
+      ,{" "}
       <a
         href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent"
         rel="noopener noreferrer"

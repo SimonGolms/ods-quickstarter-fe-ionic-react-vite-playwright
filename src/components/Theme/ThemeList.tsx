@@ -1,7 +1,15 @@
-import { useCallback } from 'react';
-import { IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup, RadioGroupChangeEventDetail } from '@ionic/react';
-import { ThemeId, THEMES } from './theme.utils';
-import { useTheme } from './useTheme';
+import { useCallback } from "react";
+import {
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonRadio,
+  IonRadioGroup,
+  RadioGroupChangeEventDetail,
+} from "@ionic/react";
+import { ThemeId, THEMES } from "./theme.utils";
+import { useTheme } from "./useTheme";
 
 export const ThemeList = () => {
   const { theme, setTheme } = useTheme();

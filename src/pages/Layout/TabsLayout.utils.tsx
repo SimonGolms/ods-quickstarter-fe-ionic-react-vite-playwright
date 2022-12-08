@@ -1,28 +1,28 @@
-import { homeOutline, keyOutline, personOutline, settingsOutline } from 'ionicons/icons';
+import { homeOutline, keyOutline, personOutline, settingsOutline } from "ionicons/icons";
 
 export const TABS = [
   {
-    href: '/home',
+    href: "/home",
     icon: homeOutline,
-    label: 'Home',
-    tab: 'home',
+    label: "Home",
+    tab: "home",
   },
   {
-    href: '/admin',
+    href: "/admin",
     icon: keyOutline,
-    label: 'Admin',
-    tab: 'admin',
+    label: "Admin",
+    tab: "admin",
   },
   {
-    href: '/user',
+    href: "/user",
     icon: personOutline,
-    label: 'User',
-    tab: 'user',
+    label: "User",
+    tab: "user",
   },
   {
-    href: '/settings',
+    href: "/settings",
     icon: settingsOutline,
-    label: 'Settings',
-    tab: 'settings',
+    label: "Settings",
+    tab: "settings",
   },
 ];

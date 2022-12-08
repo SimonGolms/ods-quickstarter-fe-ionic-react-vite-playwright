@@ -1,4 +1,4 @@
-import { TechnologyStack } from './TechnologyStack';
+import { TechnologyStack } from "./TechnologyStack";
 import {
   CI_CD,
   COMPILER,
@@ -10,7 +10,7 @@ import {
   PROGRAMMING_LANGUAGE,
   TESTING,
   VERSION_CONTROL,
-} from './TechnologyStack.utils';
+} from "./TechnologyStack.utils";
 
 export const TechnologyStacks = () => {
   return (
