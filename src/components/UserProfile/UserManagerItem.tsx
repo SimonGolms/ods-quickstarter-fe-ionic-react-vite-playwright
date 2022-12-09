@@ -1,8 +1,8 @@
-import { getErrorStatus, getIdPayloadOrSkipToken } from '../../services/api.utils';
-import { useGetUserManagerByIdQuery } from '../../services/microsoft-graph/api.users';
-import { ItemAvatarSkeleton } from '../Base/Item/ItemAvatarSkeleton';
-import { MessagePermissionsRequiredItem } from '../Message/MessagePermissionsRequiredItem';
-import { UserContactItem } from './UserContactItem';
+import { getErrorStatus, getIdPayloadOrSkipToken } from "../../services/api.utils";
+import { useGetUserManagerByIdQuery } from "../../services/microsoft-graph/api.users";
+import { ItemAvatarSkeleton } from "../Base/Item/ItemAvatarSkeleton";
+import { MessagePermissionsRequiredItem } from "../Message/MessagePermissionsRequiredItem";
+import { UserContactItem } from "./UserContactItem";
 
 export const UserManagerItem = ({ id }: TProps) => {
   const { data = {}, isFetching, error } = useGetUserManagerByIdQuery(getIdPayloadOrSkipToken(id));
@@ -14,7 +14,7 @@ export const UserManagerItem = ({ id }: TProps) => {
   if (getErrorStatus(error) === 403) {
     return (
       <MessagePermissionsRequiredItem class="ion-margin">
-        One of the following permissions is required to receive the corresponding data from Microsoft Graph:{' '}
+        One of the following permissions is required to receive the corresponding data from Microsoft Graph:{" "}
         <i>Directory.Read.All, Directory.ReadWrite.All, User.Read.All, User.ReadWrite.All</i>
       </MessagePermissionsRequiredItem>
     );

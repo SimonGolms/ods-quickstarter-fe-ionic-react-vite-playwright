@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { LoaderPage } from '../Loading/LoaderPage';
+import { useEffect } from "react";
+import { LoaderPage } from "../Loading/LoaderPage";
 
 export const LogoutPage = () => {
   useEffect(() => {
@@ -8,7 +8,7 @@ export const LogoutPage = () => {
 
       // Navigate to root page
       // see: https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
-      window.location.assign('/');
+      window.location.assign("/");
     };
 
     logout();

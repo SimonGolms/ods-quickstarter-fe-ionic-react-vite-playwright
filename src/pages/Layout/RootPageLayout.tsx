@@ -1,7 +1,7 @@
-import { IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { AvatarButtonDialog } from '../../components/Avatar/AvatarButtonDialog';
-import { UserMenuPopover } from '../../components/UserMenu/UserMenuPopover';
-import { useGetMeQuery } from '../../services/microsoft-graph/api.me';
+import { IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { AvatarButtonDialog } from "../../components/Avatar/AvatarButtonDialog";
+import { UserMenuPopover } from "../../components/UserMenu/UserMenuPopover";
+import { useGetMeQuery } from "../../services/microsoft-graph/api.me";
 
 export const RootPageLayout = ({ children, className, color, title }: TProps) => {
   const { data } = useGetMeQuery();
@@ -26,6 +26,6 @@ export const RootPageLayout = ({ children, className, color, title }: TProps) =>
 type TProps = {
   children: React.ReactNode;
   className?: string;
-  color?: HTMLIonToolbarElement['color'];
+  color?: HTMLIonToolbarElement["color"];
   title?: string;
 };

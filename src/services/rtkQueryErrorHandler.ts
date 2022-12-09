@@ -1,4 +1,4 @@
-import { type Action, isRejectedWithValue, type Middleware, type MiddlewareAPI } from '@reduxjs/toolkit';
+import { type Action, isRejectedWithValue, type Middleware, type MiddlewareAPI } from "@reduxjs/toolkit";
 
 /**
  * Log an error during development

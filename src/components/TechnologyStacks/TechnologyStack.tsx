@@ -1,5 +1,5 @@
-import styles from './TechnologyStack.module.css';
-import { TechnologyStackItem, TechnologyStackItemProps } from './TechnologyStackItem';
+import styles from "./TechnologyStack.module.css";
+import { TechnologyStackItem, TechnologyStackItemProps } from "./TechnologyStackItem";
 
 export const TechnologyStack = ({ items, title }: TProps) => {
   return (

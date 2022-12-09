@@ -1,8 +1,8 @@
-import { LoaderPage } from '../../pages/Loading/LoaderPage';
-import { useGetMeQuery } from '../../services/microsoft-graph/api.me';
-import { UserInformations } from './UserInformations';
-import { UserManager } from './UserManager';
-import { UserPeoples } from './UserPeoples';
+import { LoaderPage } from "../../pages/Loading/LoaderPage";
+import { useGetMeQuery } from "../../services/microsoft-graph/api.me";
+import { UserInformations } from "./UserInformations";
+import { UserManager } from "./UserManager";
+import { UserPeoples } from "./UserPeoples";
 
 export const UserProfile = () => {
   const { data = {}, isFetching } = useGetMeQuery();

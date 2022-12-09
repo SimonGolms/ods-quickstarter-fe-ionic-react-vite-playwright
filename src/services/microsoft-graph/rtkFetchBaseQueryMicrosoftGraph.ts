@@ -1,7 +1,7 @@
-import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { aquireTokenMsal } from '../../auth';
+import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { aquireTokenMsal } from "../../auth";
 
-const BASE_URL = 'https://graph.microsoft.com/';
+const BASE_URL = "https://graph.microsoft.com/";
 
 export const rtkFetchBaseQueryMicrosoftGraph: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError> = async (
   args,
@@ -11,7 +11,7 @@ export const rtkFetchBaseQueryMicrosoftGraph: BaseQueryFn<FetchArgs | string, un
   const { accessToken } = await aquireTokenMsal();
 
   const prepareHeaders = (headers: Headers): Headers => {
-    headers.set('Authorization', `Bearer ${accessToken}`);
+    headers.set("Authorization", `Bearer ${accessToken}`);
     return headers;
   };
 

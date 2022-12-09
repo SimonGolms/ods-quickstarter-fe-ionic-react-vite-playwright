@@ -1,6 +1,6 @@
-import { IonList, IonListHeader } from '@ionic/react';
-import { UserInformation } from './UserInformation';
-import { UserInformationOverview } from './UserInformationOverview';
+import { IonList, IonListHeader } from "@ionic/react";
+import { UserInformation } from "./UserInformation";
+import { UserInformationOverview } from "./UserInformationOverview";
 
 export const UserInformations = ({ id }: TProps) => {
   return (

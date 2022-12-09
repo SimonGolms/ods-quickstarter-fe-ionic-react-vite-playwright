@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useCallback, useMemo } from "react";
+import { useHistory, useLocation } from "react-router";
 
 export const useSearchParams = () => {
   const { search } = useLocation();
@@ -7,11 +7,11 @@ export const useSearchParams = () => {
 
   const searchParams = useMemo(() => Object.fromEntries(new URLSearchParams(search)), [search]);
   const setSearchParams = useCallback(
-    (newSearchParams: Record<string, string>, method: 'push' | 'replace' = 'push') => {
-      if (method === 'push') {
+    (newSearchParams: Record<string, string>, method: "push" | "replace" = "push") => {
+      if (method === "push") {
         history.push({ search: new URLSearchParams(newSearchParams).toString() });
       }
-      if (method === 'replace') {
+      if (method === "replace") {
         history.replace({ search: new URLSearchParams(newSearchParams).toString() });
       }
     },

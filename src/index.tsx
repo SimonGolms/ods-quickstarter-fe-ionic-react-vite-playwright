@@ -1,10 +1,10 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { App } from './App';
-import { AppProviders } from './AppProviders';
-import reportWebVitals from './report-web-vitals';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App";
+import { AppProviders } from "./AppProviders";
+import reportWebVitals from "./report-web-vitals";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
 

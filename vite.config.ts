@@ -1,14 +1,14 @@
-import react from '@vitejs/plugin-react';
-import { defineConfig, loadEnv } from 'vite';
-import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
-import manifest from './public/manifest.json';
+import react from "@vitejs/plugin-react";
+import { defineConfig, loadEnv } from "vite";
+import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
+import manifest from "./public/manifest.json";
 
 export const pwaOptions: Partial<VitePWAOptions> = {
-  base: '/',
+  base: "/",
   devOptions: {
     enabled: true,
-    navigateFallback: 'index.html',
-    type: 'module',
+    navigateFallback: "index.html",
+    type: "module",
   },
   manifest,
 };
@@ -16,7 +16,7 @@ export const pwaOptions: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
   return {
     plugins: [react(), VitePWA(pwaOptions)],

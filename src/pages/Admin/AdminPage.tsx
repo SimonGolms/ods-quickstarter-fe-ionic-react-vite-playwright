@@ -1,9 +1,9 @@
-import { MessageAccessInformation } from '../../components/Message/MessageAccessInformation';
-import { MessageAccessRestricted } from '../../components/Message/MessageAccessRestricted';
-import { MessageAccessSuccess } from '../../components/Message/MessageAccessSuccess';
-import { useAccountRole } from '../../utils/authentication/useAccountRole';
-import { RootPageLayout } from '../Layout/RootPageLayout';
-import styles from './AdminPage.module.css';
+import { MessageAccessInformation } from "../../components/Message/MessageAccessInformation";
+import { MessageAccessRestricted } from "../../components/Message/MessageAccessRestricted";
+import { MessageAccessSuccess } from "../../components/Message/MessageAccessSuccess";
+import { useAccountRole } from "../../utils/authentication/useAccountRole";
+import { RootPageLayout } from "../Layout/RootPageLayout";
+import styles from "./AdminPage.module.css";
 
 export const AdminPage = () => {
   const { isAdmin } = useAccountRole();

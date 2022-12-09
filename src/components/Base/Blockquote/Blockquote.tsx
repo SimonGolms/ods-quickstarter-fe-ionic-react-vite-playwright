@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import styles from './Blockquote.module.css';
+import { ReactNode } from "react";
+import styles from "./Blockquote.module.css";
 
-export const Blockquote = ({ quote, cite, caption = 'Link' }: TProps) => {
+export const Blockquote = ({ quote, cite, caption = "Link" }: TProps) => {
   return (
     <figure className={styles.figure}>
       <blockquote cite={cite} className={styles.blockquote}>

@@ -1,10 +1,10 @@
-import { useCallback, useMemo } from 'react';
-import { InteractionStatus } from '@azure/msal-browser';
-import { useMsal } from '@azure/msal-react';
-import { IonButton, IonSpinner } from '@ionic/react';
-import { REDIRECT_REQUEST } from '../../auth';
-import { useSearchParams } from '../../utils/useSearchParams';
-import styles from './ButtonLogIn.module.css';
+import { useCallback, useMemo } from "react";
+import { InteractionStatus } from "@azure/msal-browser";
+import { useMsal } from "@azure/msal-react";
+import { IonButton, IonSpinner } from "@ionic/react";
+import { REDIRECT_REQUEST } from "../../auth";
+import { useSearchParams } from "../../utils/useSearchParams";
+import styles from "./ButtonLogIn.module.css";
 
 export const ButtonLogIn = ({ prompt }: TProps) => {
   const { instance, accounts, inProgress } = useMsal();
@@ -52,5 +52,5 @@ export const ButtonLogIn = ({ prompt }: TProps) => {
 };
 
 type TProps = {
-  prompt?: 'consent' | 'login' | 'none' | 'select_account';
+  prompt?: "consent" | "login" | "none" | "select_account";
 };

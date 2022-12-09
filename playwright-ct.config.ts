@@ -1,4 +1,4 @@
-import { devices, type PlaywrightTestConfig } from '@playwright/experimental-ct-react';
+import { devices, type PlaywrightTestConfig } from "@playwright/experimental-ct-react";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -13,29 +13,29 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'Desktop Chromium',
-      use: devices['Desktop Chrome'],
+      name: "Desktop Chromium",
+      use: devices["Desktop Chrome"],
     },
     {
-      name: 'Desktop Safari',
-      use: devices['Desktop Safari'],
+      name: "Desktop Safari",
+      use: devices["Desktop Safari"],
     },
     {
-      name: 'Desktop Firefox',
-      use: devices['Desktop Firefox'],
+      name: "Desktop Firefox",
+      use: devices["Desktop Firefox"],
     },
     {
-      name: 'Mobile Chrome',
-      use: devices['Pixel 5'],
+      name: "Mobile Chrome",
+      use: devices["Pixel 5"],
     },
     {
-      name: 'Mobile Safari',
-      use: devices['iPhone 13 Pro'],
+      name: "Mobile Safari",
+      use: devices["iPhone 13 Pro"],
     },
   ],
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? [['junit', { outputFile: 'build/test-results/test/component-test-results.xml' }]] : 'list',
+  reporter: process.env.CI ? [["junit", { outputFile: "build/test-results/test/component-test-results.xml" }]] : "list",
 
   /**
    * Retry on CI only - Test that passes on a second retry is 'flaky'
@@ -44,9 +44,9 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
 
   /* The base directory, relative to the config file, for snapshot files created with toMatchSnapshot and toHaveScreenshot. */
-  snapshotDir: './__snapshots__',
+  snapshotDir: "./__snapshots__",
 
-  testDir: './src',
+  testDir: "./src",
 
   /* Maximum time one test can run for (in milliseconds). */
   timeout: 20_000,
@@ -63,7 +63,7 @@ const config: PlaywrightTestConfig = {
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   /* Opt out of parallel tests on CI. */

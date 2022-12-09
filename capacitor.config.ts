@@ -1,10 +1,10 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.company.PROJECTID.COMPONENTID',
-  appName: 'COMPONENTID',
+  appId: "com.company.PROJECTID.COMPONENTID",
+  appName: "COMPONENTID",
   bundledWebRuntime: false,
-  webDir: 'dist',
+  webDir: "dist",
 };
 
 export default config;

@@ -1,10 +1,10 @@
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/query';
+import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError, skipToken } from "@reduxjs/toolkit/query";
 
 export const blobToBase64 = async (blob: Blob) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result?.toString() ?? '');
+    reader.onloadend = () => resolve(reader.result?.toString() ?? "");
     reader.readAsDataURL(blob);
   });
 };
@@ -21,7 +21,7 @@ export const getErrorStatus = (error: FetchBaseQueryError | SerializedError | un
     return undefined;
   }
 
-  if ('originalStatus' in error) {
+  if ("originalStatus" in error) {
     return error.originalStatus;
   }
   return error.status;
@@ -44,5 +44,6 @@ export const getIdPayloadOrSkipToken = (id?: string | null) => {
  * @returns { boolean }
  * @see https://github.com/reduxjs/redux-toolkit/issues/1337#issuecomment-885954769
  */
-const isFetchBaseQueryError = (error: FetchBaseQueryError | SerializedError | undefined): error is FetchBaseQueryError =>
-  error !== undefined && 'status' in error;
+const isFetchBaseQueryError = (
+  error: FetchBaseQueryError | SerializedError | undefined
+): error is FetchBaseQueryError => error !== undefined && "status" in error;

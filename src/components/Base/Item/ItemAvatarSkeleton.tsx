@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { IonAvatar, IonItem, IonLabel, IonSkeletonText } from '@ionic/react';
+import { useMemo } from "react";
+import { IonAvatar, IonItem, IonLabel, IonSkeletonText } from "@ionic/react";
 
 export const ItemAvatarSkeleton = ({ numberOfLines = 1, ...rest }: TProps) => {
   const renderLines = useMemo(() => {
@@ -18,6 +18,6 @@ export const ItemAvatarSkeleton = ({ numberOfLines = 1, ...rest }: TProps) => {
   );
 };
 
-type TProps = Omit<React.ComponentProps<typeof IonItem>, 'children'> & {
+type TProps = Omit<React.ComponentProps<typeof IonItem>, "children"> & {
   numberOfLines?: number;
 };
