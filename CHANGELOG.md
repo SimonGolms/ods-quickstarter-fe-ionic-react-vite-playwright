@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.4...v2.0.5) (2022-12-09)
+
+
+### Build System
+
+* **deps:** install  package `@boehringer-ingelheim/prettier-config@1.0.0` ([7b90983](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/7b909839dfea6bb6b63ea7c41aef8bf31eeb7ad9))
+* **deps:** update dependencies ([ac2865f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ac2865f8e5a81094c647429beea3a5fd22963838))
+
+
+### Code Refactoring
+
+* **linter:** adoption of the prettier configuration ([960c359](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/960c3599e1472c9c7472a001f11f249c5eb6f4f9))
+
 ## [2.0.4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.3...v2.0.4) (2022-12-07)
 
 
