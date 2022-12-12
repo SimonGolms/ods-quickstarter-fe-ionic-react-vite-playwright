@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.6](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.5...v2.0.6) (2022-12-12)
+
+
+### Build System
+
+* **husky:** fix shell path and arg updates ([feb4a0c](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/feb4a0c5b7374265bb299def0a25c2a4dd82db38))
+* **husky:** limit the possibility of package installation after a branch switch ([25e199f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/25e199fa11238ec62da22fc04266a93b626cc819))
+
 ## [2.0.5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.4...v2.0.5) (2022-12-09)
 
 
