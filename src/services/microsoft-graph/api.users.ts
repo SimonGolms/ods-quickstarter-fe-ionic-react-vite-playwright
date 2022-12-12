@@ -1,6 +1,11 @@
-import type { User } from '@microsoft/microsoft-graph-types';
-import { apiMicrosoftGraph } from './api.microsoftGraph';
-import { getAppropriateAvailablePhotoSize, responseHandlerPhoto, responseHandlerValue, validateStatus } from './api.users.utils';
+import type { User } from "@microsoft/microsoft-graph-types";
+import { apiMicrosoftGraph } from "./api.microsoftGraph";
+import {
+  getAppropriateAvailablePhotoSize,
+  responseHandlerPhoto,
+  responseHandlerValue,
+  validateStatus,
+} from "./api.users.utils";
 
 const extendedApi = apiMicrosoftGraph.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +16,7 @@ const extendedApi = apiMicrosoftGraph.injectEndpoints({
     getUserById: builder.query<User, { id: string }>({
       query: ({ id }) => {
         return {
-          method: 'GET',
+          method: "GET",
           url: `/v1.0/users/${id}`,
         };
       },
@@ -24,7 +29,7 @@ const extendedApi = apiMicrosoftGraph.injectEndpoints({
     getUserManagerById: builder.query<User, { id: string }>({
       query: ({ id }) => {
         return {
-          method: 'GET',
+          method: "GET",
           url: `/v1.0/users/${id}/manager`,
         };
       },
@@ -37,7 +42,7 @@ const extendedApi = apiMicrosoftGraph.injectEndpoints({
     getUserPeopleById: builder.query<User[], { id: string }>({
       query: ({ id }) => {
         return {
-          method: 'GET',
+          method: "GET",
           responseHandler: responseHandlerValue,
           url: `/v1.0/users/${id}/people`,
         };
@@ -52,7 +57,7 @@ const extendedApi = apiMicrosoftGraph.injectEndpoints({
       query: ({ id, size = 64 }) => {
         const photoSize = getAppropriateAvailablePhotoSize(size);
         return {
-          method: 'GET',
+          method: "GET",
           responseHandler: responseHandlerPhoto,
           url: `/v1.0/users/${id}/photos/${photoSize}/$value`,
           validateStatus,
@@ -62,4 +67,5 @@ const extendedApi = apiMicrosoftGraph.injectEndpoints({
   }),
 });
 
-export const { useGetUserByIdQuery, useGetUserPhotoByIdQuery, useGetUserManagerByIdQuery, useGetUserPeopleByIdQuery } = extendedApi;
+export const { useGetUserByIdQuery, useGetUserPhotoByIdQuery, useGetUserManagerByIdQuery, useGetUserPeopleByIdQuery } =
+  extendedApi;

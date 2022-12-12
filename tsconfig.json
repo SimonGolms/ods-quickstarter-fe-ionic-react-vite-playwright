@@ -17,5 +17,5 @@
     "types": ["vite/client"],
     "useDefineForClassFields": true
   },
-  "include": ["src", "src/vite-env.d.ts"]
+  "include": [".", "./.eslintrc.js"]
 }

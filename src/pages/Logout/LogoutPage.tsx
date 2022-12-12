@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { LoaderPage } from '../Loading/LoaderPage';
+import { useEffect } from "react";
+import { LoaderPage } from "../Loading/LoaderPage";
 
-export function LogoutPage() {
+export const LogoutPage = () => {
   useEffect(() => {
-    const logout = async () => {
+    const logout = () => {
       // Add your logout logic here, e.g. clean cache, etc
 
       // Navigate to root page
       // see: https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
-      window.location.assign('/');
+      window.location.assign("/");
     };
 
     logout();
@@ -16,4 +16,4 @@ export function LogoutPage() {
   }, []);
 
   return <LoaderPage />;
-}
+};

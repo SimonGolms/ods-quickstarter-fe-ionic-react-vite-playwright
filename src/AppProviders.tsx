@@ -1,9 +1,9 @@
-import { MsalProvider } from '@azure/msal-react';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { msalInstance } from './auth';
-import { persistor, store } from './store';
-import { ClientSideNavigation } from './utils/authentication/ClientSideNavigation';
+import { MsalProvider } from "@azure/msal-react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { msalInstance } from "./auth";
+import { persistor, store } from "./store";
+import { ClientSideNavigation } from "./utils/authentication/ClientSideNavigation";
 
 export const AppProviders = ({ children }: TProps) => {
   return (

@@ -1,14 +1,14 @@
-import { InteractionStatus } from '@azure/msal-browser';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { IonRouterOutlet } from '@ionic/react';
-import { Redirect, Route } from 'react-router-dom';
-import { AdminPage } from './Admin/AdminPage';
-import { HomePage } from './Home/Home';
-import { TabsLayout } from './Layout/TabsLayout';
-import { LoaderPage } from './Loading/LoaderPage';
-import { LoginPage } from './Login/LoginPage';
-import { SettingsPage } from './Settings/SettingsPage';
-import { UserPage } from './User/UserPage';
+import { InteractionStatus } from "@azure/msal-browser";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { IonRouterOutlet } from "@ionic/react";
+import { Redirect, Route } from "react-router-dom";
+import { AdminPage } from "./Admin/AdminPage";
+import { HomePage } from "./Home/Home";
+import { TabsLayout } from "./Layout/TabsLayout";
+import { LoaderPage } from "./Loading/LoaderPage";
+import { LoginPage } from "./Login/LoginPage";
+import { SettingsPage } from "./Settings/SettingsPage";
+import { UserPage } from "./User/UserPage";
 
 export const ProtectedPages = () => {
   const { inProgress } = useMsal();

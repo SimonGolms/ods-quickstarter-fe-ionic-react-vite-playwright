@@ -1,9 +1,16 @@
-import { briefcaseOutline, callOutline, idCardOutline, locationOutline, mailOutline, personOutline } from 'ionicons/icons';
-import { getErrorStatus, getIdPayloadOrSkipToken } from '../../services/api.utils';
-import { useGetUserByIdQuery } from '../../services/microsoft-graph/api.users';
-import { ItemAvatarSkeleton } from '../Base/Item/ItemAvatarSkeleton';
-import { MessagePermissionsRequiredItem } from '../Message/MessagePermissionsRequiredItem';
-import { UserInformationOverviewItem } from './UserInformationOverviewItem';
+import {
+  briefcaseOutline,
+  callOutline,
+  idCardOutline,
+  locationOutline,
+  mailOutline,
+  personOutline,
+} from "ionicons/icons";
+import { getErrorStatus, getIdPayloadOrSkipToken } from "../../services/api.utils";
+import { useGetUserByIdQuery } from "../../services/microsoft-graph/api.users";
+import { ItemAvatarSkeleton } from "../Base/Item/ItemAvatarSkeleton";
+import { MessagePermissionsRequiredItem } from "../Message/MessagePermissionsRequiredItem";
+import { UserInformationOverviewItem } from "./UserInformationOverviewItem";
 
 export const UserInformationOverview = ({ id }: TProps) => {
   const { data = {}, isFetching, error } = useGetUserByIdQuery(getIdPayloadOrSkipToken(id));
@@ -25,7 +32,8 @@ export const UserInformationOverview = ({ id }: TProps) => {
   if (getErrorStatus(error) === 403) {
     return (
       <MessagePermissionsRequiredItem class="ion-margin">
-        One of the following permissions is required to receive the corresponding data from Microsoft Graph: <i>User.Read</i>
+        One of the following permissions is required to receive the corresponding data from Microsoft Graph:{" "}
+        <i>User.Read</i>
       </MessagePermissionsRequiredItem>
     );
   }

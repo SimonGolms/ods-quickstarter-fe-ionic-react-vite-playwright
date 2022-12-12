@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PURGE } from 'redux-persist';
-import { THEME_DEFAULT, ThemeId } from '../../components/Theme/theme.utils';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
+import { THEME_DEFAULT, ThemeId } from "../../components/Theme/theme.utils";
 
 type UserState = {
   themeId: ThemeId;
@@ -17,7 +17,7 @@ const userSlice = createSlice({
     });
   },
   initialState,
-  name: 'user',
+  name: "user",
   reducers: {
     resetUserState() {
       return initialState;

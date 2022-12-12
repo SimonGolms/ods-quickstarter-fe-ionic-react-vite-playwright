@@ -1,17 +1,17 @@
 import {
-  AuthenticationResult,
+  type AuthenticationResult,
   BrowserAuthError,
   type Configuration,
-  EventMessage,
+  type EventMessage,
   EventType,
   InteractionRequiredAuthError,
   PublicClientApplication,
   type RedirectRequest,
-} from '@azure/msal-browser';
-import { env } from './config';
+} from "@azure/msal-browser";
+import { env } from "./config";
 
 export const REDIRECT_REQUEST: RedirectRequest = {
-  scopes: ['User.Read'],
+  scopes: ["User.Read"],
 };
 
 // Configuration Option for MSAL
@@ -21,12 +21,12 @@ const MSAL_CONFIG: Configuration = {
     authority: `https://login.microsoftonline.com/${env.VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID}`,
     clientId: env.VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID,
     navigateToLoginRequestUrl: false,
-    postLogoutRedirectUri: '/logout',
-    redirectUri: '/',
+    postLogoutRedirectUri: "/logout",
+    redirectUri: "/",
   },
   cache: {
     // Enables sso between browser tabs, see: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-js-sso
-    cacheLocation: 'localStorage',
+    cacheLocation: "localStorage",
   },
 };
 
@@ -44,7 +44,6 @@ msalInstance.enableAccountStorageEvents();
 
 msalInstance.addEventCallback((event: EventMessage) => {
   if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const payload = event.payload as AuthenticationResult;
     const account = payload.account;
     msalInstance.setActiveAccount(account);
@@ -52,15 +51,18 @@ msalInstance.addEventCallback((event: EventMessage) => {
 });
 
 export const aquireTokenMsal = async () => {
-  const account = msalInstance.getActiveAccount() || undefined;
+  const account = msalInstance.getActiveAccount() ?? undefined;
 
   return msalInstance
     .acquireTokenSilent({
       account,
-      scopes: ['User.Read'],
+      scopes: ["User.Read"],
     })
     .catch((errorAcquireTokenSilent: Error) => {
-      if (!(errorAcquireTokenSilent instanceof BrowserAuthError) && !(errorAcquireTokenSilent instanceof InteractionRequiredAuthError)) {
+      if (
+        !(errorAcquireTokenSilent instanceof BrowserAuthError) &&
+        !(errorAcquireTokenSilent instanceof InteractionRequiredAuthError)
+      ) {
         throw errorAcquireTokenSilent;
       }
 
@@ -68,13 +70,13 @@ export const aquireTokenMsal = async () => {
       return msalInstance
         .ssoSilent({
           account,
-          scopes: ['User.Read'],
+          scopes: ["User.Read"],
         })
-        .catch((errorSsoSilent: Error) => {
-          msalInstance.acquireTokenRedirect({
+        .catch(async (errorSsoSilent: Error) => {
+          await msalInstance.acquireTokenRedirect({
             account,
-            prompt: 'select_account',
-            scopes: ['User.Read'],
+            prompt: "select_account",
+            scopes: ["User.Read"],
           });
           throw errorSsoSilent;
         });

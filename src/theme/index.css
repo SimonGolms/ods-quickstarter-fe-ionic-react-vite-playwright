@@ -1,5 +1,5 @@
-@import './variables.css';
-@import './variables.custom.css';
+@import url("./variables.css");
+@import url("./variables.custom.css");
 
 /*
  * App Theme
@@ -7,8 +7,8 @@
  * Ionic apps can have different themes applied, which can then be further customized.
  * These variables come last so that the above variables are used by default.
  */
-@import './theme.dark.css';
-@import './theme.light.css';
+@import url("./theme.dark.css");
+@import url("./theme.light.css");
 
 /* Allow users to select and copy text */
 ion-app {

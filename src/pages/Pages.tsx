@@ -1,9 +1,9 @@
-import { IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { Route } from 'react-router-dom';
-import { LoginPage } from './Login/LoginPage';
-import { LogoutPage } from './Logout/LogoutPage';
-import { ProtectedPages } from './ProtectedPages';
+import { IonRouterOutlet } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Route } from "react-router-dom";
+import { LoginPage } from "./Login/LoginPage";
+import { LogoutPage } from "./Logout/LogoutPage";
+import { ProtectedPages } from "./ProtectedPages";
 
 export const Pages = () => {
   return (

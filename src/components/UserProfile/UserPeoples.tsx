@@ -1,5 +1,5 @@
-import { IonList, IonListHeader } from '@ionic/react';
-import { UserPeopleItem } from './UserPeopleItem';
+import { IonList, IonListHeader } from "@ionic/react";
+import { UserPeopleItem } from "./UserPeopleItem";
 
 export const UserPeoples = ({ id }: TProps) => {
   return (

@@ -1,4 +1,4 @@
-import { blobToBase64 } from '../api.utils';
+import { blobToBase64 } from "../api.utils";
 
 /**
  * Returns the appropriate size of the photo based on the given size.
@@ -16,10 +16,18 @@ export const getAppropriateAvailablePhotoSize = (size: number) => {
   const availablePhotoSizes = [48, 64, 96, 120, 240, 360, 432, 504, 648];
 
   const largestSize = Math.max(...availablePhotoSizes);
-  const nextSize = availablePhotoSizes.find((availableSize) => availableSize >= size) || largestSize;
+  const nextSize = availablePhotoSizes.find((availableSize) => availableSize >= size) ?? largestSize;
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return `${nextSize}x${nextSize}` as '48x48' | '64x64' | '96x96' | '120x120' | '240x240' | '360x360' | '432x432' | '504x504' | '648x648';
+  return `${nextSize}x${nextSize}` as
+    | "48x48"
+    | "64x64"
+    | "96x96"
+    | "120x120"
+    | "240x240"
+    | "360x360"
+    | "432x432"
+    | "504x504"
+    | "648x648";
 };
 
 // WORKAROUND: If the user does not have a photo, in this case the response will still be cached to avoid constantly sending new requests.
@@ -28,13 +36,13 @@ export const responseHandlerPhoto = (response: Response) => {
     return response.blob().then((blob) => blobToBase64(blob));
   }
   if (response.status >= 400 && response.status <= 499) {
-    return Promise.resolve('');
+    return Promise.resolve("");
   }
   return response.json();
 };
 
 export const responseHandlerValue = async (response: Response) => {
-  const { value } = await response.json();
+  const { value } = (await response.json()) as Record<"value", unknown>;
   return value;
 };
 

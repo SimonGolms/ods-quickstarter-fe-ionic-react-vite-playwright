@@ -1,5 +1,5 @@
-import { IonList, IonListHeader } from '@ionic/react';
-import { UserManagerItem } from './UserManagerItem';
+import { IonList, IonListHeader } from "@ionic/react";
+import { UserManagerItem } from "./UserManagerItem";
 
 export const UserManager = ({ id }: TProps) => {
   return (

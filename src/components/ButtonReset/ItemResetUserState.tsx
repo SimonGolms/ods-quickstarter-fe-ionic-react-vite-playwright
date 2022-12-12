@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
-import { IonItem, IonLabel } from '@ionic/react';
-import { persistor } from '../../store';
+import { useCallback } from "react";
+import { IonItem, IonLabel } from "@ionic/react";
+import { persistor } from "../../store";
 
-export const ItemResetUserState = ({ label = 'Reset', labelColor = 'danger', ...rest }: TProps) => {
-  const handleClick = useCallback(() => {
-    persistor.purge();
+export const ItemResetUserState = ({ label = "Reset", labelColor = "danger", ...rest }: TProps) => {
+  const handleClick = useCallback(async () => {
+    await persistor.purge();
   }, []);
 
   return (
@@ -14,7 +14,7 @@ export const ItemResetUserState = ({ label = 'Reset', labelColor = 'danger', ...
   );
 };
 
-type TProps = Omit<React.ComponentProps<typeof IonItem>, 'button' | 'children' | 'onClick'> & {
+type TProps = Omit<React.ComponentProps<typeof IonItem>, "button" | "children" | "onClick"> & {
   label?: string;
   labelColor?: string;
 };

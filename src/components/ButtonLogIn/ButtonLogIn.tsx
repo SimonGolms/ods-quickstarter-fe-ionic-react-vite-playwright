@@ -1,10 +1,10 @@
-import { useCallback, useMemo } from 'react';
-import { InteractionStatus } from '@azure/msal-browser';
-import { useMsal } from '@azure/msal-react';
-import { IonButton, IonSpinner } from '@ionic/react';
-import { REDIRECT_REQUEST } from '../../auth';
-import { useSearchParams } from '../../utils/useSearchParams';
-import styles from './ButtonLogIn.module.css';
+import { useCallback, useMemo } from "react";
+import { InteractionStatus } from "@azure/msal-browser";
+import { useMsal } from "@azure/msal-react";
+import { IonButton, IonSpinner } from "@ionic/react";
+import { REDIRECT_REQUEST } from "../../auth";
+import { useSearchParams } from "../../utils/useSearchParams";
+import styles from "./ButtonLogIn.module.css";
 
 export const ButtonLogIn = ({ prompt }: TProps) => {
   const { instance, accounts, inProgress } = useMsal();
@@ -18,11 +18,11 @@ export const ButtonLogIn = ({ prompt }: TProps) => {
    * However, this can also be overridden with the props parameter 'prompt'.
    * see: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-js-prompt-behavior
    */
-  const query = useSearchParams();
-  const promptBehavior = useMemo(() => (query.get('prompt') || prompt) ?? undefined, [prompt, query]);
+  const { searchParams } = useSearchParams();
+  const promptBehavior = useMemo(() => (searchParams.prompt || prompt) ?? undefined, [prompt, searchParams]);
 
-  const handleClickLoginRedirect = useCallback(() => {
-    instance.loginRedirect({
+  const handleClickLoginRedirect = useCallback(async () => {
+    await instance.loginRedirect({
       ...REDIRECT_REQUEST,
       prompt: promptBehavior,
     });
@@ -52,5 +52,5 @@ export const ButtonLogIn = ({ prompt }: TProps) => {
 };
 
 type TProps = {
-  prompt?: 'consent' | 'login' | 'none' | 'select_account';
+  prompt?: "consent" | "login" | "none" | "select_account";
 };

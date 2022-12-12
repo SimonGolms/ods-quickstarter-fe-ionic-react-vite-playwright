@@ -1,4 +1,4 @@
-import { IonImg } from '@ionic/react';
+import { IonImg } from "@ionic/react";
 
 export const TechnologyStackItem = ({ alt, href, src }: TechnologyStackItemProps) => {
   return (

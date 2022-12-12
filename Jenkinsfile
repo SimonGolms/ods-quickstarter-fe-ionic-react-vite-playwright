@@ -15,6 +15,7 @@ odsComponentPipeline(
     containerTemplate(
       alwaysPullImage: true,
       args: '${computer.jnlpmac} ${computer.name}',
+      // Source of the image: https://github.com/opendevstack/ods-quickstarters/blob/4.x/common/jenkins-agents/nodejs16/docker/Dockerfile.ubi8
       image: 'image-registry.openshift-image-registry.svc:5000/ods/jenkins-agent-nodejs16:4.x',
       name: 'jnlp',
       // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
@@ -29,7 +30,10 @@ odsComponentPipeline(
       envVars: [
         envVar(key: 'HOME', value: '/tmp')
       ],
-      image: "mcr.microsoft.com/playwright:v1.25.1-focal",
+      // The playwright container is based on the Ubuntu-20.04 (focal) image and comes with the latest Node.js v16,
+      // as well as all additionally installed dependencies and browser instances.
+      // see: https://github.com/microsoft/playwright/blob/main/utils/docker/Dockerfile.focal
+      image: "mcr.microsoft.com/playwright:v1.27.1-focal",
       name: 'playwright',
       // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
       // resourceLimitCpu: '1',
@@ -281,8 +285,8 @@ def stageBuild(def context) {
 def stageDeploy(def context) {
   stage('Deploy') {
     sh(
-      label: 'Move build folder into docker directory',
-      script: 'mv build docker/',
+      label: 'Move dist folder into docker directory',
+      script: 'mv dist docker/',
     )
   }
 }

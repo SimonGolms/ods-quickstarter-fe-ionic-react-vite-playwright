@@ -1,5 +1,5 @@
-import { IonButton } from '@ionic/react';
-import { Avatar, AvatarProps } from './Avatar';
+import { IonButton } from "@ionic/react";
+import { Avatar, AvatarProps } from "./Avatar";
 
 export const AvatarButton = ({ id, expand, ...rest }: AvatarButtonProps) => {
   return (
@@ -9,4 +9,4 @@ export const AvatarButton = ({ id, expand, ...rest }: AvatarButtonProps) => {
   );
 };
 
-export type AvatarButtonProps = AvatarProps & Omit<React.ComponentProps<typeof IonButton>, 'shape'>;
+export type AvatarButtonProps = AvatarProps & Omit<React.ComponentProps<typeof IonButton>, "shape">;

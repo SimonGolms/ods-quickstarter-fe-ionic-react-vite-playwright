@@ -1,5 +1,102 @@
 # Changelog
 
+## [2.0.5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.4...v2.0.5) (2022-12-09)
+
+
+### Build System
+
+* **deps:** install  package `@boehringer-ingelheim/prettier-config@1.0.0` ([7b90983](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/7b909839dfea6bb6b63ea7c41aef8bf31eeb7ad9))
+* **deps:** update dependencies ([ac2865f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ac2865f8e5a81094c647429beea3a5fd22963838))
+
+
+### Code Refactoring
+
+* **linter:** adoption of the prettier configuration ([960c359](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/960c3599e1472c9c7472a001f11f249c5eb6f4f9))
+
+## [2.0.4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.3...v2.0.4) (2022-12-07)
+
+
+### Build System
+
+* **scripts:** add script to generate icons ([67ba771](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/67ba771880760330af471350796a89e6907767d1))
+* **pwa:** handle configuration with `vite-plugin-pwa` ([cf53fad](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/cf53fad146703a7ae445cab370898233c397ed28))
+* **deps:** install dependency @capacitor/assets@2.0.4 ([de77a53](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/de77a53a4f54409c64c95c5579dbaea151c68b93))
+* **deps:** install dependency vite-plugin-pwa@0.13.3 ([3fabf7b](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/3fabf7b8ba538d882c3a1a2fa85298aef86e9ae2))
+* **deps:** update dependencies ([f3ef97a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/f3ef97ada2f9809bd7be2a69432523156c4be3b3))
+* **deps:** update dependencies ([a7ce4e5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a7ce4e5655d546720ca3eb42a5405ee680f4ef77))
+
+## [2.0.3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.2...v2.0.3) (2022-12-01)
+
+
+### Build System
+
+* **eslint:** enable strict rule set form [@typescript-eslint](https://github.com/typescript-eslint) ([ffd8d87](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ffd8d87253d5f6933bef16b4eeef239ebb73fae7))
+* **husky:** fix coloring in output text ([d1008e7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d1008e777d8c143afa0fff9180d5608a744744eb))
+* **npm:** install exact package version as default ([b93342b](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/b93342b23d089518ae40daedaeb372fddf8ee728))
+* **deps:** update dependencies ([ed173df](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ed173df1d2da473e6d85d5f6af63f7eb9c57f116))
+* **deps:** update dependencies ([8632e77](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/8632e770e5dfaa479e6948cd20d0dc610f5e8801))
+
+## [2.0.2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.1...v2.0.2) (2022-11-17)
+
+
+### Continuous Integration
+
+* **github:** disable `build-and-test` workflow on main branch ([1d8f96f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/1d8f96f28bc258da25744c618414edbdc929573a))
+
+## [2.0.1](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.0...v2.0.1) (2022-11-17)
+
+
+### Bug Fixes
+
+* **scripts:** improve compatibility for release ([412eb3d](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/412eb3daae72a945cc80e875fc6a610639ecb54b))
+* **button-login:** use `prompt` search parameter ([bf87c22](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/bf87c229463df47bcff7e1646065bb5593fc19a4))
+* **tests:** use mocked msal instance per component and not globally ([5deeb8a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/5deeb8a8efe7cfb15d99101b7c0589ee3475926a))
+
+
+### Documentation
+
+* **README:** solution for an unstable release manager in known issues updated [skip ci] ([712e9e7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/712e9e7eb46cd28f1e6185d5dfca25072ef7c811))
+
+
+### Tests
+
+* **avatar:** add test cases ([a65fdfe](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a65fdfe8c373ef1fc037812deff50bb5407dddbd))
+
+
+### Continuous Integration
+
+* **jenkins:** add documentation about used containers ([b4dffc2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/b4dffc26ca58fdbc9f895bdf2b9015e9d05ed739))
+* **github:** add workflow to build and test application on each push ([13e8b74](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/13e8b74531180aa506df404910b653a84f4125c6))
+* **github:** setup node.js version based on `.nvmrc` file ([34df3ce](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/34df3ce5936c49114677c593e302c68740d4136b))
+* **github:** update dependencies in release workflow ([13bfc7b](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/13bfc7b13d69efbe2e779fcfd3a3352db8ecbfcb))
+* **jenkins:** update dependencies ([5929188](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/5929188af0e7d8c518c2ae0c187b4910d49b3de7))
+
+
+### Styles
+
+* **message:** fix whitespace between elements ([c7619ed](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/c7619edfc625bedf3a9b7431e26d9c91eed9ce69))
+
+
+### Code Refactoring
+
+* **playwright:** use device configuration for projects ([a30c150](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a30c15061de6baf0f4158b1cb137925213a779c5))
+* **tests:** use new locators to find elements ([5432bcf](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/5432bcf74c14ba94fd352ca3ec9901d6d1986d39))
+
+
+### Build System
+
+* **husky:** check branch name length in pre-commit ([28163f7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/28163f70064bee66182b38527a51a926cfeeef86))
+* **sonarqube:** exclude all test files from coverage analysis ([ba4f204](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ba4f204a654932027fb2f012c8d8b314aaa6864f))
+* **sonarqube:** exclude all test files from duplication checking ([fb2fa5c](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/fb2fa5c79588eef9d483938918c64b592e7ca485))
+* **sonarqube:** exclude specific rules from specific files ([68e162a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/68e162a12243bea2053b0f0f5e1861d07a34f121))
+* **husky:** force basename/dirname to treat $0 as an argument ([a65578d](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a65578d5e7166469ed4a9c564db9e10845b217cf))
+* **nvm:** replace lts with fixed node version 18 ([ffbf0af](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ffbf0af0cecba781d9bf34222ffc5060de1eab43))
+* **deps:** update dependencies ([edeea6c](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/edeea6c8ad0fa03485fbdc41a099cf3ea78e96c1))
+* **deps:** update dependencies ([7eb99be](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/7eb99bea3e9a20b1bede71657e7843cc7375ae8e))
+* **deps:** update dependencies ([74891f2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/74891f2fad8b4e615f377e004972142e74bddbc1))
+* **husky:** use recommended shebang to make scripts portable ([7c2b13c](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/7c2b13c77859e7719b9cd0f7f86a1bea91983553))
+* use the default output directory `dist` ([a2e84ff](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a2e84ff76fb5a2f29ad6bf261801c17e9415c50b))
+
 ## [2.0.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v1.0.6...v2.0.0) (2022-09-02)
 
 
@@ -20,7 +117,7 @@
 * disable eslint rule on next line ([9269e5f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/9269e5fa21cc794d29b943f968d15888bca62ebb))
 * remove unused variables ([03bd72f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/03bd72fe2dbf4aefbb54fe151601b9db728335d1))
 * **theme:** rename variable that is already declared ([0feb530](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/0feb5309765e5b80caa9094435408815ee161844))
-* reset values to `COMPONENTID` and `PROJECTID` ([a997b2d](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a997b2d4494c1bbe8d18dd90255f0be3533ec58b))
+* reset values to `app` and `foo` ([a997b2d](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a997b2d4494c1bbe8d18dd90255f0be3533ec58b))
 * **scripts:** support `sed` on macOS systems ([0a53db3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/0a53db3ba118a76ad10f658387fabc158be5ce0f))
 * **scripts:** support hyphens in badge version ([56345ea](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/56345ea746d8606476a8996a92dfdf56b8876e88))
 * **sso:** update default client and tenant id ([074bde4](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/074bde41fd95d29185f83ca602eb1f7d453b2651))

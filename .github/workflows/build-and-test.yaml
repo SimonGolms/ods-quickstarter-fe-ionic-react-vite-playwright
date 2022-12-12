@@ -1,0 +1,44 @@
+name: Build and Test
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  build_and_test:
+    name: 'Build and Test'
+    runs-on: ubuntu-20.04
+    container:
+      # Using the playwright container (https://mcr.microsoft.com/product/playwright/about)
+      # for performance reasons to avoid having to download and install all dependencies again.
+      image: mcr.microsoft.com/playwright:v1.27.1-focal
+      # Container should run with the same user of the host VM, otherwise it leads to permission issues
+      # see: https://github.com/actions/runner/issues/691 & https://github.com/actions/checkout/issues/211#issuecomment-680107607
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      # Ignore README.md from find results to avoid unintentionally changes on the release step
+      - name: Setup Quickstarter (Project ID)
+        run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/PROJECTID/foo/g' {} +
+      # Ignore README.md from find results to avoid unintentionally changes on the release step
+      - name: Setup Quickstarter (Component ID)
+        run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/COMPONENTID/app/g' {} +
+      - name: Install Dependencies
+        run: npm ci
+      - name: Analyze Code - Check ESLint Rules
+        run: npm run lint
+      - name: Test Components
+        env:
+          VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID: '11111111-2222-3333-4444-555555555dev'
+          # IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
+          VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID: 'common'
+        run: npm run test
+      - name: Build Application
+        run: npm run build

@@ -1,16 +1,16 @@
-import { expect, test } from '@playwright/experimental-ct-react';
-import { MessageAccessRestricted } from './MessageAccessRestricted';
+import { expect, test } from "@playwright/experimental-ct-react";
+import { MessageAccessRestricted } from "./MessageAccessRestricted";
 
-test.describe('MessageAccessRestricted', () => {
-  test('renders', async ({ mount }) => {
+test.describe("MessageAccessRestricted", () => {
+  test("renders", async ({ mount }) => {
     const component = await mount(<MessageAccessRestricted />);
-    await expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  test('shows text', async ({ mount }) => {
-    const text = 'Only user with role have access';
+  test("shows text", async ({ mount }) => {
+    const text = "Only user with role have access";
     const component = await mount(<MessageAccessRestricted>{text}</MessageAccessRestricted>);
-    await expect(component).toContainText('Access Restricted');
+    await expect(component).toContainText("Access Restricted");
     await expect(component).toContainText(text);
   });
 });

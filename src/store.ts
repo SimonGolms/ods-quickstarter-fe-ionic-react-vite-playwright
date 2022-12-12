@@ -1,18 +1,31 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-import userSlice from './data/user/user.slice';
-import { apiMicrosoftGraph } from './services/microsoft-graph/api.microsoftGraph';
-import { rtkQueryErrorHandler } from './services/rtkQueryErrorHandler';
-import { capacitorStorage } from './utils/capacitorStorage';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import userSlice from "./data/user/user.slice";
+import { apiMicrosoftGraph } from "./services/microsoft-graph/api.microsoftGraph";
+import { rtkQueryErrorHandler } from "./services/rtkQueryErrorHandler";
+import { capacitorStorage } from "./utils/capacitorStorage";
 
 const persistConfig = {
   debug: false,
-  key: 'root',
+  key: "root",
   storage: capacitorStorage,
   version: 1,
-  whitelist: ['user'],
+  whitelist: ["user"],
 };
+
+/**
+ * WORKAROUND since type of ReturnType<typeof store.getState> becomes any
+ * if getDefaultMiddleware is in place and a function call on the right-hand side is used of reducer.
+ * see: https://github.com/reduxjs/redux-toolkit/issues/1831#issuecomment-1007857548
+ */
+const rootReducer = persistReducer(
+  persistConfig,
+  combineReducers({
+    user: userSlice,
+    [apiMicrosoftGraph.reducerPath]: apiMicrosoftGraph.reducer,
+  })
+);
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
@@ -23,13 +36,7 @@ export const store = configureStore({
     })
       .concat(rtkQueryErrorHandler)
       .concat(apiMicrosoftGraph.middleware),
-  reducer: persistReducer(
-    persistConfig,
-    combineReducers({
-      user: userSlice,
-      [apiMicrosoftGraph.reducerPath]: apiMicrosoftGraph.reducer,
-    })
-  ),
+  reducer: rootReducer,
 });
 
 export const persistor = persistStore(store);

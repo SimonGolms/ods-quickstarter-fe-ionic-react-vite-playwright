@@ -11,10 +11,14 @@
 /playwright/.cache/
 /test-results/
 
+# development
+/dev-dist
+
 # production
 /build
 /dist
 /docker/build
+/docker/dist
 
 # misc
 .DS_Store
