@@ -68,6 +68,7 @@ module.exports = {
     "@typescript-eslint/sort-type-union-intersection-members": "error",
     camelcase: "warn",
     curly: "error",
+    "import/no-cycle": "error",
     "import/no-unused-modules": [
       "error",
       {
