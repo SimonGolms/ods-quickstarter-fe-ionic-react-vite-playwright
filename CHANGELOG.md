@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.6...v2.0.7) (2022-12-21)
+
+
+### Build System
+
+* **eslint:** do not allow circular dependencies ([103bbcf](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/103bbcf5e49c31d24430e78e5f94b8b29bcdd98c))
+* **env:** remove `NODE_ENV` from template file ([174f3bc](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/174f3bc688ce3bcf864f5e258c1918939df9a58b))
+* **vscode:** remove deprecated recommendation ([6318718](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/631871802918503d257bb6ec9cc3446eea7ca1f6))
+* **deps:** update dependencies ([4cf8d85](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/4cf8d858fbd428ffa85a455a04e1af6211917a43))
+
+
+### Continuous Integration
+
+* **jenkins:** update dependencies ([d751b22](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d751b22f07eb9d8b7c9aa30cbcb97599b8cd7fff))
+
 ## [2.0.6](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.5...v2.0.6) (2022-12-12)
 
 

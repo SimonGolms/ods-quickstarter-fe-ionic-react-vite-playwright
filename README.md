@@ -2,7 +2,7 @@
 
 > An advanced OpenDevStack Frontend Quickstarter to build mobile and desktop apps with the ionic framework, react, vite and playwright.
 
-![Version](https://img.shields.io/badge/version-2.0.6-blue.svg?style=for-the-badge&cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-2.0.7-blue.svg?style=for-the-badge&cacheSeconds=2592000)
 [![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
