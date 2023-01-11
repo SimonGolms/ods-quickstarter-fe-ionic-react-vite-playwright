@@ -1,6 +1,6 @@
 name: 💡 Feature Request
 description: Suggest an idea for the ODS Quickstarter
-title: 'feat: '
+title: "feat: "
 body:
   - type: checkboxes
     attributes:
