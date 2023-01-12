@@ -105,7 +105,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-console": ["warn", { allow: ["warn", "error"] }],
     "prettier/prettier": "error",
-    "react/jsx-sort-default-props": "error",
     "react/jsx-sort-props": [
       "error",
       {
@@ -117,6 +116,7 @@ module.exports = {
         shorthandLast: false,
       },
     ],
+    "react/sort-default-props": "error",
     "react-hooks/exhaustive-deps": "error",
     "react-hooks/rules-of-hooks": "error",
     "sort-imports": [
