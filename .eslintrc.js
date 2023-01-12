@@ -90,8 +90,8 @@ module.exports = {
         alphabetize: {
           caseInsensitive: true,
           order: "asc",
+          orderImportKind: "asc",
         },
-        groups: ["builtin", "external", "internal"],
         pathGroups: [
           {
             group: "external",
