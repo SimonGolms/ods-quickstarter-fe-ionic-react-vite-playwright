@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.0.8](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.7...v2.0.8) (2023-01-20)
+
+
+### Styles
+
+* use of double quotes to match the prettier configuration ([30f4ee2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/30f4ee24da1feb192c063f27d3d37a0f349607b5))
+
+
+### Code Refactoring
+
+* **Navigation:** use `react-router-dom` dependency ([53cb845](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/53cb8452633e0fb3048415ade129149ed761dd56))
+
+
+### Continuous Integration
+
+* **github:** update dependencies ([e068543](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/e068543dfdb276e5fe3498e8ff96269dedabfc2b))
+* **github:** update dependencies ([85415e2](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/85415e2f16bb415d7de056e63478726fc36ce0ac))
+* **github:** update dependencies ([e359579](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/e359579d974f8789b709c51bcdec7047e3146799))
+* **jenkins:** update dependencies ([bb13ace](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/bb13aced2fb30ac6582f134e376edb585faa621f))
+
+
+### Build System
+
+* **eslint:** add playwright specific rules ([ed461f6](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ed461f6306d8cf9adc75df7cb91950c39af25184))
+* **deps:** fix `@azure/msal` dependencies ([89640b3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/89640b3549762be64689613bda3e391a4f2b5ce2))
+* **eslint:** replace deprecated `react/jsx-sort-default-props` rule ([44a3e04](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/44a3e04d99b3eb6e004a864a109fbbce0fa89ce0))
+* **deps:** update dependencies ([9233b97](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/9233b97a18dc1a0a940546beb12d2cdd808149e7))
+* **deps:** update dependencies ([e25b5ba](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/e25b5ba9af5e5920867e3e0c93cbe53e3b3a71a0))
+* **deps:** update dependencies ([d290837](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d290837ccb8e077f814cb7693a773a14860a6680))
+* **eslint:** use default groups for import/order rule ([cedb2b5](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/cedb2b5023fb7d12e2a84444e7f2dcb61aecee95))
+
 ## [2.0.7](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.6...v2.0.7) (2022-12-21)
 
 
