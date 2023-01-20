@@ -104,6 +104,9 @@ module.exports = {
     ],
     "import/prefer-default-export": "off",
     "no-console": ["warn", { allow: ["warn", "error"] }],
+    "playwright/prefer-to-be": "error",
+    "playwright/prefer-to-have-length": "error",
+    "playwright/require-top-level-describe": "error",
     "prettier/prettier": "error",
     "react/jsx-sort-props": [
       "error",

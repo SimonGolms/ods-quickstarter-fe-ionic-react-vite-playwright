@@ -5,17 +5,17 @@ import { MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME } from "../utils/test/api.me.mock"
 import { MsalMock } from "../utils/test/MsalMock";
 import { ProtectedPages } from "./ProtectedPages";
 
-test.beforeEach(async ({ page }) => {
-  await page.route("**/v1.0/me/", (route) => {
-    return route.fulfill({
-      body: JSON.stringify(MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME),
-      contentType: "application/json",
-      status: 200,
+test.describe("ProtectedPages", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route("**/v1.0/me/", (route) => {
+      return route.fulfill({
+        body: JSON.stringify(MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME),
+        contentType: "application/json",
+        status: 200,
+      });
     });
   });
-});
 
-test.describe("ProtectedPages", () => {
   test("renders", async ({ mount }) => {
     const component = await mount(
       <BrowserRouter>

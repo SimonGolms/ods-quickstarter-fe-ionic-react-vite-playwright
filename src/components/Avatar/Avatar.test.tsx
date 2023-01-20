@@ -10,17 +10,17 @@ import { Avatar } from "./Avatar";
 
 const { mail } = MOCK_RESPONSE_MICROSOFT_GRAPH_GET_ME;
 
-test.beforeEach(async ({ page }) => {
-  await page.route(`**/v1.0/users/${mail}/photos/64x64/$value`, async (route) => {
-    return route.fulfill({
-      body: Buffer.from(MOCK_RESPONST_MICROSOFT_GRAPH_GET_USERS_PHOTOS_64_VALUE, "base64"),
-      contentType: "image/jpeg",
-      status: 200,
+test.describe("Avatar", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route(`**/v1.0/users/${mail}/photos/64x64/$value`, async (route) => {
+      return route.fulfill({
+        body: Buffer.from(MOCK_RESPONST_MICROSOFT_GRAPH_GET_USERS_PHOTOS_64_VALUE, "base64"),
+        contentType: "image/jpeg",
+        status: 200,
+      });
     });
   });
-});
 
-test.describe("Avatar", () => {
   test("renders photo with valid id", async ({ mount }) => {
     const component = await mount(
       <BrowserRouter>
