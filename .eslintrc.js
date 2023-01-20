@@ -90,8 +90,8 @@ module.exports = {
         alphabetize: {
           caseInsensitive: true,
           order: "asc",
+          orderImportKind: "asc",
         },
-        groups: ["builtin", "external", "internal"],
         pathGroups: [
           {
             group: "external",
@@ -104,8 +104,10 @@ module.exports = {
     ],
     "import/prefer-default-export": "off",
     "no-console": ["warn", { allow: ["warn", "error"] }],
+    "playwright/prefer-to-be": "error",
+    "playwright/prefer-to-have-length": "error",
+    "playwright/require-top-level-describe": "error",
     "prettier/prettier": "error",
-    "react/jsx-sort-default-props": "error",
     "react/jsx-sort-props": [
       "error",
       {
@@ -117,6 +119,7 @@ module.exports = {
         shorthandLast: false,
       },
     ],
+    "react/sort-default-props": "error",
     "react-hooks/exhaustive-deps": "error",
     "react-hooks/rules-of-hooks": "error",
     "sort-imports": [

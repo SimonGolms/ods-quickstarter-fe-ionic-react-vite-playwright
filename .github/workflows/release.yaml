@@ -16,9 +16,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
       # Ignore README.md from find results to avoid unintentionally changes on the release step
       - name: Setup Quickstarter (Project ID)
         run: find . -type f \( ! -name "README.md" \) -exec sed -i 's/PROJECTID/foo/g' {} +
@@ -29,9 +29,9 @@ jobs:
         run: npm ci
       - name: Release
         env:
-          GIT_AUTHOR_NAME: 'Simon Golms'
-          GIT_AUTHOR_EMAIL: 'development@gol.ms'
-          GIT_COMMITTER_NAME: 'Simon Golms'
-          GIT_COMMITTER_EMAIL: 'development@gol.ms'
+          GIT_AUTHOR_NAME: "Simon Golms"
+          GIT_AUTHOR_EMAIL: "development@gol.ms"
+          GIT_COMMITTER_NAME: "Simon Golms"
+          GIT_COMMITTER_EMAIL: "development@gol.ms"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release --extends './.github/.releaserc.js'
