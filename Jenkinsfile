@@ -103,22 +103,22 @@ def stageInitialize(def context) {
     }
 
     // Replace all non-alphanumeric characters with a dash
-    def branchName = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
+    APP_BRANCH_NAME = context.gitBranch.replaceAll(/[^a-zA-Z0-9]/,'-').toLowerCase()
 
     /**
-     * odsComponentStageBuildOpenShiftImage will fail in case of appName = ${context.componentId}-${branchName}
+     * odsComponentStageBuildOpenShiftImage will fail in case of appName = ${context.componentId}-${APP_BRANCH_NAME}
      * See: https://github.com/opendevstack/ods-jenkins-shared-library/issues/877
      */
-    APP_NAME = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_NAME = "${context.projectId}-${context.componentId}-${APP_BRANCH_NAME}"
 
     /**
      * Replace '${context.projectId}-${context.componentId}' with your preferred URL template, but keep in mind that there can only be one unique URL per OpenShift instance
-     * and that specifying only '${context.projectId}-${branchName}' or '${context.componentId}-${branchName}" may not be enough!
+     * and that specifying only '${context.projectId}-${APP_BRANCH_NAME}' or '${context.componentId}-${APP_BRANCH_NAME}" may not be enough!
      *
      * With this approach, the feature environments of application is for example accessible at the following URLs:
      * https://PROJECTID-COMPONENTID-feature-foo.dev.apps.OPENSHIFT_DOMAIN_DEV
      */
-    APP_URL = "${context.projectId}-${context.componentId}-${branchName}"
+    APP_URL = "${context.projectId}-${context.componentId}-${APP_BRANCH_NAME}"
   }
 }
 
@@ -378,7 +378,7 @@ def stageRolloutWithHelm(def context) {
 
     if( context.gitBranch.startsWith('feature/') ) {
       echo 'gitBranch starts with feature/'
-      helmValues.put('apiUrl', "http://PROJECTID-api-${BRANCH_NAME}.PROJECTID-dev.svc.cluster.local:8080/api")
+      helmValues.put('apiUrl', "http://PROJECTID-api-${APP_BRANCH_NAME}.PROJECTID-dev.svc.cluster.local:8080/api")
     }
 
     // helmValuesFiles: List of paths to values files (empty by default).
