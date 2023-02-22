@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.0.9](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.8...v2.0.9) (2023-02-22)
+
+
+### Documentation
+
+* add url to code example ([e91a298](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/e91a2987c304c2390ce84e371b1b07c1e28e9eaa))
+
+
+### Continuous Integration
+
+* **jenkins:** fix feature branch deployment ([5b94c30](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/5b94c306b09f98da9b7e3ab53938eb84dde40a57))
+* **github:** update dependencies ([40e150a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/40e150a0eb174f7f8ec67f63edbcb9befe7752fa))
+* **github:** update dependencies ([65960cc](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/65960cc7df74872b8bd4388ec580d04569879e2a))
+* **jenkins:** update dependencies ([dd094fc](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/dd094fcc1fb216fa13f05ed81783874ded510006))
+* **jenkins:** update dependencies ([c86ddd1](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/c86ddd1bdbc201f704fc29ab2ce0546ea0ebb386))
+
+
+### Build System
+
+* **playwright:** migrate component configuration ([9d414fd](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/9d414fd320c53cb44d62e696b8513e64d3ab6068))
+* **stylelint:** migrate to version 15 ([3e25a5a](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/3e25a5abd6db4b1cbc746fa07d01d2bd6c6b696d))
+* reduce required npm version ([63c237f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/63c237ff8c897007fe9c4c4287e9663b64d9c455))
+* **deps:** update dependencies ([d51d045](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d51d0459ed25227f67fa55c4c59b311ae8439748))
+* **deps:** update dependencies ([348e557](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/348e5572a35ce279737722e125d0b8339745bda7))
+* **eslint:** use eslint-config ([8eb642f](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/8eb642fc6224cb8381bbf6433b0584470d41f247))
+* use latest node and npm version ([057ed28](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/057ed282b66d78c70c77e5be2981faeca4dea655))
+
 ## [2.0.8](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.7...v2.0.8) (2023-01-20)
 
 
