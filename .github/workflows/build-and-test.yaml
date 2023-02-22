@@ -11,7 +11,7 @@ jobs:
     container:
       # Using the playwright container (https://mcr.microsoft.com/product/playwright/about)
       # for performance reasons to avoid having to download and install all dependencies again.
-      image: mcr.microsoft.com/playwright:v1.29.2-focal
+      image: mcr.microsoft.com/playwright:v1.31.0-focal
       # Container should run with the same user of the host VM, otherwise it leads to permission issues
       # see: https://github.com/actions/runner/issues/691 & https://github.com/actions/checkout/issues/211#issuecomment-680107607
       options: --user 1001

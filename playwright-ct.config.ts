@@ -1,9 +1,9 @@
-import { devices, type PlaywrightTestConfig } from "@playwright/experimental-ct-react";
+import { defineConfig, devices } from "@playwright/experimental-ct-react";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
 
@@ -68,6 +68,4 @@ const config: PlaywrightTestConfig = {
 
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-};
-
-export default config;
+});
