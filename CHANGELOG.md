@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.10](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.9...v2.0.10) (2023-02-24)
+
+
+### Continuous Integration
+
+* **github:** update dependencies ([f4b9af3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/f4b9af3600bbf10c0689b717a8433fe5b76d553b))
+* **jenkins:** update dependencies ([f92e154](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/f92e154fe8562ae0912b8abaa1fba0dea01c27c5))
+
+
+### Build System
+
+* **stylelint:** enable prettier recommendation ([ae93739](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ae93739b5a6f2ceaf929fcf8dcc322341921b660))
+* **deps:** update dependencies ([ecd6453](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/ecd64531b51d00a4ea8af67929a3f0786f42fb29))
+
 ## [2.0.9](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.8...v2.0.9) (2023-02-22)
 
 
