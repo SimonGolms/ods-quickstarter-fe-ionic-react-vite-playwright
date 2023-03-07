@@ -33,7 +33,7 @@ odsComponentPipeline(
       // The playwright container is based on the Ubuntu-20.04 (focal) image and comes with the latest Node.js v18,
       // as well as all additionally installed dependencies and browser instances.
       // see: https://github.com/microsoft/playwright/blob/main/utils/docker/Dockerfile.focal
-      image: "mcr.microsoft.com/playwright:v1.31.1-focal",
+      image: "mcr.microsoft.com/playwright:v1.31.2-focal",
       name: 'playwright',
       // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
       // resourceLimitCpu: '1',

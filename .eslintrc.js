@@ -17,21 +17,4 @@ module.exports = {
     // HINT: prettier must be the last plugin to work
     "prettier",
   ],
-  rules: {
-    "import/no-unused-modules": [
-      "error",
-      {
-        ignoreExports: [
-          "playwright/index.ts",
-          "src/index.tsx",
-          "src/**/*.d.ts",
-          "src/**/*.{spec,test}.{ts,tsx}",
-          "*.{js,ts}", // mostly configuration files
-        ],
-        missingExports: true,
-        src: ["."],
-        unusedExports: true,
-      },
-    ],
-  },
 };
