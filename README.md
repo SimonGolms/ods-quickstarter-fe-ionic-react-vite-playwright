@@ -921,11 +921,11 @@ git branch -r | grep 'origin' | grep --invert-match 'master$' | grep --invert-ma
 
 ```sh
 # Delete all local tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
-git tag -l | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | xargs git tag -d
+git tag -l | grep --invert-match '^v[[:digit:]]*.[[:digit:]]*.[[:digit:]]*$' | xargs git tag -d
 
 # Delete all remote tags that do NOT match a pattern of a semantic version (MAJOR.MINOR.PATCH), e.g. ods-generated-v20220518.001, v1.0.0-next.5
 # Skip git hooks with '--no-verify'
-git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]].[[:digit:]].[[:digit:]]$' | grep -v '}$' | xargs git push --delete --no-verify origin
+git ls-remote --tags origin | cut -d/ -f3- | grep --invert-match '^v[[:digit:]]*.[[:digit:]]*.[[:digit:]]*$' | grep -v '}$' | xargs git push --delete --no-verify origin
 ```
 
 ### OpenShift
