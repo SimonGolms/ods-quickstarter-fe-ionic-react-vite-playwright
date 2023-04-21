@@ -35,7 +35,9 @@ export default defineConfig({
   ],
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? [["junit", { outputFile: "build/test-results/test/component-test-results.xml" }]] : "list",
+  reporter: process.env.CI
+    ? [["html"], ["junit", { outputFile: "build/test-results/test/acceptance-junit.xml" }]]
+    : "list",
 
   /**
    * Retry on CI only - Test that passes on a second retry is 'flaky'
