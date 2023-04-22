@@ -6,8 +6,8 @@
 [![License: Apache-2.0](https://img.shields.io/github/license/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/simongolms/ods-quickstarter-fe-ionic-react-vite-playwright/graphs/commit-activity)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=for-the-badge)](https://conventionalcommits.org)
-![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D8.5.5-blue.svg?style=for-the-badge)
-![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D16.15-blue.svg?style=for-the-badge)
+![Prerequisite Npm](https://img.shields.io/badge/npm-%3E%3D9-blue.svg?style=for-the-badge)
+![Prerequisite Node](https://img.shields.io/badge/node-%3E%3D18-blue.svg?style=for-the-badge)
 
 ## Features ✨
 

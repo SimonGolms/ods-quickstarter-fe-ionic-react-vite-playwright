@@ -33,7 +33,7 @@ odsComponentPipeline(
       // The playwright container is based on the Ubuntu-20.04 (focal) image and comes with the latest Node.js v18,
       // as well as all additionally installed dependencies and browser instances.
       // see: https://github.com/microsoft/playwright/blob/main/utils/docker/Dockerfile.focal
-      image: "mcr.microsoft.com/playwright:v1.31.2-focal",
+      image: "mcr.microsoft.com/playwright:v1.32.3-focal",
       name: 'playwright',
       // HINT: Before you increase the resources, make sure that the quotas provide the appropriate resources.
       // resourceLimitCpu: '1',
@@ -251,19 +251,25 @@ def stageAnalyzeCode(def context) {
 }
 
 def stageTest(def context) {
-  container('playwright') {
-    stage('Test Components') {
-      withEnv([
-        'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555dev',
-        // IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
-        'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=common',
-      ]) {
-        sh(
-          label: 'Test React Components',
-          script: 'npm run test',
-        )
+  try {
+    container('playwright') {
+      stage('Test Components') {
+        withEnv([
+          'VITE_AZURE_ACTIVE_DIRECTORY_CLIENT_ID=11111111-2222-3333-4444-555555555dev',
+          // IMPORTANT: A valid Azure AD Tenant ID for testing purposes is required.
+          'VITE_AZURE_ACTIVE_DIRECTORY_TENANT_ID=common',
+        ]) {
+          sh(
+            label: 'Test React Components',
+            script: 'npm run test',
+          )
+        }
       }
     }
+  } catch (Exception exception) {
+    zip zipFile: "${context.jobName}-${context.tagversion}-playwright-report.zip", archive: true, glob: 'playwright-report/**,test-results/**'
+    echo "\033[31mERROR: The test runs have failed.\033[0m\n\nFor a detailed analysis, download and extract the artifact and view it with: \033[34mnpx --yes @playwright/test show-report\033[0m"
+    throw exception
   }
 }
 
