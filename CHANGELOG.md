@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.0.0](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.11...v3.0.0) (2023-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** drop support for ionic@6
+
+### Build System
+
+* **deps:** update dependencies ([a90946c](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/a90946c63e7258169cec598e8be9404e5c63cb77))
+
+
+### Continuous Integration
+
+* **jenkins:** provide playwright report on failed tests ([3556970](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/355697010a739d2e9b6787162a116c041d205f33))
+* **github:** update dependencies ([d8ce6d3](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/d8ce6d34ae18ee8726cd8a0100cfda6041fb4ddd))
+
+
+### Documentation
+
+* **readme:** fix potential issue in housekeeping ([8281ffa](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/8281ffabcfca72bb0e559687d5cb8a49215710c8))
+* **README:** update node & npm version shields ([52c45cc](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/commit/52c45ccda345d683cb81baa8b22a6776c2b77508))
+
 ## [2.0.11](https://github.com/SimonGolms/ods-quickstarter-fe-ionic-react-vite-playwright/compare/v2.0.10...v2.0.11) (2023-03-07)
 
 
